@@ -6,7 +6,7 @@
 #    By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/14 13:48:42 by adbouras          #+#    #+#              #
-#    Updated: 2024/12/19 17:39:44 by adbouras         ###   ########.fr        #
+#    Updated: 2024/12/19 18:03:36 by adbouras         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ RESET		= \033[0;39m
 NAME		= cub3d
 
 BNS_NAME	= cub3d_bonus
+
+CC			= cc
 
 CFLAGS		= -Wextra -Wall -Werror -Wunreachable-code -Ofast
 

@@ -1,0 +1,8 @@
+*
+!*.c
+!*.h
+!includes/
+!libraries/
+!Makefile
+!README.md
+!.git*
