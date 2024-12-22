@@ -6,7 +6,7 @@
 #    By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/14 13:48:42 by adbouras          #+#    #+#              #
-#    Updated: 2024/12/19 18:03:36 by adbouras         ###   ########.fr        #
+#    Updated: 2024/12/22 19:50:31 by adbouras         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ BNS_NAME	= cub3d_bonus
 
 CC			= cc
 
-CFLAGS		= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+CFLAGS		= -Wextra -Wall -Werror  -Wunreachable-code -Ofast
 
 LIBMLX		= ./libraries/MLX42
 
@@ -29,7 +29,7 @@ LIBFT		= ./libraries/libft/libft.a
 
 HEADERS		= -I ./include -I $(LIBMLX)/include
 
-LIBS		= $(LIBMLX)/build/libmlx42.a -ldl -L/Users/adbouras/.brew/lib -lglfw -pthread -lm
+LIBS		= $(LIBMLX)/build/libmlx42.a -ldl -L/Users/adhambouras/.brew/lib -lglfw -pthread -lm
 
 SRCS		= main.c ./libraries/get_next_line/get_next_line.c ./libraries/get_next_line/get_next_line_utils.c
 

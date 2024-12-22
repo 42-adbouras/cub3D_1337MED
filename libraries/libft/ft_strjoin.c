@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 09:34:14 by adbouras          #+#    #+#             */
-/*   Updated: 2024/08/14 19:32:31 by adbouras         ###   ########.fr       */
+/*   Updated: 2024/12/22 21:33:05 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	ft_strlcpy(s3, s1, s1_len + 1);
 	ft_strlcat(s3, s2, s1_len + s2_len + 1);
+	if (s1)
+		free((void *)s1);
 	return (s3);
 }
