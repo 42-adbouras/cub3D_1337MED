@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:29:26 by adbouras          #+#    #+#             */
-/*   Updated: 2024/12/22 21:28:05 by adbouras         ###   ########.fr       */
+/*   Updated: 2024/12/23 19:47:06 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ t_data	*init_data(void)
 		exit(EXIT_FAILURE);
 	}
 	data->map = NULL;
+	data->win = malloc(sizeof(mlx_t));
+	data->win->window = mlx_init(1280, 720, "cub3D", true);
 	return (data);
 }
 
@@ -52,7 +54,6 @@ int	main(int ac, char **av)
 	data = init_data();
 	import_map(&data, av[1]);
 	printf("%s", data->map);
-	while (1)
-	;
+	mlx_loop(data->win->window);
 	return (0);
 }

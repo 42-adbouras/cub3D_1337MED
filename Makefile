@@ -6,7 +6,7 @@
 #    By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/14 13:48:42 by adbouras          #+#    #+#              #
-#    Updated: 2024/12/22 19:50:31 by adbouras         ###   ########.fr        #
+#    Updated: 2024/12/23 19:04:46 by adbouras         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,13 +31,15 @@ HEADERS		= -I ./include -I $(LIBMLX)/include
 
 LIBS		= $(LIBMLX)/build/libmlx42.a -ldl -L/Users/adhambouras/.brew/lib -lglfw -pthread -lm
 
-SRCS		= main.c ./libraries/get_next_line/get_next_line.c ./libraries/get_next_line/get_next_line_utils.c
+SRCS		= main.c get_next_line.c get_next_line_utils.c
 
 BNS_SRCS	= 
 
-OBJS		= $(SRCS:.c=.o)
+OBJ_DIR		= objects/
 
-BOBJECT		= $(BNS_SRCS:.c=.o)
+OBJS		= $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
+
+#BOBJECT		= $(BNS_SRCS:.c=.o)
 
 all: libmlx $(NAME)
 
@@ -46,7 +48,8 @@ bonus: libmlx $(BNS_NAME)
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
-%.o: %.c
+$(OBJ_DIR)%.o: %.c
+	mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
 
 $(NAME): $(OBJS)
@@ -69,7 +72,8 @@ $(BNS_NAME): $(BOBJECT)
 
 clean:
 	@make clean -C ./libraries/libft
-	@rm -rf $(OBJS) $(BOBJECT)
+#	@rm -rf $(OBJS) $(BOBJECT)
+	@rm -rf $(OBJ_DIR)
 	@rm -rf $(LIBMLX)/build
 	@echo "$(RED)[Objects Cleaned]$(RESET)"
 

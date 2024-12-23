@@ -3,6 +3,8 @@
 !*.h
 !includes/
 !libraries/
+!maps/
+!*.cub
 !Makefile
 !README.md
 !.git*
