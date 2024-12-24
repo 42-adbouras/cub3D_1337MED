@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2024/12/24 17:20:28 by adbouras         ###   ########.fr       */
+/*   Updated: 2024/12/24 17:53:20 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 typedef	struct		s_data
 {
 	const char*		map;
+	const char**	map_arr;
 	mlx_t*			game;
 	mlx_image_t*	wall;
 	mlx_image_t*	space;

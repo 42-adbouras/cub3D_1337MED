@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:29:26 by adbouras          #+#    #+#             */
-/*   Updated: 2024/12/24 17:43:43 by adbouras         ###   ########.fr       */
+/*   Updated: 2024/12/24 18:20:20 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,8 @@ void	import_map(t_data **data, char *path)
 		(*data)->map = ft_strjoin((*data)->map, line);
 		free(line);
 	}
+	// (*data)->map_arr = ft_split((*data)->map, '\n');
 	close(fd);
-}
-
-// 'Encodes' four individual bytes into an int.
-int get_rgba(int r, int g, int b, int a)
-{
-    return (r << 24 | g << 16 | b << 8 | a);
 }
 
 void	draw_tile(mlx_image_t *image, int color)
@@ -117,15 +112,16 @@ void	ft_key_hook(mlx_key_data_t key, void *param)
 	t_data	*data;
 
 	data = (t_data*)param;
-	if (key.key == MLX_KEY_ESCAPE && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
+	(void)key;
+	if (mlx_is_key_down(data->game->window, MLX_KEY_ESCAPE))
 		exit(0);
-	if (key.key == MLX_KEY_W && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
+	if (mlx_is_key_down(data->game->window, MLX_KEY_W))
 		data->player->instances->y--;
-	if (key.key == MLX_KEY_S && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
+	if (mlx_is_key_down(data->game->window, MLX_KEY_S))
 		data->player->instances->y++;
-	if (key.key == MLX_KEY_D && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
+	if (mlx_is_key_down(data->game->window, MLX_KEY_D))
 		data->player->instances->x++;
-	if (key.key == MLX_KEY_A && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
+	if (mlx_is_key_down(data->game->window, MLX_KEY_A))
 		data->player->instances->x--;
 }
 
