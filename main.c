@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:29:26 by adbouras          #+#    #+#             */
-/*   Updated: 2024/12/24 17:11:17 by adbouras         ###   ########.fr       */
+/*   Updated: 2024/12/24 17:43:43 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,13 @@ void	draw_minimap(t_data	*data)
 		}
 		i++;
 	}
+	mlx_image_to_window(data->game->window, data->player, data->player_x * TILE_SIZE, data->player_y * TILE_SIZE);
 }
 
 t_data	*init_data(void)
 {
-	t_data	*data;
+	t_data*			data;
+	mlx_texture_t*	texture;
 
 	data = malloc(sizeof(t_data));
 	// null check!!
@@ -104,8 +106,29 @@ t_data	*init_data(void)
 	data->space = mlx_new_image(data->game->window, TILE_SIZE, TILE_SIZE);
 	data->blank = mlx_new_image(data->game->window, TILE_SIZE, TILE_SIZE);
 	// need a handler
+	texture = mlx_load_png("assets/player.png");
+	data->player = mlx_texture_to_image(data->game->window, texture);
+	mlx_delete_texture(texture);
 	return (data);
 }
+
+void	ft_key_hook(mlx_key_data_t key, void *param)
+{
+	t_data	*data;
+
+	data = (t_data*)param;
+	if (key.key == MLX_KEY_ESCAPE && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
+		exit(0);
+	if (key.key == MLX_KEY_W && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
+		data->player->instances->y--;
+	if (key.key == MLX_KEY_S && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
+		data->player->instances->y++;
+	if (key.key == MLX_KEY_D && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
+		data->player->instances->x++;
+	if (key.key == MLX_KEY_A && (key.action == MLX_PRESS || key.action == MLX_REPEAT))
+		data->player->instances->x--;
+}
+
 int	main(int ac, char **av)
 {
 	(void)ac;
@@ -116,6 +139,7 @@ int	main(int ac, char **av)
 	import_map(&data, av[1]);
 	draw_minimap(data);
 	printf("%d, %d\n", data->player_x, data->player_y);
+	mlx_key_hook(data->game->window, ft_key_hook, data);
 	mlx_loop(data->game->window);
 	return (0);
 }

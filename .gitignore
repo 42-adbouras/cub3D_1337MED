@@ -4,6 +4,8 @@
 !includes/
 !libraries/
 !maps/
+!assets/
+!*.png
 !*.cub
 !Makefile
 !README.md
