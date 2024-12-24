@@ -6,7 +6,7 @@
 #    By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/14 13:48:42 by adbouras          #+#    #+#              #
-#    Updated: 2024/12/23 19:04:46 by adbouras         ###   ########.fr        #
+#    Updated: 2024/12/24 15:05:51 by adbouras         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ LIBFT		= ./libraries/libft/libft.a
 
 HEADERS		= -I ./include -I $(LIBMLX)/include
 
-LIBS		= $(LIBMLX)/build/libmlx42.a -ldl -L/Users/adhambouras/.brew/lib -lglfw -pthread -lm
+LIBS		= $(LIBMLX)/build/libmlx42.a -ldl -L/Users/adbouras/.brew/lib -lglfw -pthread -lm
 
 SRCS		= main.c get_next_line.c get_next_line_utils.c
 
