@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:29:26 by adbouras          #+#    #+#             */
-/*   Updated: 2024/12/25 18:52:22 by adbouras         ###   ########.fr       */
+/*   Updated: 2024/12/25 20:40:50 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ t_data	*init_data(void)
 	data->player->turn_dir = 0;
 	data->player->rot_speed = 2 * (M_PI / 180);
 	data->player->rot_angle = M_PI / 2;
-	data->player->move_speed = 3.0;
+	data->player->move_speed = 1.5;
 	data->player->img = mlx_new_image(data->game->window, TILE_SIZE, TILE_SIZE);
 	// data->player->img = mlx_texture_to_image(data->game->window, texture);
 	// mlx_delete_texture(texture);
@@ -146,21 +146,23 @@ void	ft_key_hook(void *param)
 	if (mlx_is_key_down(data->game->window, MLX_KEY_ESCAPE))
 		exit(0);
 	if (mlx_is_key_down(data->game->window, MLX_KEY_W))
-		data->player->walk_dir = 1;
+		data->player->img->instances->y -= data->player->move_speed;
+		// data->player->walk_dir = 1;
 	if (mlx_is_key_down(data->game->window, MLX_KEY_S))
-		data->player->walk_dir = -1;
+		data->player->img->instances->y += data->player->move_speed;
+		// data->player->walk_dir = -1;
 	if (mlx_is_key_down(data->game->window, MLX_KEY_D))
 		data->player->img->instances->x += data->player->move_speed;
 	if (mlx_is_key_down(data->game->window, MLX_KEY_A))
 		data->player->img->instances->x -= data->player->move_speed;
-	if (mlx_is_key_down(data->game->window, MLX_KEY_RIGHT))
-		data->player->turn_dir = 1;
-	if (mlx_is_key_down(data->game->window, MLX_KEY_LEFT))
-		data->player->turn_dir = -1;
+	// if (mlx_is_key_down(data->game->window, MLX_KEY_RIGHT))
+	// 	data->player->turn_dir = 1;
+	// if (mlx_is_key_down(data->game->window, MLX_KEY_LEFT))
+	// 	data->player->turn_dir = -1;
 	
 	// update_player_pos(data);
-	data->player->turn_dir = 0;
-	data->player->walk_dir = 0;
+	// data->player->turn_dir = 0;
+	// data->player->walk_dir = 0;
 }
 
 int	main(int ac, char **av)

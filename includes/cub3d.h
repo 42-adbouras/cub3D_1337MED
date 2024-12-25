@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2024/12/25 18:45:38 by adbouras         ###   ########.fr       */
+/*   Updated: 2024/12/25 19:11:37 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,10 @@ typedef	struct		s_player
 typedef	struct		s_data
 {
 	const char*		map;
-	const char**	map_arr;
+	char**	map_arr;
 	mlx_t*			game;
 	mlx_image_t*	wall;
 	mlx_image_t*	space;
 	mlx_image_t*	blank;
 	t_player*		player;
-	// mlx_image_t*	player;
-	// int				player_x;
-	// int				player_y;
 }					t_data;
