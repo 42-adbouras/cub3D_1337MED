@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:29:26 by adbouras          #+#    #+#             */
-/*   Updated: 2024/12/24 18:20:20 by adbouras         ###   ########.fr       */
+/*   Updated: 2024/12/25 18:27:53 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	draw_minimap(t_data	*data)
 			else if (map_arr[i][j] == 'N')
 			{
 				mlx_image_to_window(data->game->window, data->space, j * TILE_SIZE, i * TILE_SIZE);
-				data->player_x = j;
-				data->player_y = i;
+				data->player->x = j;
+				data->player->y = i;
 			}
 			else
 				mlx_image_to_window(data->game->window, data->blank, j * TILE_SIZE, i * TILE_SIZE);
@@ -80,7 +80,7 @@ void	draw_minimap(t_data	*data)
 		}
 		i++;
 	}
-	mlx_image_to_window(data->game->window, data->player, data->player_x * TILE_SIZE, data->player_y * TILE_SIZE);
+	mlx_image_to_window(data->game->window, data->player->img, data->player->x * TILE_SIZE, data->player->y * TILE_SIZE);
 }
 
 t_data	*init_data(void)
@@ -102,27 +102,45 @@ t_data	*init_data(void)
 	data->blank = mlx_new_image(data->game->window, TILE_SIZE, TILE_SIZE);
 	// need a handler
 	texture = mlx_load_png("assets/player.png");
-	data->player = mlx_texture_to_image(data->game->window, texture);
+	data->player = malloc(sizeof(t_player));
+	data->player->walk_dir = 0;
+	data->player->turn_dir = 0;
+	data->player->rot_speed = 2 * (M_PI / 180);
+	data->player->rot_angle = M_PI / 2;
+	data->player->move_speed = 3.0;
+	data->player->img = mlx_texture_to_image(data->game->window, texture);
 	mlx_delete_texture(texture);
 	return (data);
 }
 
-void	ft_key_hook(mlx_key_data_t key, void *param)
+// void	update_player_pos(t_data* data)
+// {
+	
+// }
+
+void	ft_key_hook(void *param)
 {
 	t_data	*data;
 
 	data = (t_data*)param;
-	(void)key;
 	if (mlx_is_key_down(data->game->window, MLX_KEY_ESCAPE))
 		exit(0);
 	if (mlx_is_key_down(data->game->window, MLX_KEY_W))
-		data->player->instances->y--;
+		data->player->walk_dir = 1;
 	if (mlx_is_key_down(data->game->window, MLX_KEY_S))
-		data->player->instances->y++;
+		data->player->walk_dir = -1;
 	if (mlx_is_key_down(data->game->window, MLX_KEY_D))
-		data->player->instances->x++;
+		data->player->img->instances->x += data->player->move_speed;
 	if (mlx_is_key_down(data->game->window, MLX_KEY_A))
-		data->player->instances->x--;
+		data->player->img->instances->x -= data->player->move_speed;
+	if (mlx_is_key_down(data->game->window, MLX_KEY_RIGHT))
+		data->player->turn_dir = 1;
+	if (mlx_is_key_down(data->game->window, MLX_KEY_LEFT))
+		data->player->turn_dir = -1;
+	
+	// update_player_pos(data);
+	data->player->turn_dir = 0;
+	data->player->walk_dir = 0;
 }
 
 int	main(int ac, char **av)
@@ -134,8 +152,8 @@ int	main(int ac, char **av)
 	data = init_data();
 	import_map(&data, av[1]);
 	draw_minimap(data);
-	printf("%d, %d\n", data->player_x, data->player_y);
-	mlx_key_hook(data->game->window, ft_key_hook, data);
+	printf("%d, %d\n", data->player->x, data->player->y);
+	mlx_loop_hook(data->game->window, ft_key_hook, data);
 	mlx_loop(data->game->window);
 	return (0);
 }

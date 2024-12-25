@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2024/12/24 17:53:20 by adbouras         ###   ########.fr       */
+/*   Updated: 2024/12/25 17:20:59 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <stdbool.h>
+#include <math.h>
 
 #define	WIDTH		1280
 #define	HEIGHT		720
@@ -31,6 +32,18 @@
 #define BLACK		0x000000FF
 #define RED			0xFF0000FF
 
+typedef	struct		s_player
+{
+	mlx_image_t*	img;
+	int				x;
+	int				y;
+	int				walk_dir;
+	int				turn_dir;
+	double			rot_angle;
+	double			rot_speed;
+	double			move_speed;
+}					t_player;
+
 typedef	struct		s_data
 {
 	const char*		map;
@@ -39,7 +52,8 @@ typedef	struct		s_data
 	mlx_image_t*	wall;
 	mlx_image_t*	space;
 	mlx_image_t*	blank;
-	mlx_image_t*	player;
-	int				player_x;
-	int				player_y;
+	t_player*		player;
+	// mlx_image_t*	player;
+	// int				player_x;
+	// int				player_y;
 }					t_data;
