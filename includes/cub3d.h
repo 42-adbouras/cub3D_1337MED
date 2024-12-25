@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2024/12/25 17:20:59 by adbouras         ###   ########.fr       */
+/*   Updated: 2024/12/25 18:45:38 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 #define	WHITE		0xFFFFFFFF
 #define BLACK		0x000000FF
 #define RED			0xFF0000FF
+#define	GREEN		0x00FF00FF
 
 typedef	struct		s_player
 {

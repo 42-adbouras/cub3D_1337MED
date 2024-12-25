@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:29:26 by adbouras          #+#    #+#             */
-/*   Updated: 2024/12/25 18:27:53 by adbouras         ###   ########.fr       */
+/*   Updated: 2024/12/25 18:52:22 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,24 @@ void	draw_tile(mlx_image_t *image, int color)
 	}
 }
 
+void	draw_player(mlx_image_t *image)
+{
+	int	i;
+	int	j;
+
+	i = TILE_SIZE / 3;
+	while (i < (TILE_SIZE / 3) * 2)
+	{
+		j = TILE_SIZE / 3;
+		while (j < (TILE_SIZE / 3) * 2)
+		{
+			mlx_put_pixel(image, j, i, GREEN);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	draw_minimap(t_data	*data)
 {
 	char	**map_arr;
@@ -59,6 +77,7 @@ void	draw_minimap(t_data	*data)
 	draw_tile(data->space, WHITE);
 	draw_tile(data->blank, RED);
 	draw_tile(data->wall, BLACK);
+	draw_player(data->player->img);
 	while (map_arr[i])
 	{
 		j = 0;
@@ -86,7 +105,7 @@ void	draw_minimap(t_data	*data)
 t_data	*init_data(void)
 {
 	t_data*			data;
-	mlx_texture_t*	texture;
+	// mlx_texture_t*	texture;
 
 	data = malloc(sizeof(t_data));
 	// null check!!
@@ -101,15 +120,16 @@ t_data	*init_data(void)
 	data->space = mlx_new_image(data->game->window, TILE_SIZE, TILE_SIZE);
 	data->blank = mlx_new_image(data->game->window, TILE_SIZE, TILE_SIZE);
 	// need a handler
-	texture = mlx_load_png("assets/player.png");
+	// texture = mlx_load_png("assets/player.png");
 	data->player = malloc(sizeof(t_player));
 	data->player->walk_dir = 0;
 	data->player->turn_dir = 0;
 	data->player->rot_speed = 2 * (M_PI / 180);
 	data->player->rot_angle = M_PI / 2;
 	data->player->move_speed = 3.0;
-	data->player->img = mlx_texture_to_image(data->game->window, texture);
-	mlx_delete_texture(texture);
+	data->player->img = mlx_new_image(data->game->window, TILE_SIZE, TILE_SIZE);
+	// data->player->img = mlx_texture_to_image(data->game->window, texture);
+	// mlx_delete_texture(texture);
 	return (data);
 }
 
@@ -152,7 +172,7 @@ int	main(int ac, char **av)
 	data = init_data();
 	import_map(&data, av[1]);
 	draw_minimap(data);
-	printf("%d, %d\n", data->player->x, data->player->y);
+	// printf("%d, %d\n", data->player->x, data->player->y);
 	mlx_loop_hook(data->game->window, ft_key_hook, data);
 	mlx_loop(data->game->window);
 	return (0);
