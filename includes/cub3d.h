@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2024/12/26 13:41:14 by adbouras         ###   ########.fr       */
+/*   Updated: 2024/12/26 15:32:07 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 typedef	struct		s_player
 {
 	mlx_image_t*	img;
+	mlx_image_t*	line;
 	int				x;
 	int				y;
 	int				walk_dir;
