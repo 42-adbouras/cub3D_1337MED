@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:29:26 by adbouras          #+#    #+#             */
-/*   Updated: 2024/12/25 20:40:50 by adbouras         ###   ########.fr       */
+/*   Updated: 2024/12/26 13:57:14 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ void	draw_player(mlx_image_t *image)
 	int	i;
 	int	j;
 
-	i = TILE_SIZE / 3;
-	while (i < (TILE_SIZE / 3) * 2)
+	i = 0;
+	while (i < TILE_SIZE / 3)
 	{
-		j = TILE_SIZE / 3;
-		while (j < (TILE_SIZE / 3) * 2)
+		j = 0;
+		while (j < TILE_SIZE / 3)
 		{
 			mlx_put_pixel(image, j, i, GREEN);
 			j++;
@@ -127,16 +127,29 @@ t_data	*init_data(void)
 	data->player->rot_speed = 2 * (M_PI / 180);
 	data->player->rot_angle = M_PI / 2;
 	data->player->move_speed = 1.5;
-	data->player->img = mlx_new_image(data->game->window, TILE_SIZE, TILE_SIZE);
+	data->player->img = mlx_new_image(data->game->window, TILE_SIZE / 3, TILE_SIZE / 3);
 	// data->player->img = mlx_texture_to_image(data->game->window, texture);
 	// mlx_delete_texture(texture);
 	return (data);
 }
 
-// void	update_player_pos(t_data* data)
-// {
+
+void	update_player_pos(t_data* data)
+{
+	data->player->rot_angle += data->player->turn_dir * data->player->rot_speed;
+
+	double step = data->player->walk_dir * data->player->move_speed;
+	double x = data->player->img->instances->x += cos(data->player->rot_angle) * step;
+	double y = data->player->img->instances->y += sin(data->player->rot_angle) * step;
 	
-// }
+	data->map_arr = ft_split(data->map, '\n');
+	printf("=> %f, %d, %d.\n", data->player->rot_angle,(int)roundf(y)/32,(int)roundf(x)/32);
+	if (data->map_arr[(int)roundf(y)/32][(int)roundf(x)/32] != '1')
+	{
+		data->player->img->instances->x = x;
+		data->player->img->instances->y = y;
+	}
+}
 
 void	ft_key_hook(void *param)
 {
@@ -146,23 +159,21 @@ void	ft_key_hook(void *param)
 	if (mlx_is_key_down(data->game->window, MLX_KEY_ESCAPE))
 		exit(0);
 	if (mlx_is_key_down(data->game->window, MLX_KEY_W))
-		data->player->img->instances->y -= data->player->move_speed;
-		// data->player->walk_dir = 1;
+		data->player->walk_dir = 1;
 	if (mlx_is_key_down(data->game->window, MLX_KEY_S))
-		data->player->img->instances->y += data->player->move_speed;
-		// data->player->walk_dir = -1;
+		data->player->walk_dir = -1;
 	if (mlx_is_key_down(data->game->window, MLX_KEY_D))
 		data->player->img->instances->x += data->player->move_speed;
 	if (mlx_is_key_down(data->game->window, MLX_KEY_A))
 		data->player->img->instances->x -= data->player->move_speed;
-	// if (mlx_is_key_down(data->game->window, MLX_KEY_RIGHT))
-	// 	data->player->turn_dir = 1;
-	// if (mlx_is_key_down(data->game->window, MLX_KEY_LEFT))
-	// 	data->player->turn_dir = -1;
+	if (mlx_is_key_down(data->game->window, MLX_KEY_RIGHT))
+		data->player->turn_dir = 1;
+	if (mlx_is_key_down(data->game->window, MLX_KEY_LEFT))
+		data->player->turn_dir = -1;
 	
-	// update_player_pos(data);
-	// data->player->turn_dir = 0;
-	// data->player->walk_dir = 0;
+	update_player_pos(data);
+	data->player->turn_dir = 0;
+	data->player->walk_dir = 0;
 }
 
 int	main(int ac, char **av)

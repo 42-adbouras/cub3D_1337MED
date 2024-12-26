@@ -82,7 +82,7 @@ add_custom_command(
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/mlx_frag_shader.c
     COMMAND ${CCSHADER} ${PROJECT_SOURCE_DIR}/shaders/default.frag ${EMSCRIPTEN_VALUE} > ${CMAKE_CURRENT_BINARY_DIR}/mlx_frag_shader.c
     VERBATIM
-    PRE_BUILD
+    # PRE_BUILD
     USES_TERMINAL
 )
 
@@ -93,7 +93,7 @@ add_custom_command(
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/mlx_vert_shader.c
     COMMAND ${CCSHADER} ${PROJECT_SOURCE_DIR}/shaders/default.vert ${EMSCRIPTEN_VALUE} > ${CMAKE_CURRENT_BINARY_DIR}/mlx_vert_shader.c
     VERBATIM
-    PRE_BUILD
+    # PRE_BUILD
     USES_TERMINAL
 )
 

@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2024/12/25 19:11:37 by adbouras         ###   ########.fr       */
+/*   Updated: 2024/12/26 13:41:14 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef	struct		s_player
 	int				y;
 	int				walk_dir;
 	int				turn_dir;
+	int				strafe_dir;
 	double			rot_angle;
 	double			rot_speed;
 	double			move_speed;
@@ -48,7 +49,7 @@ typedef	struct		s_player
 typedef	struct		s_data
 {
 	const char*		map;
-	char**	map_arr;
+	char**			map_arr;
 	mlx_t*			game;
 	mlx_image_t*	wall;
 	mlx_image_t*	space;
