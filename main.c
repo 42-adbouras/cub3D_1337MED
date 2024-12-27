@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:29:26 by adbouras          #+#    #+#             */
-/*   Updated: 2024/12/26 18:38:00 by adbouras         ###   ########.fr       */
+/*   Updated: 2024/12/27 19:38:22 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	draw_player(mlx_image_t *image)
 	int	j;
 
 	i = TILE_SIZE / 3;
-	while (i < ((TILE_SIZE / 3) * 2))
+	while (i < ((TILE_SIZE / 4) * 2))
 	{
 		j = TILE_SIZE / 3;
-		while (j < ((TILE_SIZE / 3) * 2))
+		while (j < ((TILE_SIZE / 4) * 2))
 		{
 			mlx_put_pixel(image, j, i, GREEN);
 			j++;
@@ -105,7 +105,6 @@ void	draw_minimap(t_data	*data)
 t_data	*init_data(void)
 {
 	t_data*			data;
-	// mlx_texture_t*	texture;
 
 	data = malloc(sizeof(t_data));
 	// null check!!
@@ -120,49 +119,46 @@ t_data	*init_data(void)
 	data->space = mlx_new_image(data->game->window, TILE_SIZE, TILE_SIZE);
 	data->blank = mlx_new_image(data->game->window, TILE_SIZE, TILE_SIZE);
 	// need a handler
-	// texture = mlx_load_png("assets/player.png");
 	data->player = malloc(sizeof(t_player));
 	data->player->line = mlx_new_image(data->game->window, TILE_SIZE, TILE_SIZE);
 	data->player->walk_dir = 0;
 	data->player->turn_dir = 0;
 	data->player->strafe_dir = 0;
-	data->player->rot_speed = 2 * (M_PI / 180);
-	data->player->rot_angle = M_PI / 2;
+	data->player->rot_speed = 4 * (M_PI / 180);
+	data->player->rot_angle = 3 * M_PI / 2;
 	data->player->move_speed = 2;
 	data->player->img = mlx_new_image(data->game->window, TILE_SIZE, TILE_SIZE);
-	// data->player->img = mlx_texture_to_image(data->game->window, texture);
-	// mlx_delete_texture(texture);
 	return (data);
 }
 
-bool	if_collision(char **map, int x, int y)
-{
-	int i;
-	int j;
 
-	i = roundf(x / 32);
-	j = roundf(y / 32);
-	if (map[j][i] == '1')
-		return(true);
-	return(false);
-}
 
 void	update_player_pos(t_data* data)
 {
 	data->player->rot_angle += data->player->turn_dir * data->player->rot_speed;
 
 	double step = data->player->walk_dir * data->player->move_speed;
-	double x = data->player->img->instances->x + cos(data->player->rot_angle) * step;
-	double y = data->player->img->instances->y + sin(data->player->rot_angle) * step;
-	(void)x;
-	(void)y;
-	// printf("=> %f, %d, %d.\n", data->player->rot_angle,(int)(y)/32,(int)(x)/32);
-	if (data->map_arr[((int)(y)/32)][(int)(x)/32] != '1')
-	{
-		data->player->img->instances->x = x;
-		data->player->img->instances->y = y;
-	}
+	double straf_step = data->player->strafe_dir * data->player->move_speed;
+
+	double x = data->player->img->instances->x + cos(data->player->rot_angle) * step - sin(data->player->rot_angle) * straf_step;
+	double y = data->player->img->instances->y + sin(data->player->rot_angle) * step + cos(data->player->rot_angle) * straf_step;
+
+	printf("=> %f, %d, %d, %d.\n", data->player->rot_angle, data->player->turn_dir, data->player->walk_dir, data->player->strafe_dir);
+
+	int		p_x = (int)roundf(x);
+	int		p_y = (int)roundf(y);
+
+	// int		m_x = p_x / 32;
+	// int		m_y = p_y / 32;
+
+	// if (map[m_y][m_x] != '1' && map[m_y][] != '1' && map[][] != '1')
+	// {
+		data->player->img->instances->x = p_x;
+		data->player->img->instances->y = p_y;
+	// }
 }
+
+
 
 void	ft_key_hook(void *param)
 {
@@ -176,9 +172,9 @@ void	ft_key_hook(void *param)
 	if (mlx_is_key_down(data->game->window, MLX_KEY_S))
 		data->player->walk_dir = -1;
 	if (mlx_is_key_down(data->game->window, MLX_KEY_D))
-		data->player->img->instances->x += data->player->move_speed;
+		data->player->strafe_dir = 1;
 	if (mlx_is_key_down(data->game->window, MLX_KEY_A))
-		data->player->img->instances->x -= data->player->move_speed;
+		data->player->strafe_dir = -1;
 	if (mlx_is_key_down(data->game->window, MLX_KEY_RIGHT))
 		data->player->turn_dir = 1;
 	if (mlx_is_key_down(data->game->window, MLX_KEY_LEFT))
@@ -187,6 +183,7 @@ void	ft_key_hook(void *param)
 	update_player_pos(data);
 	data->player->turn_dir = 0;
 	data->player->walk_dir = 0;
+	data->player->strafe_dir = 0;
 }
 
 int	main(int ac, char **av)
