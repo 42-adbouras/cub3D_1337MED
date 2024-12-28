@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:29:26 by adbouras          #+#    #+#             */
-/*   Updated: 2024/12/27 19:38:22 by adbouras         ###   ########.fr       */
+/*   Updated: 2024/12/28 16:44:00 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,13 @@ void	draw_player(mlx_image_t *image)
 	int	i;
 	int	j;
 
-	i = TILE_SIZE / 3;
-	while (i < ((TILE_SIZE / 4) * 2))
+	i = 0;
+	while (i < HITBOX)
 	{
-		j = TILE_SIZE / 3;
-		while (j < ((TILE_SIZE / 4) * 2))
+		j = 0;
+		while (j < HITBOX)
 		{
+			printf("%d, %d\n", i, j);
 			mlx_put_pixel(image, j, i, GREEN);
 			j++;
 		}
@@ -127,7 +128,7 @@ t_data	*init_data(void)
 	data->player->rot_speed = 4 * (M_PI / 180);
 	data->player->rot_angle = 3 * M_PI / 2;
 	data->player->move_speed = 2;
-	data->player->img = mlx_new_image(data->game->window, TILE_SIZE, TILE_SIZE);
+	data->player->img = mlx_new_image(data->game->window, HITBOX, HITBOX);
 	return (data);
 }
 
@@ -143,7 +144,7 @@ void	update_player_pos(t_data* data)
 	double x = data->player->img->instances->x + cos(data->player->rot_angle) * step - sin(data->player->rot_angle) * straf_step;
 	double y = data->player->img->instances->y + sin(data->player->rot_angle) * step + cos(data->player->rot_angle) * straf_step;
 
-	printf("=> %f, %d, %d, %d.\n", data->player->rot_angle, data->player->turn_dir, data->player->walk_dir, data->player->strafe_dir);
+	// printf("=> %f, %d, %d, %d.\n", data->player->rot_angle, data->player->turn_dir, data->player->walk_dir, data->player->strafe_dir);
 
 	int		p_x = (int)roundf(x);
 	int		p_y = (int)roundf(y);
@@ -151,11 +152,12 @@ void	update_player_pos(t_data* data)
 	// int		m_x = p_x / 32;
 	// int		m_y = p_y / 32;
 
-	// if (map[m_y][m_x] != '1' && map[m_y][] != '1' && map[][] != '1')
-	// {
+	if (data->map_arr[p_y/32][p_x/32] != '1' && data->map_arr[(p_y + HITBOX - 1)/32][(p_x + HITBOX - 1)/32] != '1'
+		&& data->map_arr[p_y/32][(p_x + HITBOX - 1)/32] != '1' && data->map_arr[(p_y + HITBOX - 1)/32][p_x/32] != '1')
+	{
 		data->player->img->instances->x = p_x;
 		data->player->img->instances->y = p_y;
-	// }
+	}
 }
 
 

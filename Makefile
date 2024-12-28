@@ -6,7 +6,7 @@
 #    By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/14 13:48:42 by adbouras          #+#    #+#              #
-#    Updated: 2024/12/26 10:53:44 by adbouras         ###   ########.fr        #
+#    Updated: 2024/12/28 16:42:07 by adbouras         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,9 @@ LIBFT		= ./libraries/libft/libft.a
 
 HEADERS		= -I ./include -I $(LIBMLX)/include
 
-LIBS		= $(LIBMLX)/build/libmlx42.a -ldl -L/Users/adbouras/.brew/lib -lglfw -pthread -lm
+INCLUDES	= ./includes/cub3d.h
+
+LIBS		= $(LIBMLX)/build/libmlx42.a -ldl -L/Users/adhambouras/.brew/lib -lglfw -pthread -lm
 
 SRCS		= main.c get_next_line.c get_next_line_utils.c
 
@@ -48,7 +50,7 @@ bonus: libmlx $(BNS_NAME)
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
-$(OBJ_DIR)%.o: %.c
+$(OBJ_DIR)%.o: %.c $(INCLUDES)
 	mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
 

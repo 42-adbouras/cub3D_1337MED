@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2024/12/26 15:32:07 by adbouras         ###   ########.fr       */
+/*   Updated: 2024/12/28 16:45:23 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 #define	WIDTH		1280
 #define	HEIGHT		720
 #define	TILE_SIZE	32
+#define	HITBOX		8
 
 #define	WHITE		0xFFFFFFFF
 #define BLACK		0x000000FF
