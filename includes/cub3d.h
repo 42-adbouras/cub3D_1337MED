@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2024/12/28 16:45:23 by adbouras         ###   ########.fr       */
+/*   Updated: 2024/12/30 19:18:59 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 #define	HEIGHT		720
 #define	TILE_SIZE	32
 #define	HITBOX		8
+#define	SPEED		2
+#define	ROT_SPEED	3 * (M_PI / 180)
 
 #define	WHITE		0xFFFFFFFF
 #define BLACK		0x000000FF
@@ -44,8 +46,8 @@ typedef	struct		s_player
 	int				turn_dir;
 	int				strafe_dir;
 	double			rot_angle;
-	double			rot_speed;
-	double			move_speed;
+	// double			rot_speed;
+	// double			move_speed;
 }					t_player;
 
 typedef	struct		s_data
@@ -58,3 +60,18 @@ typedef	struct		s_data
 	mlx_image_t*	blank;
 	t_player*		player;
 }					t_data;
+
+t_data	*init_data(void);
+void	load_data(t_data **data);
+void	load_game(t_data **data);
+void	load_player(t_data **data);
+void	load_images(t_data **data);
+
+void	import_map(t_data **data, char *path);
+void	draw_minimap(t_data	*data);
+void	draw_tile(mlx_image_t *image, int color);
+void	draw_player(mlx_image_t *image);
+
+void	ft_key_hook(void *param);
+void	update_player_pos(t_data* data);
+void	if_collition(t_data *data, double x, double y);
