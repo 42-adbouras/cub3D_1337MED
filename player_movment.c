@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 17:45:49 by adbouras          #+#    #+#             */
-/*   Updated: 2024/12/30 19:18:37 by adbouras         ###   ########.fr       */
+/*   Updated: 2024/12/30 20:22:02 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	update_player_pos(t_data* data)
 	step = data->player->walk_dir * SPEED;
 	straf_step = data->player->strafe_dir * SPEED;
 
-	x = data->player->img->instances->x + cos(data->player->rot_angle) * step - sin(data->player->rot_angle) * straf_step;
-	y = data->player->img->instances->y + sin(data->player->rot_angle) * step + cos(data->player->rot_angle) * straf_step;
+	x = cos(data->player->rot_angle) * step - sin(data->player->rot_angle) * straf_step;
+	y = sin(data->player->rot_angle) * step + cos(data->player->rot_angle) * straf_step;
 
 	// int		p_x = (int)roundf(x);
 	// int		p_y = (int)roundf(y);
@@ -65,11 +65,13 @@ void	update_player_pos(t_data* data)
 
 void	if_collition(t_data *data, double x, double y)
 {
-	int		p_x = (int)roundf(x);
-	int		p_y = (int)roundf(y);
+	int		p_x = (int)roundf(x + data->player->img->instances->x);
+	int		p_y = (int)roundf(y + data->player->img->instances->y);
+	int		h_x = (p_x + HITBOX - 1) / 32;
+	int		h_y = (p_y + HITBOX - 1) / 32;
 
-	if (data->map_arr[p_y/32][p_x/32] != '1' && data->map_arr[(p_y + HITBOX - 1)/32][(p_x + HITBOX - 1)/32] != '1'
-		&& data->map_arr[p_y/32][(p_x + HITBOX - 1)/32] != '1' && data->map_arr[(p_y + HITBOX - 1)/32][p_x/32] != '1')
+	if (data->map_arr[p_y / 32][p_x / 32] != '1' && data->map_arr[h_y][h_x] != '1'
+		&& data->map_arr[p_y / 32][h_x] != '1' && data->map_arr[h_y][p_x / 32] != '1')
 	{
 		data->player->img->instances->x = p_x;
 		data->player->img->instances->y = p_y;
