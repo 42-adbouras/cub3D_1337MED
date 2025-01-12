@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 18:20:28 by adbouras          #+#    #+#             */
-/*   Updated: 2024/12/30 19:20:54 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/11 12:00:48 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	import_map(t_data **data, char *path)
 	char	*line;
 	int		fd;
 
+	(*data)->map = NULL;
 	fd = open(path, O_RDONLY);
 	while (1)
 	{
@@ -52,11 +53,7 @@ void	draw_minimap(t_data	*data)
 			else if (map_arr[i][j] == '0')
 				mlx_image_to_window(data->game->window, data->space, j * TILE_SIZE, i * TILE_SIZE);
 			else if (map_arr[i][j] == 'N')
-			{
 				mlx_image_to_window(data->game->window, data->space, j * TILE_SIZE, i * TILE_SIZE);
-				data->player->x = j;
-				data->player->y = i;
-			}
 			else
 				mlx_image_to_window(data->game->window, data->blank, j * TILE_SIZE, i * TILE_SIZE);
 			j++;

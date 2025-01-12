@@ -6,7 +6,7 @@
 #    By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/14 13:48:42 by adbouras          #+#    #+#              #
-#    Updated: 2024/12/30 18:29:35 by adbouras         ###   ########.fr        #
+#    Updated: 2025/01/10 20:00:27 by adbouras         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ INCLUDES	= ./includes/cub3d.h
 
 LIBS		= $(LIBMLX)/build/libmlx42.a -ldl -L/Users/adhambouras/.brew/lib -lglfw -pthread -lm
 
-SRCS		= main.c get_next_line.c get_next_line_utils.c player_movment.c map_loading.c init.c
+SRCS		= main.c get_next_line.c get_next_line_utils.c player_movment.c map_loading.c init.c raycasting.c
 
 BNS_SRCS	= 
 
