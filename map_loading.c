@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/30 18:20:28 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/11 12:00:48 by adbouras         ###   ########.fr       */
+/*   Created: 2025/01/16 19:06:12 by adbouras          #+#    #+#             */
+/*   Updated: 2025/01/16 20:04:42 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,18 @@ void	import_map(t_data **data, char *path)
 		free(line);
 	}
 	(*data)->map_arr = ft_split((*data)->map, '\n');
+	(*data)->map_height = get_map_height((*data)->map_arr);
 	close(fd);
+}
+
+int		get_map_height(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+		i++;
+	return (i);
 }
 
 void	draw_minimap(t_data	*data)
@@ -42,7 +53,7 @@ void	draw_minimap(t_data	*data)
 	draw_tile(data->space, WHITE);
 	draw_tile(data->blank, RED);
 	draw_tile(data->wall, BLACK);
-	draw_player(data->player->img);
+	draw_player(data->player->imge);
 	while (map_arr[i])
 	{
 		j = 0;
@@ -60,7 +71,7 @@ void	draw_minimap(t_data	*data)
 		}
 		i++;
 	}
-	mlx_image_to_window(data->game->window, data->player->img, data->player->x * TILE_SIZE, data->player->y * TILE_SIZE);
+	mlx_image_to_window(data->game->window, data->player->imge, data->player->x * TILE_SIZE, data->player->y * TILE_SIZE);
 }
 
 void	draw_tile(mlx_image_t *image, int color)

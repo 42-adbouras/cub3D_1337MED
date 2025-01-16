@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/12 12:40:27 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/16 20:05:02 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,16 @@
 #include <string.h>
 #include <stdbool.h>
 #include <math.h>
+#include <float.h>
 
-#define	WIDTH		1280
-#define	HEIGHT		800
+#define	WIDTH		1900
+#define	HEIGHT		1000
 #define	TILE_SIZE	32
-#define	M_TILE_SIZE	16
+#define	M_TILE_SIZE	32
 #define	HITBOX		4
-#define	SPEED		2
-#define	ROT_SPEED	3 * (M_PI / 180)
-#define	FOV			60 * (M_PI / 180)
+#define	SPEED		4
+#define	ROT_SPEED	0.045
+#define	FOV			60
 
 #define	WHITE		0xFFFFFFFF
 #define BLACK		0x000000FF
@@ -40,7 +41,7 @@
 
 typedef	struct		s_player
 {
-	mlx_image_t*	img;
+	mlx_image_t*	imge;
 	mlx_image_t*	line;
 	int				x;
 	int				y;
@@ -48,12 +49,19 @@ typedef	struct		s_player
 	int				turn_dir;
 	int				strafe_dir;
 	double			rot_angle;
+	double			fov;
 }					t_player;
 
 typedef	struct		s_ray
 {
 	double			angle;
 	double			distance;
+	bool			h_cross;
+	bool			v_cross;
+	bool			face_up;
+	bool			face_down;
+	bool			face_left;
+	bool			face_right;
 	bool			x;
 }					t_ray;
 
@@ -61,6 +69,7 @@ typedef	struct		s_data
 {
 	const char*		map;
 	char**			map_arr;
+	int				map_height;
 	mlx_t*			game;
 	mlx_image_t*	wall;
 	mlx_image_t*	space;
@@ -72,17 +81,13 @@ typedef	struct		s_data
 
 void	init_data(t_data *data, char *arg);
 void	load_game(t_data **data);
+void	get_player_position(t_data *data, int *x, int *y);
 void	load_player(t_data **data);
 void	load_images(t_data **data);
+void	load_ray(t_data **data);
 
 void	import_map(t_data **data, char *path);
 void	draw_minimap(t_data	*data);
 void	draw_tile(mlx_image_t *image, int color);
 void	draw_player(mlx_image_t *image);
-
-void	ft_key_hook(void *param);
-void	update_player_pos(t_data** data);
-void	if_collition(t_data **data, double x, double y);
-
-void	raycasting(t_data *data);
-void	draw_vision(void *data);
+int		get_map_height(char **map);
