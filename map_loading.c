@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:06:12 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/16 20:04:42 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/17 17:50:10 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	import_map(t_data **data, char *path)
 		free(line);
 	}
 	(*data)->map_arr = ft_split((*data)->map, '\n');
+	(*data)->map_width = 13;
 	(*data)->map_height = get_map_height((*data)->map_arr);
 	close(fd);
 }

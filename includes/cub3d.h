@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/16 20:05:02 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/17 18:18:31 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@
 #define	WIDTH		1900
 #define	HEIGHT		1000
 #define	TILE_SIZE	32
-#define	M_TILE_SIZE	32
+#define	M_TILE_SIZE	16
 #define	HITBOX		4
-#define	SPEED		4
-#define	ROT_SPEED	0.045
-#define	FOV			60
+#define	SPEED		2
+#define	ROT_SPEED	3
+#define	FOV			92
+#define	STRIP_WIDTH	1
+#define	RAYS		WIDTH / STRIP_WIDTH
 
 #define	WHITE		0xFFFFFFFF
 #define BLACK		0x000000FF
@@ -49,6 +51,7 @@ typedef	struct		s_player
 	int				turn_dir;
 	int				strafe_dir;
 	double			rot_angle;
+	double			rot_speed;
 	double			fov;
 }					t_player;
 
@@ -69,6 +72,7 @@ typedef	struct		s_data
 {
 	const char*		map;
 	char**			map_arr;
+	int				map_width;
 	int				map_height;
 	mlx_t*			game;
 	mlx_image_t*	wall;
@@ -91,3 +95,12 @@ void	draw_minimap(t_data	*data);
 void	draw_tile(mlx_image_t *image, int color);
 void	draw_player(mlx_image_t *image);
 int		get_map_height(char **map);
+
+void    draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, uint32_t color);
+
+void	player_hook(t_data *data);
+void	update_line(mlx_image_t *line, t_data *data, double angle, int dist);
+
+double	norm_angle(double angle);
+
+void	raycasting(t_data *data);
