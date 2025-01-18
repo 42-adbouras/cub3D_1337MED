@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/18 17:55:13 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/18 20:19:04 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,15 @@
 #include <math.h>
 #include <float.h>
 
-#define	WIDTH		2550
-#define	HEIGHT		1000
+#define	WIDTH		1080
+#define	HEIGHT		720
 #define	TILE_SIZE	32
 #define	MAP_FACT	1
 #define	HITBOX		4
 #define	SPEED		2
-#define	ROT_SPEED	3
-#define	FOV			80
-#define	STRIP_WIDTH	1
-#define	RAYS		WIDTH / STRIP_WIDTH
+#define	ROT_SPEED	3 * (M_PI / 180)
+#define	FOV			80 * (M_PI / 180)
+#define	RAYS		WIDTH
 
 #define	WHITE		0xFFFFFFFF
 #define BLACK		0x000000FF
@@ -44,15 +43,13 @@
 typedef	struct		s_player
 {
 	mlx_image_t*	imge;
-	mlx_image_t*	line;
+	mlx_image_t*	rays;
 	int				x;
 	int				y;
 	int				walk_dir;
 	int				turn_dir;
 	int				strafe_dir;
 	double			rot_angle;
-	double			rot_speed;
-	double			fov;
 }					t_player;
 
 typedef	struct		s_ray
@@ -61,6 +58,8 @@ typedef	struct		s_ray
 	double			distance;
 	bool			h_cross;
 	bool			v_cross;
+	double			wall_hit_x;
+	double			wall_hit_y;
 	bool			face_up;
 	bool			face_down;
 	bool			face_left;
@@ -78,7 +77,7 @@ typedef	struct		s_data
 	mlx_image_t*	wall;
 	mlx_image_t*	space;
 	mlx_image_t*	blank;
-	mlx_image_t*	render;
+	mlx_image_t*	frame;
 	t_player*		player;
 	t_ray*			ray;
 }					t_data;

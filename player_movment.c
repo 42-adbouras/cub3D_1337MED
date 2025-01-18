@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:26:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/18 18:27:27 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:46:18 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,11 @@ bool	if_collition(t_data *data, int32_t x, int32_t y)
 
 void	update_line(mlx_image_t *line, t_data *data, double angle, int dist)
 {
-	double	start = (data->player->x + cos(angle) * dist);
-	double	end = (data->player->y + sin(angle) * dist);
+	double	start;
+	double	end;
+
+	start = (data->player->x + cos(angle) * dist);
+	end = (data->player->y + sin(angle) * dist);
 	draw_line(line, data->player->x, data->player->y, start, end, GREEN);
 }
 
@@ -87,7 +90,7 @@ void	update_player_pose(t_data *data)
 	int32_t	new_x;
 	int32_t	new_y;
 
-	data->player->rot_angle += data->player->turn_dir * data->player->rot_speed;
+	data->player->rot_angle += data->player->turn_dir * ROT_SPEED;
 	data->player->rot_angle = norm_angle(data->player->rot_angle);
 	move_step = data->player->walk_dir * SPEED;
 	straf_step = data->player->strafe_dir * SPEED;

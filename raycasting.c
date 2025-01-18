@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:58:41 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/18 18:08:55 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:57:58 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,9 +124,9 @@ void draw_rect(t_data *data, double x, double y, double width, double height)
         while (j < height)
 		{
 			if (data->ray->is_hori)
-            	mlx_put_pixel(data->render, x + i, y + j, WHITE);
+            	mlx_put_pixel(data->frame, x + i, y + j, WHITE);
 			else
-            	mlx_put_pixel(data->render, x + i, y + j, 0xB5B5B5FF);
+            	mlx_put_pixel(data->frame, x + i, y + j, 0xB5B5B5FF);
 			j++;
         }
 		i++;
@@ -141,7 +141,7 @@ void render_strip(t_data *data, int ray, double distance)
 	double bottom;
 
 	distance = distance * cos(data->ray->angle - data->player->rot_angle);
-	proj_plane = (WIDTH / 2) / tan(data->player->fov / 2);
+	proj_plane = (WIDTH / 2) / tan(FOV / 2);
 	wall_height = (TILE_SIZE / distance) * proj_plane;
 
 	top = (HEIGHT / 2) - (wall_height / 2);
@@ -165,9 +165,9 @@ void	draw_bg(t_data *data)
 		while (width < WIDTH)
 		{
 			if (height < HEIGHT / 2)
-				mlx_put_pixel(data->render, width, height, 0x89CFF3FF);
+				mlx_put_pixel(data->frame, width, height, 0x89CFF3FF);
 			else
-				mlx_put_pixel(data->render, width, height, 0xB99470FF);
+				mlx_put_pixel(data->frame, width, height, 0xB99470FF);
 			width++;
 		}
 		height++;
@@ -178,8 +178,6 @@ void	raycasting(t_data *data)
 {
 	double	*hori_coord;
 	double	*vert_coord;
-	double	wall_hit_x;
-	double	wall_hit_y;
 	double	hori_dist;
 	double	vert_dist;
 	int		ray;
@@ -187,7 +185,7 @@ void	raycasting(t_data *data)
 	ray = 0;
 	hori_dist = DBL_MAX;
 	vert_dist = DBL_MAX;
-	data->ray->angle = data->player->rot_angle - (data->player->fov / 2);
+	data->ray->angle = data->player->rot_angle - (FOV / 2);
 	draw_bg(data);
 	while (ray < RAYS)
 	{
@@ -204,19 +202,19 @@ void	raycasting(t_data *data)
 		{
 			data->ray->distance = hori_dist;
 			data->ray->is_hori = true;
-			wall_hit_x = hori_coord[0];
-			wall_hit_y = hori_coord[1];
+			data->ray->wall_hit_x = hori_coord[0];
+			data->ray->wall_hit_y = hori_coord[1];
 		}
 		else
 		{
 			data->ray->distance = vert_dist;
 			data->ray->is_hori = false;
-			wall_hit_x = vert_coord[0];
-			wall_hit_y = vert_coord[1];
+			data->ray->wall_hit_x = vert_coord[0];
+			data->ray->wall_hit_y = vert_coord[1];
 		}
-		draw_line(data->player->line, data->player->x, data->player->y, wall_hit_x, wall_hit_y, GREEN);
+		draw_line(data->player->rays, data->player->x, data->player->y, data->ray->wall_hit_x, data->ray->wall_hit_y, GREEN);
 		render_strip(data, ray, data->ray->distance);
-		data->ray->angle += data->player->fov / RAYS;
+		data->ray->angle += FOV / RAYS;
 		ray++;
 	}
 }

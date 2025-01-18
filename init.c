@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:09 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/17 12:21:05 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:53:21 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,10 @@ void	load_player(t_data **data)
 	(*data)->player->turn_dir = 0;
 	(*data)->player->strafe_dir = 0;
 	(*data)->player->rot_angle = 3 * (M_PI / 2);
-	(*data)->player->rot_speed = ROT_SPEED * (M_PI / 180);
-	(*data)->player->fov = FOV * (M_PI / 180);
-	(*data)->player->line = mlx_new_image((*data)->game->window, WIDTH, HEIGHT);
+	(*data)->player->rays = mlx_new_image((*data)->game->window, WIDTH, HEIGHT);
 	(*data)->player->imge = mlx_new_image((*data)->game->window, HITBOX, HITBOX);
 	get_player_position(*data, &(*data)->player->x, &(*data)->player->y);
-	if (!(*data)->player->imge || !(*data)->player->line)
+	if (!(*data)->player->imge || !(*data)->player->rays)
 	{
 		perror("Failed while loading player image");
 		free((*data)->game);
@@ -101,8 +99,8 @@ void	load_images(t_data **data)
 	(*data)->wall = mlx_new_image((*data)->game->window, TILE_SIZE, TILE_SIZE);
 	(*data)->space = mlx_new_image((*data)->game->window, TILE_SIZE, TILE_SIZE);
 	(*data)->blank = mlx_new_image((*data)->game->window, TILE_SIZE, TILE_SIZE);
-	(*data)->render = mlx_new_image((*data)->game->window, WIDTH, HEIGHT);
-	if (!(*data)->wall || !(*data)->space || !(*data)->blank || !(*data)->render)
+	(*data)->frame = mlx_new_image((*data)->game->window, WIDTH, HEIGHT);
+	if (!(*data)->wall || !(*data)->space || !(*data)->blank || !(*data)->frame)
 	{
 		perror("Failed while loading images");
 		free((*data)->game);
