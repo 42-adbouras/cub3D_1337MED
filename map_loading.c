@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:06:12 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/17 17:50:10 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/18 15:22:25 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,26 @@ void	import_map(t_data **data, char *path)
 		free(line);
 	}
 	(*data)->map_arr = ft_split((*data)->map, '\n');
-	(*data)->map_width = 13;
-	(*data)->map_height = get_map_height((*data)->map_arr);
+	get_map_size(*data);
+	printf("%d, %d\n", (*data)->map_width, (*data)->map_height);
 	close(fd);
 }
 
-int		get_map_height(char **map)
+void	get_map_size(t_data *data)
 {
-	int	i;
+	int	width;
+	int	height;
 
-	i = 0;
-	while (map[i])
-		i++;
-	return (i);
+	height = 0;
+	width = (int)ft_strlen(data->map_arr[0]);
+	while (data->map_arr[height])
+	{
+		if (height > 0 && width < (int)ft_strlen(data->map_arr[height - 1]))
+			width = (int)ft_strlen(data->map_arr[height]);
+		height++;
+	}
+	data->map_height = height;
+	data->map_width = width;
 }
 
 void	draw_minimap(t_data	*data)
@@ -61,18 +68,18 @@ void	draw_minimap(t_data	*data)
 		while (map_arr[i][j])
 		{
 			if (map_arr[i][j] == '1')
-				mlx_image_to_window(data->game->window, data->wall, j * TILE_SIZE, i * TILE_SIZE);
+				mlx_image_to_window(data->game->window, data->wall, j * TILE_SIZE * MAP_FACT, i * TILE_SIZE * MAP_FACT);
 			else if (map_arr[i][j] == '0')
-				mlx_image_to_window(data->game->window, data->space, j * TILE_SIZE, i * TILE_SIZE);
+				mlx_image_to_window(data->game->window, data->space, j * TILE_SIZE * MAP_FACT, i * TILE_SIZE * MAP_FACT);
 			else if (map_arr[i][j] == 'N')
-				mlx_image_to_window(data->game->window, data->space, j * TILE_SIZE, i * TILE_SIZE);
+				mlx_image_to_window(data->game->window, data->space, j * TILE_SIZE * MAP_FACT, i * TILE_SIZE * MAP_FACT);
 			else
-				mlx_image_to_window(data->game->window, data->blank, j * TILE_SIZE, i * TILE_SIZE);
+				mlx_image_to_window(data->game->window, data->blank, j * TILE_SIZE * MAP_FACT, i * TILE_SIZE * MAP_FACT);
 			j++;
 		}
 		i++;
 	}
-	mlx_image_to_window(data->game->window, data->player->imge, data->player->x * TILE_SIZE, data->player->y * TILE_SIZE);
+	mlx_image_to_window(data->game->window, data->player->imge, data->player->x * TILE_SIZE * MAP_FACT, data->player->y * TILE_SIZE * MAP_FACT);
 }
 
 void	draw_tile(mlx_image_t *image, int color)
@@ -81,10 +88,10 @@ void	draw_tile(mlx_image_t *image, int color)
 	int	j;
 
 	i = 0;
-	while (i < TILE_SIZE)
+	while (i < TILE_SIZE * MAP_FACT)
 	{
 		j = 0;
-		while (j < TILE_SIZE)
+		while (j < TILE_SIZE * MAP_FACT)
 		{
 			mlx_put_pixel(image, j, i, color);
 			j++;

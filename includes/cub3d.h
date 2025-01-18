@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/17 18:18:31 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/18 17:55:13 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@
 #include <math.h>
 #include <float.h>
 
-#define	WIDTH		1900
+#define	WIDTH		2550
 #define	HEIGHT		1000
 #define	TILE_SIZE	32
-#define	M_TILE_SIZE	16
+#define	MAP_FACT	1
 #define	HITBOX		4
 #define	SPEED		2
 #define	ROT_SPEED	3
-#define	FOV			92
+#define	FOV			80
 #define	STRIP_WIDTH	1
 #define	RAYS		WIDTH / STRIP_WIDTH
 
@@ -65,7 +65,7 @@ typedef	struct		s_ray
 	bool			face_down;
 	bool			face_left;
 	bool			face_right;
-	bool			x;
+	bool			is_hori;
 }					t_ray;
 
 typedef	struct		s_data
@@ -94,7 +94,7 @@ void	import_map(t_data **data, char *path);
 void	draw_minimap(t_data	*data);
 void	draw_tile(mlx_image_t *image, int color);
 void	draw_player(mlx_image_t *image);
-int		get_map_height(char **map);
+void	get_map_size(t_data *data);
 
 void    draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, uint32_t color);
 

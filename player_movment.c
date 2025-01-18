@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:26:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/17 15:43:08 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:27:27 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ bool	if_collition(t_data *data, int32_t x, int32_t y)
 
 void	update_line(mlx_image_t *line, t_data *data, double angle, int dist)
 {
-	double	start = (data->player->imge->instances->x + cos(angle) * dist);
-	double	end = (data->player->imge->instances->y + sin(angle) * dist);
-	draw_line(line, data->player->imge->instances->x, data->player->imge->instances->y, start, end, GREEN);
+	double	start = (data->player->x + cos(angle) * dist);
+	double	end = (data->player->y + sin(angle) * dist);
+	draw_line(line, data->player->x, data->player->y, start, end, GREEN);
 }
 
 
@@ -102,10 +102,6 @@ void	update_player_pose(t_data *data)
 	}
 	data->player->x = data->player->imge->instances->x;
 	data->player->y = data->player->imge->instances->y;
-	mlx_delete_image(data->game->window, data->player->line);
-	data->player->line = mlx_new_image(data->game->window, 3000, data->map_height * TILE_SIZE);
-	update_line(data->player->line, data, data->player->rot_angle, 20);
-	mlx_image_to_window(data->game->window, data->player->line, 0, 0);
 }
 
 void	player_hook(t_data *data)

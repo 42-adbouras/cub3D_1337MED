@@ -6,29 +6,29 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:58:41 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/17 20:06:57 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:08:55 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
 
-bool wall_at(t_data *data, int x, int y) {
-    int X_index;
-    int Y_index;
+bool	wall_at(t_data *data, int x, int y)
+{
+    int map_x;
+    int map_y;
 
-    if (x < 0 || x >= data->map_width || y < 0 || y >= data->map_height)
+    if (x < 0 || x >= data->map_width * TILE_SIZE || y < 0 || y >= data->map_height * TILE_SIZE)
         return (true);
-    Y_index = floor(y / TILE_SIZE);
-    X_index = floor(x / TILE_SIZE);
-    if (Y_index >= data->map_height / TILE_SIZE || X_index >= data->map_width / TILE_SIZE)
+    map_y = floor(y / TILE_SIZE);
+    map_x = floor(x / TILE_SIZE);
+    if (map_y >= data->map_height || map_x >= data->map_width)
         return (true);
-    if (X_index >= (int)ft_strlen(data->map_arr[Y_index]))
+    if (map_x >= (int)ft_strlen(data->map_arr[map_y]))
         return (true);
-    if (data->map_arr[Y_index][X_index] == '1')
+    if (data->map_arr[map_y][map_x] == '1')
         return (true);
     return (false);
 }
-
 
 void	set_orientation(t_data *data, double angle)
 {
@@ -40,7 +40,7 @@ void	set_orientation(t_data *data, double angle)
 
 double	get_distance(double x1, double y1, double x2, double y2)
 {
-	return (sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1))));
+	return (sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)));
 }
 
 double*	hori_intersection(t_data *data, double angle)
@@ -53,28 +53,19 @@ double*	hori_intersection(t_data *data, double angle)
 
 	hori_coord = malloc(sizeof(double) * 2);
 	//////////////
-
 	y_inter = floor(data->player->y / TILE_SIZE) * TILE_SIZE;
 	y_inter += data->ray->face_down ? TILE_SIZE : 0;
-
 	x_inter = data->player->x + (y_inter - data->player->y) / tan(angle);
-
 	y_step = TILE_SIZE;
 	y_step *= data->ray->face_up ? -1 : 1;
-
 	x_step = TILE_SIZE / tan(angle);
 	x_step *= data->ray->face_left && x_step > 0 ? -1 : 1;
 	x_step *= data->ray->face_right && x_step < 0 ? -1 : 1;
-
 	double	next_x = x_inter;
 	double	next_y = y_inter;
-
-	if (data->ray->face_up)
-		next_y--;
-
-	while (next_x >= 0 && next_x <= WIDTH && next_y >= 0 && next_y <= HEIGHT)
+	while (next_x >= 0 && next_x <= data->map_width * TILE_SIZE && next_y >= 0 && next_y <= data->map_height * TILE_SIZE)
 	{
-		if (wall_at(data, next_x, next_y))
+		if (wall_at(data, next_x, next_y - (data->ray->face_up ? 1 : 0)))
 		{
 			data->ray->h_cross = true;
 			break;
@@ -97,28 +88,19 @@ double*	vert_intersection(t_data *data, double angle)
 
 	vert_coord = malloc(sizeof(double) * 2);
 	//////////////
-
 	x_inter = floor(data->player->x / TILE_SIZE) * TILE_SIZE;
 	x_inter += data->ray->face_right ? TILE_SIZE : 0;
-
 	y_inter = data->player->y + (x_inter - data->player->x) * tan(angle);
-
 	x_step = TILE_SIZE;
 	x_step *= data->ray->face_left ? -1 : 1;
-
 	y_step = TILE_SIZE * tan(angle);
 	y_step *= (data->ray->face_up && y_step > 0) ? -1 : 1;
 	y_step *= (data->ray->face_down && y_step < 0) ? -1 : 1;
-
 	double	next_x = x_inter;
 	double	next_y = y_inter;
-
-	if (data->ray->face_left)
-		next_x--;
-
-	while (next_x >= 0 && next_x <= WIDTH && next_y >= 0 && next_y <= HEIGHT)
+	while (next_x >= 0 && next_x <= data->map_width * TILE_SIZE && next_y >= 0 && next_y <= data->map_height * TILE_SIZE)
 	{
-		if (wall_at(data, next_x, next_y))
+		if (wall_at(data, next_x - (data->ray->face_left ? 1 : 0), next_y))
 		{
 			data->ray->v_cross = true;
 			break;
@@ -131,64 +113,110 @@ double*	vert_intersection(t_data *data, double angle)
 	return (vert_coord);
 }
 
-void draw_rect(t_data *data, double ray, double t_pix, double b_pix)
+void draw_rect(t_data *data, double x, double y, double width, double height)
 {
-	while (t_pix < b_pix)
-		mlx_put_pixel(data->render, ray, t_pix++, WHITE);
+	int i, j;
+
+	i = 0;
+    while (i < width)
+	{
+		j = 0;
+        while (j < height)
+		{
+			if (data->ray->is_hori)
+            	mlx_put_pixel(data->render, x + i, y + j, WHITE);
+			else
+            	mlx_put_pixel(data->render, x + i, y + j, 0xB5B5B5FF);
+			j++;
+        }
+		i++;
+    }
 }
 
-void	render_strip(t_data *data, int ray)
+void render_strip(t_data *data, int ray, double distance)
 {
-	double	wall_height;
-	double	projec_plane;
-	double	t_pix;
-	double	b_pix;
+	double wall_height;
+	double proj_plane;
+	double top;
+	double bottom;
 
-	projec_plane = (WIDTH / 2) / tan(data->player->fov / 2);
-	wall_height = (TILE_SIZE / data->ray->distance) * projec_plane;
-	b_pix = (HEIGHT / 2) + (wall_height / 2);
-	t_pix = (HEIGHT / 2) - (wall_height / 2);
-	if (b_pix > HEIGHT)
-		b_pix = HEIGHT;
-	if (t_pix < 0)
-		t_pix = 0;
-	draw_rect(data, ray, t_pix, b_pix);
+	distance = distance * cos(data->ray->angle - data->player->rot_angle);
+	proj_plane = (WIDTH / 2) / tan(data->player->fov / 2);
+	wall_height = (TILE_SIZE / distance) * proj_plane;
+
+	top = (HEIGHT / 2) - (wall_height / 2);
+	top = top < 0 ? 0 : top;
+
+	bottom = (HEIGHT / 2) + (wall_height / 2);
+	bottom = bottom > HEIGHT ? HEIGHT : bottom;
+
+	draw_rect(data, ray, top, 1, bottom - top);
+}
+
+void	draw_bg(t_data *data)
+{
+	int	height;
+	int	width;
+
+	height = 0;
+	while (height < HEIGHT)
+	{
+		width = 0;
+		while (width < WIDTH)
+		{
+			if (height < HEIGHT / 2)
+				mlx_put_pixel(data->render, width, height, 0x89CFF3FF);
+			else
+				mlx_put_pixel(data->render, width, height, 0xB99470FF);
+			width++;
+		}
+		height++;
+	}
 }
 
 void	raycasting(t_data *data)
 {
 	double	*hori_coord;
-	// double	*vert_coord;
+	double	*vert_coord;
+	double	wall_hit_x;
+	double	wall_hit_y;
 	double	hori_dist;
-	// double	vert_dist;
+	double	vert_dist;
 	int		ray;
 
 	ray = 0;
 	hori_dist = DBL_MAX;
-	// vert_dist = DBL_MAX;
+	vert_dist = DBL_MAX;
 	data->ray->angle = data->player->rot_angle - (data->player->fov / 2);
-	mlx_delete_image(data->game->window, data->player->line);
-	data->player->line = mlx_new_image(data->game->window, WIDTH, HEIGHT);
-	while (ray < 1)
+	draw_bg(data);
+	while (ray < RAYS)
 	{
 		data->ray->angle = norm_angle(data->ray->angle);
 		set_orientation(data, data->ray->angle);
 		
 		hori_coord = hori_intersection(data, data->ray->angle);
-		// vert_coord = vert_intersection(data, data->ray->angle);
-
-		// if (data->ray->h_cross)
+		vert_coord = vert_intersection(data, data->ray->angle);	
+		if (data->ray->h_cross)
 			hori_dist = get_distance(data->player->x, data->player->y, hori_coord[0], hori_coord[1]);
-		// if (data->ray->v_cross)
-		// 	vert_dist = get_distance(data->player->x, data->player->y, vert_coord[0], vert_coord[1]);
-		// if (hori_dist < vert_dist)
-			// data->ray->distance = hori_dist;
-		// else
-		// 	data->ray->distance = vert_dist;
-		update_line(data->player->line, data, data->ray->angle, hori_dist);
+		if (data->ray->v_cross)
+			vert_dist = get_distance(data->player->x, data->player->y, vert_coord[0], vert_coord[1]);
+		if (hori_dist < vert_dist)
+		{
+			data->ray->distance = hori_dist;
+			data->ray->is_hori = true;
+			wall_hit_x = hori_coord[0];
+			wall_hit_y = hori_coord[1];
+		}
+		else
+		{
+			data->ray->distance = vert_dist;
+			data->ray->is_hori = false;
+			wall_hit_x = vert_coord[0];
+			wall_hit_y = vert_coord[1];
+		}
+		draw_line(data->player->line, data->player->x, data->player->y, wall_hit_x, wall_hit_y, GREEN);
+		render_strip(data, ray, data->ray->distance);
 		data->ray->angle += data->player->fov / RAYS;
 		ray++;
 	}
-	mlx_image_to_window(data->game->window, data->player->line, 0, 0);
-	
 }

@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:43:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/17 13:30:07 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:06:57 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,11 @@ void	game_loop(void *param)
 
 	data = (t_data*) param;
 	// handle render image
+	mlx_delete_image(data->game->window, data->render);
+	data->render = mlx_new_image(data->game->window, WIDTH, HEIGHT);
 	player_hook(data);
 	raycasting(data);
+	mlx_image_to_window(data->game->window, data->render, 0, 0);
 }
 
 int	main(int ac, char **av)
