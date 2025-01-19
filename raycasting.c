@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:58:41 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/18 18:57:58 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/19 12:19:52 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ double*	hori_intersection(t_data *data, double angle)
 
 	hori_coord = malloc(sizeof(double) * 2);
 	//////////////
-	y_inter = floor(data->player->y / TILE_SIZE) * TILE_SIZE;
+	y_inter = floor((data->player->y + (HITBOX / 2)) / TILE_SIZE) * TILE_SIZE;
 	y_inter += data->ray->face_down ? TILE_SIZE : 0;
-	x_inter = data->player->x + (y_inter - data->player->y) / tan(angle);
+	x_inter = (data->player->x + (HITBOX / 2)) + (y_inter - (data->player->y + (HITBOX / 2))) / tan(angle);
 	y_step = TILE_SIZE;
 	y_step *= data->ray->face_up ? -1 : 1;
 	x_step = TILE_SIZE / tan(angle);
@@ -88,9 +88,9 @@ double*	vert_intersection(t_data *data, double angle)
 
 	vert_coord = malloc(sizeof(double) * 2);
 	//////////////
-	x_inter = floor(data->player->x / TILE_SIZE) * TILE_SIZE;
+	x_inter = floor((data->player->x + (HITBOX / 2)) / TILE_SIZE) * TILE_SIZE;
 	x_inter += data->ray->face_right ? TILE_SIZE : 0;
-	y_inter = data->player->y + (x_inter - data->player->x) * tan(angle);
+	y_inter = (data->player->y + (HITBOX / 2)) + (x_inter - (data->player->x + (HITBOX / 2))) * tan(angle);
 	x_step = TILE_SIZE;
 	x_step *= data->ray->face_left ? -1 : 1;
 	y_step = TILE_SIZE * tan(angle);
@@ -195,9 +195,9 @@ void	raycasting(t_data *data)
 		hori_coord = hori_intersection(data, data->ray->angle);
 		vert_coord = vert_intersection(data, data->ray->angle);	
 		if (data->ray->h_cross)
-			hori_dist = get_distance(data->player->x, data->player->y, hori_coord[0], hori_coord[1]);
+			hori_dist = get_distance((data->player->x + (HITBOX / 2)), (data->player->y + (HITBOX / 2)), hori_coord[0], hori_coord[1]);
 		if (data->ray->v_cross)
-			vert_dist = get_distance(data->player->x, data->player->y, vert_coord[0], vert_coord[1]);
+			vert_dist = get_distance((data->player->x + (HITBOX / 2)), (data->player->y + (HITBOX / 2)), vert_coord[0], vert_coord[1]);
 		if (hori_dist < vert_dist)
 		{
 			data->ray->distance = hori_dist;
@@ -212,7 +212,7 @@ void	raycasting(t_data *data)
 			data->ray->wall_hit_x = vert_coord[0];
 			data->ray->wall_hit_y = vert_coord[1];
 		}
-		draw_line(data->player->rays, data->player->x, data->player->y, data->ray->wall_hit_x, data->ray->wall_hit_y, GREEN);
+		draw_line(data->player->rays, (data->player->x + (HITBOX / 2)), (data->player->y + (HITBOX / 2)), data->ray->wall_hit_x, data->ray->wall_hit_y, GREEN);
 		render_strip(data, ray, data->ray->distance);
 		data->ray->angle += FOV / RAYS;
 		ray++;

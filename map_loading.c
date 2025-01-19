@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:06:12 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/18 15:22:25 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/19 12:02:24 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	draw_player(mlx_image_t *image)
 		j = 0;
 		while (j < HITBOX)
 		{
-			mlx_put_pixel(image, j, i, GREEN);
+			mlx_put_pixel(image, j, i, RED);
 			j++;
 		}
 		i++;

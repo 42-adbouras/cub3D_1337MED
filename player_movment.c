@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:26:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/18 18:46:18 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/19 10:29:03 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,10 @@ void	update_player_pose(t_data *data)
 	int32_t	new_x;
 	int32_t	new_y;
 
-	data->player->rot_angle += data->player->turn_dir * ROT_SPEED;
+	data->player->rot_angle += data->player->turn_dir * (ROT_SPEED );
 	data->player->rot_angle = norm_angle(data->player->rot_angle);
-	move_step = data->player->walk_dir * SPEED;
-	straf_step = data->player->strafe_dir * SPEED;
+	move_step = data->player->walk_dir * (SPEED );
+	straf_step = data->player->strafe_dir * (SPEED );
 
 	new_x = round(cos(data->player->rot_angle) * move_step - sin(data->player->rot_angle) * straf_step);
 	new_y = round(sin(data->player->rot_angle) * move_step + cos(data->player->rot_angle) * straf_step);
@@ -109,6 +109,10 @@ void	update_player_pose(t_data *data)
 
 void	player_hook(t_data *data)
 {
+	// static double	last_time;
+	// double			curr_time = mlx_get_time();
+	// double			delta_time = curr_time - last_time;
+
 	key_press(data);
 	update_player_pose(data);
 }

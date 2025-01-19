@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/18 20:19:04 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/19 12:23:12 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 #include <math.h>
 #include <float.h>
 
-#define	WIDTH		1080
-#define	HEIGHT		720
-#define	TILE_SIZE	32
+#define	WIDTH		1920
+#define	HEIGHT		1080
+#define	TILE_SIZE	42
 #define	MAP_FACT	1
-#define	HITBOX		4
+#define	HITBOX		8
 #define	SPEED		2
 #define	ROT_SPEED	3 * (M_PI / 180)
 #define	FOV			80 * (M_PI / 180)
