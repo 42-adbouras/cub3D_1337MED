@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/19 12:23:12 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/19 12:41:22 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,13 @@ typedef	struct		s_data
 {
 	const char*		map;
 	char**			map_arr;
+	char**			parsed_map;
+	char			*east_texture;
+	char			*west_texture;
+	char			*north_texture;
+	char			*south_texture;
+	int				floor_color[3];
+	int				ceiling_color[3];
 	int				map_width;
 	int				map_height;
 	mlx_t*			game;

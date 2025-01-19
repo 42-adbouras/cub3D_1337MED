@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:43:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/19 12:33:53 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/19 12:38:11 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	main(int ac, char **av)
 
 	(void) ac;
 	init_data(&data, av[1]);
+	parse_map(data);
 	draw_minimap(&data);
 	mlx_loop_hook(data.game->window, game_loop, &data);
 	mlx_loop(data.game->window);
