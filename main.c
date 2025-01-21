@@ -3,48 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:43:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/19 12:38:11 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/01/21 16:24:51 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
 
-// void	var_check(t_data *data)
-// {
-// 	int i = 0;
+void	clear_image(mlx_image_t *image)
+{
+	uint32_t	i;
+	uint32_t	j;
 
-// 	printf(" ----------- MAP -----------\n%s\n\n", data->map);
-// 	while (data->map_arr[i]) {
-// 		printf("%s\n", data->map_arr[i++]);
-// 	}
-// 	printf("map height: %d.\n", data->map_height);
-// 	data->game ? printf("\nData.game is good\n") : printf("\nData.game is NOT good\n");
-// 	printf("\twindow width: %d\n\twindow height: %d.\n", data->game->width, data->game->height);
-// 	data->wall ? printf("\nData.wall is good\n") : printf("\nData.wall is NOT good\n");
-// 	data->space ? printf("\nData.space is good\n") : printf("\nData.space is NOT good\n");
-// 	data->blank ? printf("\nData.blank is good\n") : printf("\nData.blank is NOT good\n");
-// 	data->frame ? printf("\nData.frame is good\n") : printf("\nData.frame is NOT good\n");
-// 	data->player ? printf("\nData.player is good\n") : printf("\nData.player is NOT good\n");
-// 	printf("\tplayer x: %d, player y: %d.\n", data->player->x, data->player->y);
-// 	printf("\tplayer view angle: %f.\n", data->player->rot_angle);
-// 	data->ray ? printf("\nData.ray is good\n") : printf("\nData.ray is NOT good\n");
-// 	printf("\tray angle: %f\n", data->ray->angle);
-// 	printf("\tray distance: %f\n", data->ray->distance);
-// }
+	i = 0;
+	while (i < image->height)
+	{
+		j = 0;
+		while (j < image->width)
+			mlx_put_pixel(image, j++, i, 0x00000000);
+		i++;
+	}
+}
+
+void	draw_walls(t_data *data)
+{
+	int	ray;
+
+	ray = -1;
+	while (++ray < RAYS)
+		render_strip(data, ray, data->text[ray].distance);
+}
+
+void	draw_rays(t_data *data)
+{
+	int	ray;
+	
+	ray = -1;
+	while (++ray < RAYS)
+		draw_line(data->frame,
+				(data->player->x + (HITBOX / 2)) * MAP_FACT,
+				(data->player->y + (HITBOX / 2)) * MAP_FACT,
+				data->text[ray].wall_hit_x * MAP_FACT,
+				data->text[ray].wall_hit_y * MAP_FACT,
+				rgba(192, 242, 255, 255));
+}
 
 void	game_loop(void *param)
 {
 	t_data	*data;
 
 	data = (t_data*) param;
-	// handle frame image
-	mlx_delete_image(data->game->window, data->frame);
-	data->frame = mlx_new_image(data->game->window, WIDTH, HEIGHT);
 	player_hook(data);
 	raycasting(data);
+
+	mlx_delete_image(data->game->window, data->frame);
+	data->frame = mlx_new_image(data->game->window, WIDTH, HEIGHT);
+
+	draw_bg(data);
+	draw_walls(data);
+
+	draw_minimap(data);
+
+	draw_rays(data);
+
 	mlx_image_to_window(data->game->window, data->frame, 0, 0);
 }
 
@@ -54,9 +77,8 @@ int	main(int ac, char **av)
 
 	(void) ac;
 	init_data(&data, av[1]);
-	parse_map(data);
-	draw_minimap(&data);
+	// draw_player(data.player->imge);
+	mlx_image_to_window(data.game->window, data.player->imge, data.player->x * TILE_SIZE + (TILE_SIZE / 2 - HITBOX), data.player->y * TILE_SIZE + (TILE_SIZE / 2 - HITBOX));
 	mlx_loop_hook(data.game->window, game_loop, &data);
 	mlx_loop(data.game->window);
-	// var_check(&data);
 }

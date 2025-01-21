@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/19 12:41:22 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/01/21 18:44:31 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 #include <math.h>
 #include <float.h>
 
-#define	WIDTH		1920
-#define	HEIGHT		1080
+#define	WIDTH		1280
+#define	HEIGHT		round(WIDTH / 16 * 9)
 #define	TILE_SIZE	42
-#define	MAP_FACT	1
+#define	MAP_FACT	0.2
 #define	HITBOX		8
 #define	SPEED		2
 #define	ROT_SPEED	3 * (M_PI / 180)
@@ -67,26 +67,36 @@ typedef	struct		s_ray
 	bool			is_hori;
 }					t_ray;
 
+typedef	struct		s_text
+{
+	double			angle;
+	double			distance;
+	bool			h_cross;
+	bool			v_cross;
+	double			wall_hit_x;
+	double			wall_hit_y;
+	bool			face_up;
+	bool			face_down;
+	bool			face_left;
+	bool			face_right;
+	bool			is_hori;
+}					t_text;
+
 typedef	struct		s_data
 {
 	const char*		map;
 	char**			map_arr;
-	char**			parsed_map;
-	char			*east_texture;
-	char			*west_texture;
-	char			*north_texture;
-	char			*south_texture;
-	int				floor_color[3];
-	int				ceiling_color[3];
 	int				map_width;
 	int				map_height;
 	mlx_t*			game;
-	mlx_image_t*	wall;
-	mlx_image_t*	space;
-	mlx_image_t*	blank;
+	mlx_image_t*	bg;
 	mlx_image_t*	frame;
+	mlx_image_t*	map_img;
 	t_player*		player;
 	t_ray*			ray;
+	t_text			text[RAYS];
+	bool			mini_map;
+	
 }					t_data;
 
 void	init_data(t_data *data, char *arg);
@@ -98,7 +108,7 @@ void	load_ray(t_data **data);
 
 void	import_map(t_data **data, char *path);
 void	draw_minimap(t_data	*data);
-void	draw_tile(mlx_image_t *image, int color);
+void	draw_tile(mlx_image_t *image, int x, int y ,int color);
 void	draw_player(mlx_image_t *image);
 void	get_map_size(t_data *data);
 
@@ -110,3 +120,8 @@ void	update_line(mlx_image_t *line, t_data *data, double angle, int dist);
 double	norm_angle(double angle);
 
 void	raycasting(t_data *data);
+void	draw_bg(t_data *data);
+void	render_strip(t_data *data, int ray, double distance);
+void	draw_rect(t_data *data, double x, double y, double width, double height);
+
+int		rgba(int r, int g, int b, int a);

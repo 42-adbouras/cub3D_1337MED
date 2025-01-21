@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:09 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/18 18:53:21 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:48:05 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	load_game(t_data **data)
 	(*data)->game->width = WIDTH;
 	(*data)->game->height = HEIGHT;
 	(*data)->game->window = mlx_init(WIDTH, HEIGHT, "cub3D", true);
+	(*data)->mini_map = false;
 	if (!(*data)->game->window)
 	{
 		perror("Failed while loading game window");
@@ -96,11 +97,8 @@ void	load_player(t_data **data)
 
 void	load_images(t_data **data)
 {
-	(*data)->wall = mlx_new_image((*data)->game->window, TILE_SIZE, TILE_SIZE);
-	(*data)->space = mlx_new_image((*data)->game->window, TILE_SIZE, TILE_SIZE);
-	(*data)->blank = mlx_new_image((*data)->game->window, TILE_SIZE, TILE_SIZE);
 	(*data)->frame = mlx_new_image((*data)->game->window, WIDTH, HEIGHT);
-	if (!(*data)->wall || !(*data)->space || !(*data)->blank || !(*data)->frame)
+	if (!(*data)->frame)
 	{
 		perror("Failed while loading images");
 		free((*data)->game);

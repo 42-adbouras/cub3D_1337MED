@@ -6,11 +6,16 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:58:41 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/19 12:19:52 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:29:42 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
+
+int	rgba(int r, int g, int b, int a)
+{
+    return (r << 24 | g << 16 | b << 8 | a);
+}
 
 bool	wall_at(t_data *data, int x, int y)
 {
@@ -113,7 +118,7 @@ double*	vert_intersection(t_data *data, double angle)
 	return (vert_coord);
 }
 
-void draw_rect(t_data *data, double x, double y, double width, double height)
+void	draw_rect(t_data *data, double x, double y, double width, double height)
 {
 	int i, j;
 
@@ -123,24 +128,24 @@ void draw_rect(t_data *data, double x, double y, double width, double height)
 		j = 0;
         while (j < height)
 		{
-			if (data->ray->is_hori)
-            	mlx_put_pixel(data->frame, x + i, y + j, WHITE);
+			if (data->text[(int)x].is_hori)
+            	mlx_put_pixel(data->frame, x + i, y + j, rgba(255, 255, 255, 255));
 			else
-            	mlx_put_pixel(data->frame, x + i, y + j, 0xB5B5B5FF);
+            	mlx_put_pixel(data->frame, x + i, y + j, rgba(214, 214, 214, 255));
 			j++;
         }
 		i++;
     }
 }
 
-void render_strip(t_data *data, int ray, double distance)
+void	render_strip(t_data *data, int ray, double distance)
 {
 	double wall_height;
 	double proj_plane;
 	double top;
 	double bottom;
 
-	distance = distance * cos(data->ray->angle - data->player->rot_angle);
+	distance *= cos(data->text[ray].angle - data->player->rot_angle);
 	proj_plane = (WIDTH / 2) / tan(FOV / 2);
 	wall_height = (TILE_SIZE / distance) * proj_plane;
 
@@ -165,9 +170,9 @@ void	draw_bg(t_data *data)
 		while (width < WIDTH)
 		{
 			if (height < HEIGHT / 2)
-				mlx_put_pixel(data->frame, width, height, 0x89CFF3FF);
+				mlx_put_pixel(data->frame, width, height, rgba(175, 246, 255, 255));
 			else
-				mlx_put_pixel(data->frame, width, height, 0xB99470FF);
+				mlx_put_pixel(data->frame, width, height, rgba(20, 36, 40, 255));
 			width++;
 		}
 		height++;
@@ -176,45 +181,43 @@ void	draw_bg(t_data *data)
 
 void	raycasting(t_data *data)
 {
-	double	*hori_coord;
-	double	*vert_coord;
-	double	hori_dist;
-	double	vert_dist;
-	int		ray;
+    double  *vert_coord;
+    double  *hori_coord;
+    double  hori_dist;
+    double  vert_dist;
+    int     ray;
 
-	ray = 0;
-	hori_dist = DBL_MAX;
-	vert_dist = DBL_MAX;
-	data->ray->angle = data->player->rot_angle - (FOV / 2);
-	draw_bg(data);
-	while (ray < RAYS)
-	{
-		data->ray->angle = norm_angle(data->ray->angle);
-		set_orientation(data, data->ray->angle);
-		
-		hori_coord = hori_intersection(data, data->ray->angle);
-		vert_coord = vert_intersection(data, data->ray->angle);	
-		if (data->ray->h_cross)
-			hori_dist = get_distance((data->player->x + (HITBOX / 2)), (data->player->y + (HITBOX / 2)), hori_coord[0], hori_coord[1]);
-		if (data->ray->v_cross)
-			vert_dist = get_distance((data->player->x + (HITBOX / 2)), (data->player->y + (HITBOX / 2)), vert_coord[0], vert_coord[1]);
-		if (hori_dist < vert_dist)
-		{
-			data->ray->distance = hori_dist;
-			data->ray->is_hori = true;
-			data->ray->wall_hit_x = hori_coord[0];
-			data->ray->wall_hit_y = hori_coord[1];
-		}
-		else
-		{
-			data->ray->distance = vert_dist;
-			data->ray->is_hori = false;
-			data->ray->wall_hit_x = vert_coord[0];
-			data->ray->wall_hit_y = vert_coord[1];
-		}
-		draw_line(data->player->rays, (data->player->x + (HITBOX / 2)), (data->player->y + (HITBOX / 2)), data->ray->wall_hit_x, data->ray->wall_hit_y, GREEN);
-		render_strip(data, ray, data->ray->distance);
-		data->ray->angle += FOV / RAYS;
-		ray++;
-	}
+    ray = 0;
+    hori_dist = DBL_MAX;
+    vert_dist = DBL_MAX;
+    data->ray->angle = data->player->rot_angle - (FOV / 2);
+    while (ray < RAYS)
+    {
+        data->ray->angle = norm_angle(data->ray->angle);
+        data->text[ray].angle = data->ray->angle;
+        set_orientation(data, data->ray->angle);
+        
+        hori_coord = hori_intersection(data, data->ray->angle);
+        vert_coord = vert_intersection(data, data->ray->angle);    
+        if (data->ray->h_cross)
+            hori_dist = get_distance((data->player->x + (HITBOX / 2)), (data->player->y + (HITBOX / 2)), hori_coord[0], hori_coord[1]);
+        if (data->ray->v_cross)
+            vert_dist = get_distance((data->player->x + (HITBOX / 2)), (data->player->y + (HITBOX / 2)), vert_coord[0], vert_coord[1]);
+        if (hori_dist < vert_dist)
+        {
+            data->text[ray].is_hori = data->ray->is_hori = true;
+            data->text[ray].distance = data->ray->distance = hori_dist;
+            data->text[ray].wall_hit_x = data->ray->wall_hit_x = hori_coord[0];
+            data->text[ray].wall_hit_y = data->ray->wall_hit_y = hori_coord[1];
+        }
+        else
+        {
+            data->text[ray].is_hori = data->ray->is_hori = false;
+            data->text[ray].distance = data->ray->distance = vert_dist;
+            data->text[ray].wall_hit_x = data->ray->wall_hit_x = vert_coord[0];
+            data->text[ray].wall_hit_y = data->ray->wall_hit_y = vert_coord[1];
+        }
+        data->ray->angle += FOV / RAYS;
+        ray++;
+    }
 }

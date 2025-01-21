@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:26:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/19 10:29:03 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/20 20:06:46 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	key_press(t_data *data)
 	data->player->turn_dir = 0;
 	data->player->walk_dir = 0;
 	data->player->strafe_dir = 0;
+	data->mini_map = false;
 	if (mlx_is_key_down(data->game->window, MLX_KEY_ESCAPE))
 		exit(0);
 	if (mlx_is_key_down(data->game->window, MLX_KEY_RIGHT))
@@ -31,6 +32,11 @@ void	key_press(t_data *data)
 		data->player->strafe_dir = 1;
 	if (mlx_is_key_down(data->game->window, MLX_KEY_A))
 		data->player->strafe_dir = -1;
+	if (mlx_is_key_down(data->game->window, MLX_KEY_Q))
+		data->mini_map = true;
+	if (mlx_is_key_down(data->game->window, MLX_KEY_LEFT_SHIFT))
+		data->player->walk_dir *= 2.5;
+		
 }
 void    draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, uint32_t color) {
     int dx;
@@ -109,10 +115,6 @@ void	update_player_pose(t_data *data)
 
 void	player_hook(t_data *data)
 {
-	// static double	last_time;
-	// double			curr_time = mlx_get_time();
-	// double			delta_time = curr_time - last_time;
-
 	key_press(data);
 	update_player_pose(data);
 }
