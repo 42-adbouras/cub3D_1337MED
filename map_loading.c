@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:06:12 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/21 16:10:37 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/22 10:39:52 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	draw_tile(mlx_image_t *image, int x, int y ,int color)
 		while (j < TILE_SIZE * MAP_FACT)
 		{
 			x_pixel = x * TILE_SIZE * MAP_FACT + j;
-			if (x_pixel > 0 && x_pixel < WIDTH && y_pixel > 0 && y_pixel < HEIGHT)
+			if (x_pixel >= 0 && x_pixel < WIDTH && y_pixel >= 0 && y_pixel < HEIGHT)
 				mlx_put_pixel(image, x * TILE_SIZE * MAP_FACT + j, y * TILE_SIZE * MAP_FACT + i, color);
 			j++;
 		}

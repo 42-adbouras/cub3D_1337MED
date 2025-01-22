@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:26:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/20 20:06:46 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/22 10:38:38 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,10 @@ void	key_press(t_data *data)
 		data->player->strafe_dir = 1;
 	if (mlx_is_key_down(data->game->window, MLX_KEY_A))
 		data->player->strafe_dir = -1;
-	if (mlx_is_key_down(data->game->window, MLX_KEY_Q))
-		data->mini_map = true;
 	if (mlx_is_key_down(data->game->window, MLX_KEY_LEFT_SHIFT))
 		data->player->walk_dir *= 2.5;
-		
+	if (mlx_is_key_down(data->game->window, MLX_KEY_Q))
+		data->mini_map = true;
 }
 void    draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, uint32_t color) {
     int dx;
