@@ -1,48 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_up.c                                         :+:      :+:    :+:   */
+/*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 16:14:40 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/22 19:19:44 by adbouras         ###   ########.fr       */
+/*   Created: 2025/01/22 19:23:36 by adbouras          #+#    #+#             */
+/*   Updated: 2025/01/22 19:24:15 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
 
-void	close_game(void *param)
+void	game_loop(void *param)
 {
 	t_data	*data;
 
-	data = (t_data *)param;
-	ft_exit(data, 2, true);
-}
+	data = (t_data*) param;
+	player_hook(data);
+	raycasting(data);
 
-void	ft_exit(t_data *data, int i, bool term)
-{
-	(void)i;
-
-	mlx_close_window(data->game);
-	if (i > 0)
+	mlx_delete_image(data->game, data->frame);
+	data->frame = mlx_new_image(data->game, WIDTH, HEIGHT);
+	if (!data->frame)
+		ft_exit(data, 2, true);
+	draw_bg(data);
+	draw_walls(data);
+	if (data->mini_map)
 	{
-		free(data->player);
-		free_char_arr(data->map_arr);
-		free((char *)data->map);
+		draw_minimap(data);
+		draw_rays(data);
 	}
-	if (i > 1)
-		free(data->ray);
-	if (term)
-		exit(i);
-}
-
-void	free_char_arr(char **arr)
-{
-	int	i;
-
-	i = -1;
-	while (arr[++i])
-		free(arr[i]);
-	free(arr);
+	if (mlx_image_to_window(data->game, data->frame, 0, 0) == -1)
+		ft_exit(data, 2, true);
 }

@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:26:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/22 17:19:10 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/22 19:18:51 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	key_press(t_data *data)
 	data->player->strafe_dir = 0;
 	data->mini_map = false;
 	if (mlx_is_key_down(data->game, MLX_KEY_ESCAPE))
-		exit(0);
+		ft_exit(data, 0, true);
 	if (mlx_is_key_down(data->game, MLX_KEY_RIGHT))
 		data->player->turn_dir = 1;
 	if (mlx_is_key_down(data->game, MLX_KEY_LEFT))
@@ -34,7 +34,7 @@ void	key_press(t_data *data)
 		data->player->strafe_dir = -1;
 	if (mlx_is_key_down(data->game, MLX_KEY_LEFT_SHIFT))
 		data->player->walk_dir *= 2.5;
-	if (mlx_is_key_down(data->game, MLX_KEY_Q))
+	if (mlx_is_key_down(data->game, MLX_KEY_TAB))
 		data->mini_map = true;
 }
 void    draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, uint32_t color) {

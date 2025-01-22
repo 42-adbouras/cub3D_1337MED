@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:09 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/22 18:24:45 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/22 19:04:40 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void	load_game(t_data **data)
 	if (!(*data)->game)
 	{
 		perror("Failed while loading game window");
-		free(*data);
-		exit(1);
+		ft_exit(*data, 0, true);
 	}
 }
 
@@ -66,9 +65,7 @@ void	load_player(t_data **data)
 	if (!(*data)->player)
 	{
 		perror("Bad malloc on <load_player>");
-		free((*data)->game);
-		free(*data);
-		exit(1);
+		ft_exit(*data, 0, true);
 	}
 	(*data)->player->walk_dir = 0;
 	(*data)->player->turn_dir = 0;
@@ -80,9 +77,7 @@ void	load_player(t_data **data)
 	if (!(*data)->player->imge || !(*data)->player->rays)
 	{
 		perror("Failed while loading player image");
-		free((*data)->game);
-		free(*data);
-		exit(1);
+		ft_exit(*data, 1, true);
 	}
 }
 
@@ -92,9 +87,7 @@ void	load_images(t_data **data)
 	if (!(*data)->frame)
 	{
 		perror("Failed while loading images");
-		free((*data)->game);
-		free(*data);
-		exit(1);
+		ft_exit(*data, 1, true);
 	}
 }
 
@@ -104,8 +97,7 @@ void	load_ray(t_data **data)
 	if (!(*data)->ray)
 	{
 		perror("Bad malloc on <load_ray>");
-		free(*data);
-		exit(1);
+		ft_exit(*data, 1, true);
 	}
 	(*data)->ray->angle = 0;
 	(*data)->ray->distance = 0;

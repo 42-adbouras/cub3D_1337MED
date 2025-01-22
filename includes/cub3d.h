@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/22 18:29:38 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/22 20:18:45 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 #include <math.h>
 #include <float.h>
 
-#define	WIDTH		1280
+#define	WIDTH		1440
 #define	HEIGHT		round(WIDTH / 16 * 9)
 #define	TILE_SIZE	42
 #define	MAP_FACT	0.2
@@ -117,13 +117,16 @@ void	update_line(mlx_image_t *line, t_data *data, double angle, int dist);
 
 double	norm_angle(double angle);
 
+void	game_loop(void *param);
 void	raycasting(t_data *data);
 void	draw_bg(t_data *data);
 void	render_strip(t_data *data, int ray, double distance);
 void	draw_rect(t_data *data, double x, double y, double width, double height);
+void	draw_rays(t_data *data);
+void	draw_walls(t_data *data);
 
 int		rgba(int r, int g, int b, int a);
 
 void	close_game(void *param);
-void	ft_exit(t_data *data, int i);
+void	ft_exit(t_data *data, int i, bool term);
 void	free_char_arr(char **arr);

@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:58:41 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/22 17:49:36 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/22 19:33:36 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ double*	hori_intersection(t_data *data, double angle)
 	double	*hori_coord;
 
 	hori_coord = malloc(sizeof(double) * 2);
-	//////////////
+	if (!hori_coord)
+		ft_exit(data, 2, true);
 	y_inter = floor((data->player->y + (HITBOX / 2)) / TILE_SIZE) * TILE_SIZE;
 	y_inter += data->ray->face_down ? TILE_SIZE : 0;
 	x_inter = (data->player->x + (HITBOX / 2)) + (y_inter - (data->player->y + (HITBOX / 2))) / tan(angle);
@@ -92,7 +93,8 @@ double*	vert_intersection(t_data *data, double angle)
 	double	*vert_coord;
 
 	vert_coord = malloc(sizeof(double) * 2);
-	//////////////
+	if (!vert_coord)
+		ft_exit(data, 2, true);
 	x_inter = floor((data->player->x + (HITBOX / 2)) / TILE_SIZE) * TILE_SIZE;
 	x_inter += data->ray->face_right ? TILE_SIZE : 0;
 	y_inter = (data->player->y + (HITBOX / 2)) + (x_inter - (data->player->x + (HITBOX / 2))) * tan(angle);
@@ -116,67 +118,6 @@ double*	vert_intersection(t_data *data, double angle)
 	vert_coord[0] = next_x;
 	vert_coord[1] = next_y;
 	return (vert_coord);
-}
-
-void	draw_rect(t_data *data, double x, double y, double width, double height)
-{
-	int i, j;
-
-	i = 0;
-    while (i < width)
-	{
-		j = 0;
-        while (j < height)
-		{
-			if (data->text[(int)x].is_hori)
-            	mlx_put_pixel(data->frame, x + i, y + j, rgba(255, 255, 255, 255));
-			else
-            	mlx_put_pixel(data->frame, x + i, y + j, rgba(214, 214, 214, 255));
-			j++;
-        }
-		i++;
-    }
-}
-
-void	render_strip(t_data *data, int ray, double distance)
-{
-	double wall_height;
-	double proj_plane;
-	double top;
-	double bottom;
-
-	distance *= cos(data->text[ray].angle - data->player->rot_angle);
-	proj_plane = (WIDTH / 2) / tan(FOV / 2);
-	wall_height = (TILE_SIZE / distance) * proj_plane;
-
-	top = (HEIGHT / 2) - (wall_height / 2);
-	top = top < 0 ? 0 : top;
-
-	bottom = (HEIGHT / 2) + (wall_height / 2);
-	bottom = bottom > HEIGHT ? HEIGHT : bottom;
-
-	draw_rect(data, ray, top, 1, bottom - top);
-}
-
-void	draw_bg(t_data *data)
-{
-	int	height;
-	int	width;
-
-	height = 0;
-	while (height < HEIGHT)
-	{
-		width = 0;
-		while (width < WIDTH)
-		{
-			if (height < HEIGHT / 2)
-				mlx_put_pixel(data->frame, width, height, rgba(175, 246, 255, 255));
-			else
-				mlx_put_pixel(data->frame, width, height, rgba(20, 36, 40, 255));
-			width++;
-		}
-		height++;
-	}
 }
 
 void	raycasting(t_data *data)
