@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:09 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/21 14:48:05 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/22 18:24:45 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,9 @@ void	init_data(t_data *data, char *arg)
 
 void	load_game(t_data **data)
 {
-	(*data)->game = malloc(sizeof(mlx_t));
-	if (!(*data)->game)
-	{
-		perror("Bad malloc on <load_game>");
-		free(*data);
-		exit(1);
-	}
-	(*data)->game->width = WIDTH;
-	(*data)->game->height = HEIGHT;
-	(*data)->game->window = mlx_init(WIDTH, HEIGHT, "cub3D", true);
+	(*data)->game = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	(*data)->mini_map = false;
-	if (!(*data)->game->window)
+	if (!(*data)->game)
 	{
 		perror("Failed while loading game window");
 		free(*data);
@@ -83,8 +74,8 @@ void	load_player(t_data **data)
 	(*data)->player->turn_dir = 0;
 	(*data)->player->strafe_dir = 0;
 	(*data)->player->rot_angle = 3 * (M_PI / 2);
-	(*data)->player->rays = mlx_new_image((*data)->game->window, WIDTH, HEIGHT);
-	(*data)->player->imge = mlx_new_image((*data)->game->window, HITBOX, HITBOX);
+	(*data)->player->rays = mlx_new_image((*data)->game, WIDTH, HEIGHT);
+	(*data)->player->imge = mlx_new_image((*data)->game, HITBOX, HITBOX);
 	get_player_position(*data, &(*data)->player->x, &(*data)->player->y);
 	if (!(*data)->player->imge || !(*data)->player->rays)
 	{
@@ -97,7 +88,7 @@ void	load_player(t_data **data)
 
 void	load_images(t_data **data)
 {
-	(*data)->frame = mlx_new_image((*data)->game->window, WIDTH, HEIGHT);
+	(*data)->frame = mlx_new_image((*data)->game, WIDTH, HEIGHT);
 	if (!(*data)->frame)
 	{
 		perror("Failed while loading images");

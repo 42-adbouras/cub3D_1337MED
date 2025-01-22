@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:26:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/22 10:38:38 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/22 17:19:10 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,23 @@ void	key_press(t_data *data)
 	data->player->walk_dir = 0;
 	data->player->strafe_dir = 0;
 	data->mini_map = false;
-	if (mlx_is_key_down(data->game->window, MLX_KEY_ESCAPE))
+	if (mlx_is_key_down(data->game, MLX_KEY_ESCAPE))
 		exit(0);
-	if (mlx_is_key_down(data->game->window, MLX_KEY_RIGHT))
+	if (mlx_is_key_down(data->game, MLX_KEY_RIGHT))
 		data->player->turn_dir = 1;
-	if (mlx_is_key_down(data->game->window, MLX_KEY_LEFT))
+	if (mlx_is_key_down(data->game, MLX_KEY_LEFT))
 		data->player->turn_dir = -1;
-	if (mlx_is_key_down(data->game->window, MLX_KEY_W))
+	if (mlx_is_key_down(data->game, MLX_KEY_W))
 		data->player->walk_dir = 1;
-	if (mlx_is_key_down(data->game->window, MLX_KEY_S))
+	if (mlx_is_key_down(data->game, MLX_KEY_S))
 		data->player->walk_dir = -1;
-	if (mlx_is_key_down(data->game->window, MLX_KEY_D))
+	if (mlx_is_key_down(data->game, MLX_KEY_D))
 		data->player->strafe_dir = 1;
-	if (mlx_is_key_down(data->game->window, MLX_KEY_A))
+	if (mlx_is_key_down(data->game, MLX_KEY_A))
 		data->player->strafe_dir = -1;
-	if (mlx_is_key_down(data->game->window, MLX_KEY_LEFT_SHIFT))
+	if (mlx_is_key_down(data->game, MLX_KEY_LEFT_SHIFT))
 		data->player->walk_dir *= 2.5;
-	if (mlx_is_key_down(data->game->window, MLX_KEY_Q))
+	if (mlx_is_key_down(data->game, MLX_KEY_Q))
 		data->mini_map = true;
 }
 void    draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, uint32_t color) {

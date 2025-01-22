@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/21 18:44:31 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/22 18:29:38 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,7 @@ typedef	struct		s_data
 	int				map_width;
 	int				map_height;
 	mlx_t*			game;
-	mlx_image_t*	bg;
 	mlx_image_t*	frame;
-	mlx_image_t*	map_img;
 	t_player*		player;
 	t_ray*			ray;
 	t_text			text[RAYS];
@@ -125,3 +123,7 @@ void	render_strip(t_data *data, int ray, double distance);
 void	draw_rect(t_data *data, double x, double y, double width, double height);
 
 int		rgba(int r, int g, int b, int a);
+
+void	close_game(void *param);
+void	ft_exit(t_data *data, int i);
+void	free_char_arr(char **arr);

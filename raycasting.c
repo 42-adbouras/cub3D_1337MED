@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:58:41 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/21 16:29:42 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/22 17:49:36 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,7 @@ void	raycasting(t_data *data)
             data->text[ray].wall_hit_x = data->ray->wall_hit_x = vert_coord[0];
             data->text[ray].wall_hit_y = data->ray->wall_hit_y = vert_coord[1];
         }
+		free(hori_coord); free(vert_coord);
         data->ray->angle += FOV / RAYS;
         ray++;
     }

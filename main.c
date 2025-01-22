@@ -6,26 +6,11 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:43:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/22 10:38:56 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/22 18:52:05 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
-
-void	clear_image(mlx_image_t *image)
-{
-	uint32_t	i;
-	uint32_t	j;
-
-	i = 0;
-	while (i < image->height)
-	{
-		j = 0;
-		while (j < image->width)
-			mlx_put_pixel(image, j++, i, 0x00000000);
-		i++;
-	}
-}
 
 void	draw_walls(t_data *data)
 {
@@ -58,8 +43,8 @@ void	game_loop(void *param)
 	player_hook(data);
 	raycasting(data);
 
-	mlx_delete_image(data->game->window, data->frame);
-	data->frame = mlx_new_image(data->game->window, WIDTH, HEIGHT);
+	mlx_delete_image(data->game, data->frame);
+	data->frame = mlx_new_image(data->game, WIDTH, HEIGHT);
 
 	draw_bg(data);
 	draw_walls(data);
@@ -69,17 +54,23 @@ void	game_loop(void *param)
 		draw_rays(data);
 	}
 
-	mlx_image_to_window(data->game->window, data->frame, 0, 0);
+	mlx_image_to_window(data->game, data->frame, 0, 0);
 }
+
+void	_leaks(void){system("leaks cub3D");}
 
 int	main(int ac, char **av)
 {
 	t_data	data;
 
 	(void) ac;
+	atexit(_leaks);
 	init_data(&data, av[1]);
-	// draw_player(data.player->imge);
-	mlx_image_to_window(data.game->window, data.player->imge, data.player->x * TILE_SIZE + (TILE_SIZE / 2 - HITBOX), data.player->y * TILE_SIZE + (TILE_SIZE / 2 - HITBOX));
-	mlx_loop_hook(data.game->window, game_loop, &data);
-	mlx_loop(data.game->window);
+	mlx_image_to_window(data.game, data.player->imge,
+						data.player->x * TILE_SIZE + (TILE_SIZE / 2 - HITBOX),
+						data.player->y * TILE_SIZE + (TILE_SIZE / 2 - HITBOX));
+	mlx_loop_hook(data.game, game_loop, &data);
+	mlx_close_hook(data.game, close_game, &data);
+	mlx_loop(data.game);
+	mlx_terminate(data.game);
 }
