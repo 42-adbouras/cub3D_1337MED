@@ -6,13 +6,13 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:09 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/22 19:04:40 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/23 12:04:19 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "includes/cub3D.h"
 
-#include "includes/cub3d.h"
+#include "includes/cub3D.h"
 
 void	init_data(t_data *data, char *arg)
 {

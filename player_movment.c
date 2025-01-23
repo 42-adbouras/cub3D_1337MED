@@ -6,11 +6,11 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:26:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/23 11:54:38 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:27:31 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "includes/cub3D.h"
 
 void	key_press(t_data *data)
 {
@@ -115,26 +115,24 @@ void	update_player_pose(t_data *data)
 void	mouse_hook(t_data *data)
 {
 	static int32_t	prev_x;
-	static int32_t	prev_y;
 	int32_t			new_x;
 	int32_t			new_y;
-	int32_t			delta_x;
-	
-	(void)prev_y;
-	mlx_set_cursor_mode(data->game, MLX_MOUSE_HIDDEN);
-	mlx_get_mouse_pos(data->game, &new_x, &new_y);
-	delta_x = new_x - prev_x;
-	data->player->rot_angle += (delta_x / MOUSE_SENS);
-	data->player->rot_angle = norm_angle(data->player->rot_angle);
+	double			delta;
 
-    mlx_set_mouse_pos(data->game, WIDTH / 2, HEIGHT / 2);
+	mlx_get_mouse_pos(data->game, &new_x, &new_y);
+	delta = (new_x - prev_x) / MOUSE_SENS;
+	printf("prev: %d, new: %d, delta: %f.\n", prev_x, new_x, delta);
+	if (prev_x != 0)
+	{
+		data->player->rot_angle += delta;
+		data->player->rot_angle = norm_angle(data->player->rot_angle);	
+	}
 	prev_x = WIDTH / 2;
-	prev_y = HEIGHT / 2;
+	mlx_set_mouse_pos(data->game, WIDTH / 2, HEIGHT / 2);
 }
 
 void	player_hook(t_data *data)
 {
-	mouse_hook(data);
 	key_press(data);
 	update_player_pose(data);
 }

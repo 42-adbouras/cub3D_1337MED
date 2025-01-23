@@ -6,17 +6,18 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:23:36 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/22 19:24:15 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:20:10 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "includes/cub3D.h"
 
 void	game_loop(void *param)
 {
 	t_data	*data;
 
 	data = (t_data*) param;
+	mlx_set_mouse_pos(data->game, WIDTH / 2, HEIGHT / 2);
 	player_hook(data);
 	raycasting(data);
 
@@ -33,4 +34,5 @@ void	game_loop(void *param)
 	}
 	if (mlx_image_to_window(data->game, data->frame, 0, 0) == -1)
 		ft_exit(data, 2, true);
+	mouse_hook(data);
 }

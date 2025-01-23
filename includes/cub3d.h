@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/23 11:50:25 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:24:17 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@
 #define	HEIGHT		(int)round(WIDTH / 16 * 9)
 #define	TILE_SIZE	42
 #define	MAP_FACT	0.2
-#define	HITBOX		8
+#define	HITBOX		4
 #define	SPEED		2
 #define	ROT_SPEED	3 * (M_PI / 180)
 #define	FOV			80 * (M_PI / 180)
 #define	RAYS		WIDTH
-#define	MOUSE_SENS	1800.0
+#define	MOUSE_SENS	1000.00
 
 #define	WHITE		0xFFFFFFFF
 #define BLACK		0x000000FF
@@ -95,7 +95,7 @@ typedef	struct		s_data
 	t_ray*			ray;
 	t_text			text[RAYS];
 	bool			mini_map;
-	
+	bool			mouse;
 }					t_data;
 
 void	init_data(t_data *data, char *arg);
@@ -128,6 +128,9 @@ void	draw_walls(t_data *data);
 
 int		rgba(int r, int g, int b, int a);
 
+void	mouse_hook(t_data *data);
+
 void	close_game(void *param);
 void	ft_exit(t_data *data, int i, bool term);
 void	free_char_arr(char **arr);
+

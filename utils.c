@@ -6,11 +6,11 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:12:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/17 14:01:03 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/23 12:04:19 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "includes/cub3D.h"
 
 double	norm_angle(double angle)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 14:02:54 by fidriss           #+#    #+#             */
-/*   Updated: 2025/01/19 12:04:15 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/01/23 12:04:19 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "includes/cub3D.h"
 
 int	parse_color(t_data *data, char	*line, int id[])
 {
