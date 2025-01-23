@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:26:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/22 19:18:51 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/23 11:54:38 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	key_press(t_data *data)
 	data->player->turn_dir = 0;
 	data->player->walk_dir = 0;
 	data->player->strafe_dir = 0;
-	data->mini_map = false;
+	data->mini_map = true;
 	if (mlx_is_key_down(data->game, MLX_KEY_ESCAPE))
 		ft_exit(data, 0, true);
 	if (mlx_is_key_down(data->game, MLX_KEY_RIGHT))
@@ -112,8 +112,29 @@ void	update_player_pose(t_data *data)
 	data->player->y = data->player->imge->instances->y;
 }
 
+void	mouse_hook(t_data *data)
+{
+	static int32_t	prev_x;
+	static int32_t	prev_y;
+	int32_t			new_x;
+	int32_t			new_y;
+	int32_t			delta_x;
+	
+	(void)prev_y;
+	mlx_set_cursor_mode(data->game, MLX_MOUSE_HIDDEN);
+	mlx_get_mouse_pos(data->game, &new_x, &new_y);
+	delta_x = new_x - prev_x;
+	data->player->rot_angle += (delta_x / MOUSE_SENS);
+	data->player->rot_angle = norm_angle(data->player->rot_angle);
+
+    mlx_set_mouse_pos(data->game, WIDTH / 2, HEIGHT / 2);
+	prev_x = WIDTH / 2;
+	prev_y = HEIGHT / 2;
+}
+
 void	player_hook(t_data *data)
 {
+	mouse_hook(data);
 	key_press(data);
 	update_player_pose(data);
 }
