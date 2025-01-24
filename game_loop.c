@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:23:36 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/23 17:20:10 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/24 11:25:58 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void	game_loop(void *param)
 	}
 	if (mlx_image_to_window(data->game, data->frame, 0, 0) == -1)
 		ft_exit(data, 2, true);
+	mlx_image_to_window(data->game, data->m, 0, 0);
 	mouse_hook(data);
 }

@@ -6,7 +6,7 @@
 /*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/24 10:10:46 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/01/24 11:24:12 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ typedef	struct		s_data
 	t_text			text[RAYS];
 	bool			mini_map;
 	bool			mouse;
+	mlx_texture_t*	t;
+	mlx_image_t*	m;
 }					t_data;
 
 void	init_data(t_data *data, char *arg);

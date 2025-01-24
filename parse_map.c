@@ -6,7 +6,7 @@
 /*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 14:02:54 by fidriss           #+#    #+#             */
-/*   Updated: 2025/01/22 00:11:15 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/01/24 10:14:18 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int check_elements(t_data *data, char *line, int id[])
 					printf("Error, invalid file.\n");
 					return (1);
 				}
-				data->north_texture = ft_strdup(line + i);
+				data->north_texture = ft_strtrim(ft_strdup(line + i), " ");
 				id[0] = 1;	
 			}
 			else if (ft_strncmp("SO ", line, 3) == 0)
@@ -127,7 +127,7 @@ int check_elements(t_data *data, char *line, int id[])
 					printf("Error, invalid file.\n");
 					return (1);
 				}
-				data->south_texture = ft_strdup(line + i);
+				data->south_texture = ft_strtrim(ft_strdup(line + i), " ");
 				id[1] = 1;
 			}
 			else if (ft_strncmp("WE ", line, 3) == 0)
@@ -137,7 +137,7 @@ int check_elements(t_data *data, char *line, int id[])
 					printf("Error, invalid file.\n");
 					return (1);
 				}
-				data->west_texture = ft_strdup(line + i);
+				data->west_texture = ft_strtrim(ft_strdup(line + i), " ");
 				id[2] = 1;
 			}
 			else if (ft_strncmp("EA ", line, 3) == 0)
@@ -147,7 +147,7 @@ int check_elements(t_data *data, char *line, int id[])
 					printf("Error, invalid file.\n");
 					return (1);
 				}
-				data->east_texture = ft_strdup(line + i);
+				data->east_texture = ft_strtrim(ft_strdup(line + i), " ");
 				id[3] = 1;
 			}
 		}
