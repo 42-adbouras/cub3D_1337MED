@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 14:02:54 by fidriss           #+#    #+#             */
-/*   Updated: 2025/01/23 12:04:19 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/22 00:11:15 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3D.h"
+#include "includes/cub3d.h"
 
 int	parse_color(t_data *data, char	*line, int id[])
 {
@@ -72,69 +72,88 @@ int check_elements(t_data *data, char *line, int id[])
 	int	fd;
 
 	i = 0;
-	while (line[i] != ' ')
-		i++;
-	printf("%s\n", line + i);
-	fd = open(line + i, O_RDONLY);
-	if (fd < 0)
+	fd = -1;
+	if (ft_strncmp("F ", line, 2) == 0 || ft_strncmp("C ", line, 2) == 0)
 	{
-		printf("Error, file not found.\n");
-		return (1);
+		if (ft_strncmp("F ", line, 2) == 0)
+		{
+			if (id[4] == 1)
+			{
+				printf("Error, invalid file.\n");
+				exit(1);				
+			}
+				id[4] = 1;
+			}
+		else
+		{
+			if (id[5] == 1)
+			{
+				printf("Error, invalid file.\n");
+				exit(1);
+			}
+			id[5] = 1;
+		}
+		if (parse_color(data, line, id) == 1)
+			return (1);
 	}
 	else
 	{
-		if (ft_strncmp("NO ", line, 3) == 0)
+		while (line[i] && line[i] != ' ')
+			i++;
+		while (line[i] && line[i] == ' ')
+			i++;
+		fd = open(line + i, O_RDONLY);
+		if (fd < 0)
 		{
-			if (id[0] == 1)
-			{
-				printf("Error, invalid file.\n");
-				return (1);
-			}
-			data->north_texture = ft_strdup(line + i);
-			id[0] = 1;
+			printf("Error, file not found.\n");
+			return (1);
 		}
-		else if (ft_strncmp("SO ", line, 3) == 0)
+		else
 		{
-			if (id[1] == 1)
+			if (ft_strncmp("NO ", line, 3) == 0)
 			{
-				printf("Error, invalid file.\n");
-				return (1);
+				if (id[0] == 1)
+				{
+					printf("Error, invalid file.\n");
+					return (1);
+				}
+				data->north_texture = ft_strdup(line + i);
+				id[0] = 1;	
 			}
-			data->south_texture = ft_strdup(line + i);
-			id[1] = 1;
-		}
-		else if (ft_strncmp("WE ", line, 3) == 0)
-		{
-			if (id[2] == 1)
+			else if (ft_strncmp("SO ", line, 3) == 0)
 			{
-				printf("Error, invalid file.\n");
-				return (1);
+				if (id[1] == 1)
+				{
+					printf("Error, invalid file.\n");
+					return (1);
+				}
+				data->south_texture = ft_strdup(line + i);
+				id[1] = 1;
 			}
-			data->west_texture = ft_strdup(line + i);
-			id[2] = 1;
-		}
-		else if (ft_strncmp("EA ", line, 3) == 0)
-		{
-			if (id[3] == 1)
+			else if (ft_strncmp("WE ", line, 3) == 0)
 			{
-				printf("Error, invalid file.\n");
-				return (1);
+				if (id[2] == 1)
+				{
+					printf("Error, invalid file.\n");
+					return (1);
+				}
+				data->west_texture = ft_strdup(line + i);
+				id[2] = 1;
 			}
-			data->east_texture = ft_strdup(line + i);
-			id[3] = 1;
-		}
-		else if (ft_strncmp("F ", line, 2) == 0 || ft_strncmp("C ", line, 2) == 0)
-		{
-			if (id[4] == 1 || id[5] == 1)
+			else if (ft_strncmp("EA ", line, 3) == 0)
 			{
-				printf("Error, invalid file.\n");
-				return (1);
+				if (id[3] == 1)
+				{
+					printf("Error, invalid file.\n");
+					return (1);
+				}
+				data->east_texture = ft_strdup(line + i);
+				id[3] = 1;
 			}
-			if (parse_color(data, line, id) == 1)
-				return (1);
 		}
+		if (fd != -1)
+			close(fd);
 	}
-	close(fd);
 	return (0);
 }
 
@@ -146,16 +165,23 @@ int check_map_borders(char **map)
 
 	i = 0;
 	j = 0;
+	row_count = 0;
 	while (map[row_count])
 		row_count++;
 	row_count--;
 	while (map[i])
 	{
+		j = 0;
 		while (map[i][j])
 		{
 			if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
 			{
-				if (i == 0 || j == 0 || i == row_count || j == ft_strlen(map[i]) - 1)
+				if (i == 0 || j == 0 || i == row_count || (size_t)j == ft_strlen(map[i]) - 1)
+				{
+					printf("Error, invalid map.\n");
+					return (1);
+				}
+				if ((size_t)j > ft_strlen(map[i - 1]) - 1 || (size_t)j > ft_strlen(map[i + 1]) - 1)
 				{
 					printf("Error, invalid map.\n");
 					return (1);
@@ -225,16 +251,13 @@ int check_characters(char	**map)
 	return (0);
 }
 
-int	check_map(t_data *data, char **map)
+int	check_map(char **map)
 {
-	int		i;
 	int		row_count;
 
-	i = 0;
 	row_count = 0;
 	while (map[row_count])
 		row_count++;
-	
 	if (check_map_borders(map) == 1)
 		return (1);
 	if (check_map_content(map) == 1)
@@ -246,7 +269,7 @@ int	check_map(t_data *data, char **map)
 
 char **extract_map_content(char **map_arr)
 {
-    int	 i = 0;
+    int	 	i = 0;
     int 	j = 0;
     int 	start_index = -1;
     int 	row_count = 0;
@@ -257,6 +280,8 @@ char **extract_map_content(char **map_arr)
         j = 0;
         while (map_arr[i][j])
         {
+			if(map_arr[i][j] == 'F' || map_arr[i][j] == 'C')
+				break;
             if (map_arr[i][j] == '1')
             {
                 start_index = i;
@@ -291,7 +316,12 @@ char **extract_map_content(char **map_arr)
         j++;
     }
     new_map_arr[j] = NULL;
-
+	i = 0;
+	while (new_map_arr[i])
+	{
+		printf("%s\n", new_map_arr[i]);
+		i++;
+	}
     return (new_map_arr);
 }
 
@@ -301,10 +331,12 @@ int parse_map(t_data *data)
     int j;
     int id[6];
     int k;
+	int	flag;
 
     i = 0;
     j = 0;
     k = 0;
+	flag = 0;
     while (i < 6)
 	{
         id[i] = 0;
@@ -336,18 +368,27 @@ int parse_map(t_data *data)
                     }
                     k++;
                 }
-                data->parsed_map = extract_map_content(data->map_arr);
-                if (check_map(data, data->parsed_map) == 1)
+				if (flag)
+				{
+					printf("Error, invalid map.\n");
 					return (1);
-            }
-            else
-            {
-                printf("Error, invalid map.\n");
-                return (1);
+				}
+                flag = 1;
             }
             j++;
         }
         i++;
     }
+	if (flag)
+	{
+		data->parsed_map = extract_map_content(data->map_arr + i);
+		if (check_map(data->parsed_map) == 1)
+			return (1);
+	}
+	else
+	{
+		printf("Error, invalid map.\n");
+		return (1);
+	}
     return (0);
 }

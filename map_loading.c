@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   map_loading.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:06:12 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/23 12:04:19 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/24 10:04:43 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3D.h"
+
+int	check_extension(char	*name)
+{
+	int	i;
+
+	i = 0;
+	if (ft_strlen(name) < 4)
+		return (1);
+	while (name[i] != '.')
+		i++;
+	if (ft_strncmp(&name[i], ".cub", 4) != 0)
+		return (1);
+	return (0);
+}
 
 void	import_map(t_data **data, char *path)
 {
@@ -18,6 +32,11 @@ void	import_map(t_data **data, char *path)
 	int		fd;
 
 	(*data)->map = NULL;
+	if (check_extension(path) == 1)
+	{
+		printf("Error,\n invalid map extension.");
+		exit(1);
+	}
 	fd = open(path, O_RDONLY);
 	while (1)
 	{

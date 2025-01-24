@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:09 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/23 12:04:19 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/24 10:02:55 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 void	init_data(t_data *data, char *arg)
 {
 	import_map(&data, arg);
+	parse_map(&data);
 	load_game(&data);
 	load_player(&data);
 	load_images(&data);
