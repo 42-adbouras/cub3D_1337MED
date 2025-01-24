@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:09 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/24 10:02:55 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/01/24 13:51:10 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	init_data(t_data *data, char *arg)
 {
 	import_map(&data, arg);
-	parse_map(&data);
+	parse_map(data);
 	load_game(&data);
 	load_player(&data);
 	load_images(&data);
@@ -42,13 +42,13 @@ void	get_player_position(t_data *data, int *x, int *y)
 	int		j;
 
 	i = 0;
-	while (data->map_arr[i])
+	while (data->parsed_map[i])
 	{
 		j = 0;
-		while (data->map_arr[i][j])
+		while (data->parsed_map[i][j])
 		{
-			if (data->map_arr[i][j] == 'N' || data->map_arr[i][j] == 'S' \
-				|| data->map_arr[i][j] == 'E' || data->map_arr[i][j] == 'W')
+			if (data->parsed_map[i][j] == 'N' || data->parsed_map[i][j] == 'S' \
+				|| data->parsed_map[i][j] == 'E' || data->parsed_map[i][j] == 'W')
 			{
 				*x = j;
 				*y = i;

@@ -1,12 +1,12 @@
-NO  /Users/starscourge/Desktop/cub2/image.png
-SO /Users/starscourge/Desktop/cub2/image copy.png
-WE /Users/starscourge/Desktop/cub2/image copy 3.png
-EA /Users/starscourge/Desktop/cub2/image copy 2.png
+NO image.png
+SO image copy.png
+WE image copy 3.png
+EA image copy 2.png
 
 F 0,32,0
 C 120,0,16
 
-        111111111111111111111111
+        1111111111111111111111111
         1000000000110000000000001
         1011000001110000000000001
         1001000000000000000000001

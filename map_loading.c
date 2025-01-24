@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_loading.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:06:12 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/24 10:04:43 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/01/24 13:58:16 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	import_map(t_data **data, char *path)
 		free(line);
 	}
 	(*data)->map_arr = ft_split((*data)->map, '\n');
-	get_map_size(*data);
+	// get_map_size(*data);
 	close(fd);
 }
 
@@ -57,11 +57,11 @@ void	get_map_size(t_data *data)
 	int	height;
 
 	height = 0;
-	width = (int)ft_strlen(data->map_arr[0]);
-	while (data->map_arr[height])
+	width = (int)ft_strlen(data->parsed_map[0]);
+	while (data->parsed_map[height])
 	{
-		if (height > 0 && width < (int)ft_strlen(data->map_arr[height - 1]))
-			width = (int)ft_strlen(data->map_arr[height]);
+		if (height > 0 && width < (int)ft_strlen(data->parsed_map[height - 1]))
+			width = (int)ft_strlen(data->parsed_map[height]);
 		height++;
 	}
 	data->map_height = height;
@@ -74,16 +74,16 @@ void	draw_minimap(t_data	*data)
 	int		j;
 
 	i = 0;
-	while (data->map_arr[i])
+	while (data->parsed_map[i])
 	{
 		j = 0;
-		while (data->map_arr[i][j])
+		while (data->parsed_map[i][j])
 		{
-			if (data->map_arr[i][j] == '1')
+			if (data->parsed_map[i][j] == '1')
 				draw_tile(data->frame, j, i, rgba(33, 103, 120, 125));
-			else if (data->map_arr[i][j] == '0')
-				draw_tile(data->frame, j, i, rgba(255, 255, 255, 255));
-			else if (data->map_arr[i][j] == 'N')
+			else if (data->parsed_map[i][j] == '0')
+				draw_tile(data->frame, j, i, rgba(250, 255, 255, 255));
+			else if (data->parsed_map[i][j] == 'N')
 				draw_tile(data->frame, j, i, rgba(255, 255, 255, 255));
 			j++;
 		}

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 14:02:54 by fidriss           #+#    #+#             */
-/*   Updated: 2025/01/24 10:14:18 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/01/24 13:47:05 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "includes/cub3D.h"
 
 int	parse_color(t_data *data, char	*line, int id[])
 {
@@ -178,17 +178,17 @@ int check_map_borders(char **map)
 			{
 				if (i == 0 || j == 0 || i == row_count || (size_t)j == ft_strlen(map[i]) - 1)
 				{
-					printf("Error, invalid map.\n");
+					printf("Error, invalid map. 1\n");
 					return (1);
 				}
 				if ((size_t)j > ft_strlen(map[i - 1]) - 1 || (size_t)j > ft_strlen(map[i + 1]) - 1)
 				{
-					printf("Error, invalid map.\n");
+					printf("Error, invalid map. 2\n");
 					return (1);
 				}
 				if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ' || map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
 				{
-					printf("Error, invalid map.\n");
+					printf("Error, invalid map. 3\n");
 					return (1);
 				}
 			}
@@ -221,7 +221,7 @@ int	check_map_content(char **map)
 	}
 	if (count != 1)
 	{
-		printf("Error, invalid map.\n");
+		printf("Error, invalid map. 4\n");
 		return (1);
 	}
 	return (0);
@@ -368,27 +368,19 @@ int parse_map(t_data *data)
                     }
                     k++;
                 }
-				if (flag)
-				{
-					printf("Error, invalid map.\n");
+				data->parsed_map = extract_map_content(data->map_arr + i);
+				if (check_map(data->parsed_map) == 1)
 					return (1);
-				}
-                flag = 1;
+				// if (flag)
+				// {
+				// 	printf("Error, invalid map. 5\n");
+				// 	return (1);
+				// }
+                // flag = 1;
             }
             j++;
         }
         i++;
     }
-	if (flag)
-	{
-		data->parsed_map = extract_map_content(data->map_arr + i);
-		if (check_map(data->parsed_map) == 1)
-			return (1);
-	}
-	else
-	{
-		printf("Error, invalid map.\n");
-		return (1);
-	}
     return (0);
 }

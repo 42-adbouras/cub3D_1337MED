@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:26:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/23 17:27:31 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/24 14:03:13 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ bool	if_collition(t_data *data, int32_t x, int32_t y)
 	p_y = y + data->player->imge->instances->y;
 	h_x = (p_x + HITBOX - 1) / TILE_SIZE;
 	h_y = (p_y + HITBOX - 1) / TILE_SIZE;
-	if (data->map_arr[p_y / TILE_SIZE][p_x / TILE_SIZE] != '1' && data->map_arr[h_y][h_x] != '1'
-		&& data->map_arr[p_y / TILE_SIZE][h_x] != '1' && data->map_arr[h_y][p_x / TILE_SIZE] != '1')
+	if (data->parsed_map[p_y / TILE_SIZE][p_x / TILE_SIZE] != '1' && data->parsed_map[h_y][h_x] != '1'
+		&& data->parsed_map[p_y / TILE_SIZE][h_x] != '1' && data->parsed_map[h_y][p_x / TILE_SIZE] != '1')
 		return (true);
 	return (false);
 }
@@ -121,7 +121,6 @@ void	mouse_hook(t_data *data)
 
 	mlx_get_mouse_pos(data->game, &new_x, &new_y);
 	delta = (new_x - prev_x) / MOUSE_SENS;
-	printf("prev: %d, new: %d, delta: %f.\n", prev_x, new_x, delta);
 	if (prev_x != 0)
 	{
 		data->player->rot_angle += delta;

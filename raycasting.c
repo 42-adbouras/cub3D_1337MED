@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:58:41 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/23 12:04:19 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/24 13:49:39 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ bool	wall_at(t_data *data, int x, int y)
     map_x = floor(x / TILE_SIZE);
     if (map_y >= data->map_height || map_x >= data->map_width)
         return (true);
-    if (map_x >= (int)ft_strlen(data->map_arr[map_y]))
+    if (map_x >= (int)ft_strlen(data->parsed_map[map_y]))
         return (true);
-    if (data->map_arr[map_y][map_x] == '1')
+    if (data->parsed_map[map_y][map_x] == '1')
         return (true);
     return (false);
 }
