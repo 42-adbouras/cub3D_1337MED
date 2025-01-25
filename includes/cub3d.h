@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/25 15:29:22 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/25 19:36:59 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 #include <math.h>
 #include <float.h>
 
-#define	WIDTH		1366
+#define	WIDTH		1449
 #define	HEIGHT		(int)round(WIDTH / 16 * 9)
 #define	TILE_SIZE	42
 #define	MAP_FACT	0.2
@@ -36,8 +36,8 @@
 #define	RAYS		WIDTH
 #define	MOUSE_SENS	1000.00
 
-#define MINI_MAP_WIDTH (int)round(WIDTH * 0.2)
-#define MINI_MAP_HEIGHT (int)round(MINI_MAP_WIDTH * 0.7)
+#define MINI_MAP_WIDTH 350
+#define MINI_MAP_HEIGHT 200
 #define M_MAP_FACT 0.3
 
 #define	WHITE		0xFFFFFFFF
@@ -130,7 +130,6 @@ void	load_ray(t_data **data);
 
 void	import_map(t_data **data, char *path);
 void	draw_minimap(t_data	*data);
-// void	draw_tile(mlx_image_t *image, int x, int y ,int color);
 void	draw_player(t_data *data);
 void	get_map_size(t_data *data);
 
@@ -146,7 +145,6 @@ void	raycasting(t_data *data);
 void	draw_bg(t_data *data);
 void	render_strip(t_data *data, int ray, double distance);
 void	draw_rect(t_data *data, double x, double y, double width, double height);
-// void	draw_rays(t_data *data);
 void	draw_walls(t_data *data);
 
 int		rgba(int r, int g, int b, int a);

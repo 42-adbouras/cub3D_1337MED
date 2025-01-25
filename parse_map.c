@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 14:02:54 by fidriss           #+#    #+#             */
-/*   Updated: 2025/01/24 13:47:05 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/25 17:28:12 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,7 +319,7 @@ char **extract_map_content(char **map_arr)
 	i = 0;
 	while (new_map_arr[i])
 	{
-		printf("%s\n", new_map_arr[i]);
+		// printf("%s\n", new_map_arr[i]);
 		i++;
 	}
     return (new_map_arr);
