@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:23:36 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/24 13:26:26 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/25 10:29:25 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	game_loop(void *param)
 	if (data->mini_map)
 	{
 		draw_minimap(data);
-		draw_rays(data);
+		// draw_rays(data);
 	}
 	if (mlx_image_to_window(data->game, data->frame, 0, 0) == -1)
 		ft_exit(data, 2, true);

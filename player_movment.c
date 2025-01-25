@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:26:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/24 14:03:13 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/25 10:51:29 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void    draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, uint32_t col
     double y = y0;
     while (++i <= steps)
     {
-        if (x >= 0 && x < img->width && y >= 0 && y < img->height)
+        if (x >= 0 && x <= img->width && y >= 0 && y <= img->height)
             mlx_put_pixel(img, (int)round(x), (int)round(y), color);
         x += x_inc;
         y += y_inc;

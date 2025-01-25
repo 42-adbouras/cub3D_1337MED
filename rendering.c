@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:29:18 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/23 12:04:19 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/25 13:10:30 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ void	draw_walls(t_data *data)
 		render_strip(data, ray, data->text[ray].distance);
 }
 
-void	draw_rays(t_data *data)
-{
-	int	ray;
+// void	draw_rays(t_data *data)
+// {
+// 	int	ray;
 	
-	ray = -1;
-	while (++ray < RAYS)
-		draw_line(data->frame,
-				(data->player->x + (HITBOX / 2)) * MAP_FACT,
-				(data->player->y + (HITBOX / 2)) * MAP_FACT,
-				data->text[ray].wall_hit_x * MAP_FACT,
-				data->text[ray].wall_hit_y * MAP_FACT,
-				rgba(192, 242, 255, 255));
-}
+// 	ray = -1;
+// 	while (++ray < RAYS)
+// 		draw_line(data->frame,
+// 				(data->player->x + (HITBOX / 2)) * MAP_FACT,
+// 				(data->player->y + (HITBOX / 2)) * MAP_FACT,
+// 				data->text[ray].wall_hit_x * MAP_FACT,
+// 				data->text[ray].wall_hit_y * MAP_FACT,
+// 				rgba(192, 242, 255, 255));
+// }
 
 void	draw_bg(t_data *data)
 {
@@ -49,7 +49,7 @@ void	draw_bg(t_data *data)
 			if (height < HEIGHT / 2)
 				mlx_put_pixel(data->frame, width, height, rgba(175, 246, 255, 255));
 			else
-				mlx_put_pixel(data->frame, width, height, rgba(20, 36, 40, 255));
+				mlx_put_pixel(data->frame, width, height, rgba(0, 89, 98, 255));
 			width++;
 		}
 		height++;

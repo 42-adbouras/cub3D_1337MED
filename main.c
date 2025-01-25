@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:43:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/24 13:55:03 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/25 10:09:54 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int	main(int ac, char **av)
 	(void) ac;
 	// atexit(_leaks);
 	init_data(&data, av[1]);
-	// data.t = mlx_load_texture(data.game, "image.png");
-	// data.m = mlx_new_image(data.game, 200, 200);
 	get_map_size(&data);
 	player_spawn(&data);
 	mlx_loop_hook(data.game, game_loop, &data);

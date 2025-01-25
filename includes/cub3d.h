@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/24 14:00:38 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/25 15:29:22 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,24 @@
 #define	RAYS		WIDTH
 #define	MOUSE_SENS	1000.00
 
+#define MINI_MAP_WIDTH (int)round(WIDTH * 0.2)
+#define MINI_MAP_HEIGHT (int)round(MINI_MAP_WIDTH * 0.7)
+#define M_MAP_FACT 0.3
+
 #define	WHITE		0xFFFFFFFF
 #define BLACK		0x000000FF
 #define RED			0xFF0000FF
 #define	GREEN		0x00FF00FF
+
+typedef	struct		s_mini_map
+{
+	int				x;
+	int				y;
+	int				map_x;
+	int				map_y;
+	int				start_x;
+	int				start_y;
+}					t_mini_map;
 
 typedef	struct		s_player
 {
@@ -116,8 +130,8 @@ void	load_ray(t_data **data);
 
 void	import_map(t_data **data, char *path);
 void	draw_minimap(t_data	*data);
-void	draw_tile(mlx_image_t *image, int x, int y ,int color);
-void	draw_player(mlx_image_t *image);
+// void	draw_tile(mlx_image_t *image, int x, int y ,int color);
+void	draw_player(t_data *data);
 void	get_map_size(t_data *data);
 
 void    draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, uint32_t color);
@@ -132,7 +146,7 @@ void	raycasting(t_data *data);
 void	draw_bg(t_data *data);
 void	render_strip(t_data *data, int ray, double distance);
 void	draw_rect(t_data *data, double x, double y, double width, double height);
-void	draw_rays(t_data *data);
+// void	draw_rays(t_data *data);
 void	draw_walls(t_data *data);
 
 int		rgba(int r, int g, int b, int a);
