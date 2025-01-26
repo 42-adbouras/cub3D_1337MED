@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_loading.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:06:12 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/25 19:35:11 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/26 16:41:25 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	import_map(t_data **data, char *path)
 		(*data)->map = ft_strjoin((*data)->map, line);
 		free(line);
 	}
-	(*data)->map_arr = ft_split((*data)->map, '\n');
+	(*data)->map_arr = ft_split_cub((*data)->map, '\n');
 	// get_map_size(*data);
 	close(fd);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 14:02:54 by fidriss           #+#    #+#             */
-/*   Updated: 2025/01/25 17:28:12 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/25 21:11:56 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3D.h"
+#include "includes/cub3d.h"
 
 int	parse_color(t_data *data, char	*line, int id[])
 {
@@ -117,7 +117,7 @@ int check_elements(t_data *data, char *line, int id[])
 					printf("Error, invalid file.\n");
 					return (1);
 				}
-				data->north_texture = ft_strtrim(ft_strdup(line + i), " ");
+				data->north_texture = ft_strdup(line + i);
 				id[0] = 1;	
 			}
 			else if (ft_strncmp("SO ", line, 3) == 0)
@@ -127,7 +127,7 @@ int check_elements(t_data *data, char *line, int id[])
 					printf("Error, invalid file.\n");
 					return (1);
 				}
-				data->south_texture = ft_strtrim(ft_strdup(line + i), " ");
+				data->south_texture = ft_strdup(line + i);
 				id[1] = 1;
 			}
 			else if (ft_strncmp("WE ", line, 3) == 0)
@@ -137,7 +137,7 @@ int check_elements(t_data *data, char *line, int id[])
 					printf("Error, invalid file.\n");
 					return (1);
 				}
-				data->west_texture = ft_strtrim(ft_strdup(line + i), " ");
+				data->west_texture = ft_strdup(line + i);
 				id[2] = 1;
 			}
 			else if (ft_strncmp("EA ", line, 3) == 0)
@@ -147,7 +147,7 @@ int check_elements(t_data *data, char *line, int id[])
 					printf("Error, invalid file.\n");
 					return (1);
 				}
-				data->east_texture = ft_strtrim(ft_strdup(line + i), " ");
+				data->east_texture = ft_strdup(line + i);
 				id[3] = 1;
 			}
 		}
@@ -178,17 +178,17 @@ int check_map_borders(char **map)
 			{
 				if (i == 0 || j == 0 || i == row_count || (size_t)j == ft_strlen(map[i]) - 1)
 				{
-					printf("Error, invalid map. 1\n");
+					printf("Error, invalid map.\n");
 					return (1);
 				}
 				if ((size_t)j > ft_strlen(map[i - 1]) - 1 || (size_t)j > ft_strlen(map[i + 1]) - 1)
 				{
-					printf("Error, invalid map. 2\n");
+					printf("Error, invalid map.\n");
 					return (1);
 				}
 				if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ' || map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
 				{
-					printf("Error, invalid map. 3\n");
+					printf("Error, invalid map.\n");
 					return (1);
 				}
 			}
@@ -221,7 +221,7 @@ int	check_map_content(char **map)
 	}
 	if (count != 1)
 	{
-		printf("Error, invalid map. 4\n");
+		printf("Error, invalid map.\n");
 		return (1);
 	}
 	return (0);
@@ -251,6 +251,44 @@ int check_characters(char	**map)
 	return (0);
 }
 
+int	isspace(int	c)
+{
+	if (c == ' ')
+		return (1);
+	return (0);
+}
+
+int	only_spaces(char	*line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (isspace(line[i]) == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int check_for_empty_lines(char **map)
+{
+	int i;
+
+	i = 0;
+	while (map[i])
+	{
+		if (ft_strlen(map[i]) == 0 || only_spaces(map[i]))
+		{
+			printf("Error, invalid map.\n");
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	check_map(char **map)
 {
 	int		row_count;
@@ -263,6 +301,8 @@ int	check_map(char **map)
 	if (check_map_content(map) == 1)
 		return (1);
 	if (check_characters(map) == 1)
+		return (1);
+	if (check_for_empty_lines(map) == 1)
 		return (1);
 	return (0);
 }
@@ -316,12 +356,6 @@ char **extract_map_content(char **map_arr)
         j++;
     }
     new_map_arr[j] = NULL;
-	i = 0;
-	while (new_map_arr[i])
-	{
-		// printf("%s\n", new_map_arr[i]);
-		i++;
-	}
     return (new_map_arr);
 }
 
@@ -356,8 +390,9 @@ int parse_map(t_data *data)
             {
                 if (check_elements(data, data->map_arr[i] + j, id) == 1)
 					return (1);
+				break;
             }
-            else if (data->map_arr[i][j] == '1')
+            else if (data->map_arr[i][j] == '1' || data->map_arr[i][j] == '0')
             {
                 while (k < 6)
                 {
@@ -371,16 +406,19 @@ int parse_map(t_data *data)
 				data->parsed_map = extract_map_content(data->map_arr + i);
 				if (check_map(data->parsed_map) == 1)
 					return (1);
-				// if (flag)
-				// {
-				// 	printf("Error, invalid map. 5\n");
-				// 	return (1);
-				// }
-                // flag = 1;
+				flag = 1;
+				break;
             }
+			else if (data->map_arr[i][j] != ' ' && data->map_arr[i][j] != '\0')
+			{
+				printf("Error, invalid character.\n");
+				return (1);
+			}
             j++;
         }
+		if (flag == 1)
+			break;
         i++;
-    }
+	}
     return (0);
 }
