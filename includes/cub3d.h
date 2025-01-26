@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/26 16:41:47 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/01/26 18:38:39 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 #include <math.h>
 #include <float.h>
 
-#define	WIDTH		1449
-#define	HEIGHT		(int)round(WIDTH / 16 * 9)
+#define	WIDTH		1600
+#define	HEIGHT		(int)round(WIDTH / 16 * 10)
 #define	TILE_SIZE	42
 #define	MAP_FACT	0.2
 #define	HITBOX		4
@@ -112,13 +112,10 @@ typedef	struct		s_data
 	int				map_height;
 	mlx_t*			game;
 	mlx_image_t*	frame;
+	mlx_image_t*	minimap;
 	t_player*		player;
 	t_ray*			ray;
 	t_text			text[RAYS];
-	bool			mini_map;
-	bool			mouse;
-	mlx_texture_t*	t;
-	mlx_image_t*	m;
 }					t_data;
 
 void	init_data(t_data *data, char *arg);

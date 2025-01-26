@@ -6,11 +6,11 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:14:40 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/24 13:41:19 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/26 18:12:55 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3D.h"
+#include "includes/cub3d.h"
 
 void	close_game(void *param)
 {

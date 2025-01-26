@@ -6,11 +6,11 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:23:36 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/25 19:18:43 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/26 18:18:35 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3D.h"
+#include "includes/cub3d.h"
 
 void	game_loop(void *param)
 {
@@ -18,21 +18,16 @@ void	game_loop(void *param)
 
 	data = (t_data*) param;
 	mlx_set_mouse_pos(data->game, WIDTH / 2, HEIGHT / 2);
+
 	player_hook(data);
 	raycasting(data);
 
-	mlx_delete_image(data->game, data->frame);
-	data->frame = mlx_new_image(data->game, WIDTH, HEIGHT);
-	if (!data->frame)
-		ft_exit(data, 2, true);
 	draw_bg(data);
 	draw_walls(data);
 
-	if (data->mini_map)
-		draw_minimap(data);
+	draw_minimap(data);
 
-	if (mlx_image_to_window(data->game, data->frame, 0, 0) == -1)
-		ft_exit(data, 2, true);
+
 
 	mouse_hook(data);
 }

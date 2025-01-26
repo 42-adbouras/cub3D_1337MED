@@ -6,11 +6,11 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:58:41 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/24 13:49:39 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/26 18:12:55 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3D.h"
+#include "includes/cub3d.h"
 
 int	rgba(int r, int g, int b, int a)
 {

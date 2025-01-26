@@ -6,18 +6,17 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:26:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/25 10:51:29 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/26 18:19:55 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3D.h"
+#include "includes/cub3d.h"
 
 void	key_press(t_data *data)
 {
 	data->player->turn_dir = 0;
 	data->player->walk_dir = 0;
 	data->player->strafe_dir = 0;
-	data->mini_map = true;
 	if (mlx_is_key_down(data->game, MLX_KEY_ESCAPE))
 		ft_exit(data, 0, true);
 	if (mlx_is_key_down(data->game, MLX_KEY_RIGHT))
@@ -34,8 +33,6 @@ void	key_press(t_data *data)
 		data->player->strafe_dir = -1;
 	if (mlx_is_key_down(data->game, MLX_KEY_LEFT_SHIFT))
 		data->player->walk_dir *= 2.5;
-	if (mlx_is_key_down(data->game, MLX_KEY_TAB))
-		data->mini_map = true;
 }
 void    draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, uint32_t color) {
     int dx;
@@ -127,7 +124,7 @@ void	mouse_hook(t_data *data)
 		data->player->rot_angle = norm_angle(data->player->rot_angle);	
 	}
 	prev_x = WIDTH / 2;
-	mlx_set_mouse_pos(data->game, WIDTH / 2, HEIGHT / 2);
+	// mlx_set_mouse_pos(data->game, WIDTH / 2, HEIGHT / 2);
 }
 
 void	player_hook(t_data *data)

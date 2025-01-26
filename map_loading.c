@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_loading.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:06:12 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/26 16:41:25 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/01/26 19:09:24 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3D.h"
+#include "includes/cub3d.h"
 
 int	check_extension(char	*name)
 {
@@ -84,12 +84,12 @@ void	draw_minimap(t_data	*data)
 			m.map_y = (m.start_y + m.y / M_MAP_FACT) / TILE_SIZE;
 			if ((m.x >= 0 && m.x <= 3 ) || (m.y >= 0 && m.y <= 3) || (m.x >= MINI_MAP_WIDTH - 4 && m.x <= MINI_MAP_WIDTH) \
 				|| (m.y >= MINI_MAP_HEIGHT - 4 && m.y <= MINI_MAP_HEIGHT))
-				mlx_put_pixel(data->frame, m.x, m.y, rgba(0, 89, 98, 255));
+				mlx_put_pixel(data->minimap, m.x, m.y, rgba(230, 230, 230, 255));
 			else if (m.map_y >= 0 && m.map_y < data->map_height && m.map_x >= 0 \
 				&& m.map_x < (int)ft_strlen(data->parsed_map[m.map_y]) && data->parsed_map[m.map_y][m.map_x] == '1')
-				mlx_put_pixel(data->frame, m.x, m.y, rgba(0, 89, 98, 255));
+				mlx_put_pixel(data->minimap, m.x, m.y, rgba(230, 230, 230, 255));
 			else
-				mlx_put_pixel(data->frame, m.x, m.y, rgba(230, 230, 230, 255));
+				mlx_put_pixel(data->minimap, m.x, m.y, rgba(0, 89, 98, 180));
 			m.x++;
 		}
 		m.y++;
@@ -108,14 +108,14 @@ void	draw_player(t_data *data)
 	center_y = MINI_MAP_HEIGHT / 2;
 	end_x = MINI_MAP_WIDTH / 2 + 10 * cos(data->player->rot_angle);
 	end_y = MINI_MAP_HEIGHT / 2 + 10 * sin(data->player->rot_angle);
-	mlx_put_pixel(data->frame, (MINI_MAP_WIDTH / 2), (MINI_MAP_HEIGHT / 2), RED);
-	mlx_put_pixel(data->frame, (MINI_MAP_WIDTH / 2) + 1, (MINI_MAP_HEIGHT / 2), RED);
-	mlx_put_pixel(data->frame, (MINI_MAP_WIDTH / 2) - 1, (MINI_MAP_HEIGHT / 2), RED);
-	mlx_put_pixel(data->frame, (MINI_MAP_WIDTH / 2), (MINI_MAP_HEIGHT / 2) + 1, RED);
-	mlx_put_pixel(data->frame, (MINI_MAP_WIDTH / 2), (MINI_MAP_HEIGHT / 2) - 1, RED);
-	mlx_put_pixel(data->frame, (MINI_MAP_WIDTH / 2) + 2, (MINI_MAP_HEIGHT / 2), RED);
-	mlx_put_pixel(data->frame, (MINI_MAP_WIDTH / 2) - 2, (MINI_MAP_HEIGHT / 2), RED);
-	mlx_put_pixel(data->frame, (MINI_MAP_WIDTH / 2), (MINI_MAP_HEIGHT / 2) + 2, RED);
-	mlx_put_pixel(data->frame, (MINI_MAP_WIDTH / 2), (MINI_MAP_HEIGHT / 2) - 2, RED);
-	draw_line(data->frame, center_x, center_y, end_x, end_y, RED);	
+	mlx_put_pixel(data->minimap, (MINI_MAP_WIDTH / 2), (MINI_MAP_HEIGHT / 2), RED);
+	mlx_put_pixel(data->minimap, (MINI_MAP_WIDTH / 2) + 1, (MINI_MAP_HEIGHT / 2), RED);
+	mlx_put_pixel(data->minimap, (MINI_MAP_WIDTH / 2) - 1, (MINI_MAP_HEIGHT / 2), RED);
+	mlx_put_pixel(data->minimap, (MINI_MAP_WIDTH / 2), (MINI_MAP_HEIGHT / 2) + 1, RED);
+	mlx_put_pixel(data->minimap, (MINI_MAP_WIDTH / 2), (MINI_MAP_HEIGHT / 2) - 1, RED);
+	mlx_put_pixel(data->minimap, (MINI_MAP_WIDTH / 2) + 2, (MINI_MAP_HEIGHT / 2), RED);
+	mlx_put_pixel(data->minimap, (MINI_MAP_WIDTH / 2) - 2, (MINI_MAP_HEIGHT / 2), RED);
+	mlx_put_pixel(data->minimap, (MINI_MAP_WIDTH / 2), (MINI_MAP_HEIGHT / 2) + 2, RED);
+	mlx_put_pixel(data->minimap, (MINI_MAP_WIDTH / 2), (MINI_MAP_HEIGHT / 2) - 2, RED);
+	draw_line(data->minimap, center_x, center_y, end_x, end_y, RED);	
 }

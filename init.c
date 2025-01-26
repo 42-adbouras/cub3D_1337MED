@@ -6,13 +6,13 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:09 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/25 19:08:10 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/26 18:22:11 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3D.h"
+#include "includes/cub3d.h"
 
-#include "includes/cub3D.h"
+#include "includes/cub3d.h"
 
 void	init_data(t_data *data, char *arg)
 {
@@ -29,7 +29,6 @@ void	init_data(t_data *data, char *arg)
 void	load_game(t_data **data)
 {
 	(*data)->game = mlx_init(WIDTH, HEIGHT, "cub3D", true);
-	(*data)->mini_map = false;
 	if (!(*data)->game)
 	{
 		perror("Failed while loading game window");
@@ -86,7 +85,8 @@ void	load_player(t_data **data)
 void	load_images(t_data **data)
 {
 	(*data)->frame = mlx_new_image((*data)->game, WIDTH, HEIGHT);
-	if (!(*data)->frame)
+	(*data)->minimap = mlx_new_image((*data)->game, WIDTH, HEIGHT);
+	if (!(*data)->frame || !(*data)->minimap)
 	{
 		perror("Failed while loading images");
 		ft_exit(*data, 1, true);
