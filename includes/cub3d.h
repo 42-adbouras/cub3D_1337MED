@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/26 18:38:39 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/29 11:33:37 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ typedef	struct		s_data
 	mlx_t*			game;
 	mlx_image_t*	frame;
 	mlx_image_t*	minimap;
+	mlx_texture_t*	tx;
+	mlx_image_t*	im;
 	t_player*		player;
 	t_ray*			ray;
 	t_text			text[RAYS];

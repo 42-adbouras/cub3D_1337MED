@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:06:12 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/26 19:09:24 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:04:41 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,10 @@ void	draw_minimap(t_data	*data)
 		{
 			m.map_x = (m.start_x + m.x / M_MAP_FACT) / TILE_SIZE;
 			m.map_y = (m.start_y + m.y / M_MAP_FACT) / TILE_SIZE;
-			if ((m.x >= 0 && m.x <= 3 ) || (m.y >= 0 && m.y <= 3) || (m.x >= MINI_MAP_WIDTH - 4 && m.x <= MINI_MAP_WIDTH) \
+			if ((m.x >= 0 && m.x < 4 ) || (m.y >= 0 && m.y < 4) || (m.x >= MINI_MAP_WIDTH - 4 && m.x <= MINI_MAP_WIDTH) \
 				|| (m.y >= MINI_MAP_HEIGHT - 4 && m.y <= MINI_MAP_HEIGHT))
 				mlx_put_pixel(data->minimap, m.x, m.y, rgba(230, 230, 230, 255));
-			else if (m.map_y >= 0 && m.map_y < data->map_height && m.map_x >= 0 \
-				&& m.map_x < (int)ft_strlen(data->parsed_map[m.map_y]) && data->parsed_map[m.map_y][m.map_x] == '1')
+			else if (m.map_y >= 0 && m.map_x >= 0 && m.map_y < data->map_height && m.map_x < (int)ft_strlen(data->parsed_map[m.map_y]) && data->parsed_map[m.map_y][m.map_x] == '1')
 				mlx_put_pixel(data->minimap, m.x, m.y, rgba(230, 230, 230, 255));
 			else
 				mlx_put_pixel(data->minimap, m.x, m.y, rgba(0, 89, 98, 180));

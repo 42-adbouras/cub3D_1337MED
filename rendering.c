@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:29:18 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/26 19:06:36 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/29 10:10:36 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,6 @@ void	draw_walls(t_data *data)
 		render_strip(data, ray, data->text[ray].distance);
 }
 
-// void	draw_rays(t_data *data)
-// {
-// 	int	ray;
-	
-// 	ray = -1;
-// 	while (++ray < RAYS)
-// 		draw_line(data->frame,
-// 				(data->player->x + (HITBOX / 2)) * MAP_FACT,
-// 				(data->player->y + (HITBOX / 2)) * MAP_FACT,
-// 				data->text[ray].wall_hit_x * MAP_FACT,
-// 				data->text[ray].wall_hit_y * MAP_FACT,
-// 				rgba(192, 242, 255, 255));
-// }
 
 void	draw_bg(t_data *data)
 {

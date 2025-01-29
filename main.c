@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:43:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/26 18:28:15 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/29 13:47:25 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,21 @@ void	player_spawn(t_data *data)
 		ft_exit(data, 2, true);
 	if (mlx_image_to_window(data->game, data->minimap, 20, HEIGHT - MINI_MAP_HEIGHT - 20) == -1)
 		ft_exit(data, 2, true);
+	data->tx = mlx_load_png("assets/petition.png");
+	data->im = mlx_texture_to_image(data->game, data->tx);
+	// mlx_resize_image(data->im, 300, 450);
+	if (mlx_image_to_window(data->game, data->im, WIDTH / 2, HEIGHT - data->im->height) == -1)
+		ft_exit(data, 2, true);
 }
+
+// void	sprite(void *param)
+// {
+// 	t_data	*data;
+// 	static int count;
+	
+// 	data = (t_data *)param;
+	
+// }
 
 int	main(int ac, char **av)
 {
@@ -37,6 +51,7 @@ int	main(int ac, char **av)
 	for (int i = 0; data.parsed_map[i]; i++)
 		printf("%s\n", data.parsed_map[i]);
 	mlx_loop_hook(data.game, game_loop, &data);
+	// mlx_loop_hook(data.game, sprite, &data);
 	mlx_close_hook(data.game, close_game, &data);
 	mlx_loop(data.game);
 	mlx_terminate(data.game);
