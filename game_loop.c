@@ -6,11 +6,27 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:23:36 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/26 18:18:35 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/30 22:42:00 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
+
+void	animation(t_data *data)
+{
+	static int	current;
+	static int	frame;
+	int			speed;
+	
+    speed = 8;
+	frame++;
+    if (frame % speed == 0)
+    {
+        data->sprites.s_images[current]->enabled = false;
+        current = (current + 1) % NUM_SPRITES;
+        data->sprites.s_images[current]->enabled = true;
+    }
+}
 
 void	game_loop(void *param)
 {
@@ -24,9 +40,8 @@ void	game_loop(void *param)
 
 	draw_bg(data);
 	draw_walls(data);
-
 	draw_minimap(data);
-
+	animation(data);
 
 
 	mouse_hook(data);

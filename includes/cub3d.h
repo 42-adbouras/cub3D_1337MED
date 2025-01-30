@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/29 11:33:37 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/30 19:32:22 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 #include <math.h>
 #include <float.h>
 
-#define	WIDTH		1600
-#define	HEIGHT		(int)round(WIDTH / 16 * 10)
+#define	WIDTH		1200
+#define	HEIGHT		(int)round(WIDTH / 16 * 9)
 #define	TILE_SIZE	42
 #define	MAP_FACT	0.2
 #define	HITBOX		4
@@ -35,6 +35,8 @@
 #define	FOV			80 * (M_PI / 180)
 #define	RAYS		WIDTH
 #define	MOUSE_SENS	1000.00
+#define	NUM_SPRITES	18
+
 
 #define MINI_MAP_WIDTH 350
 #define MINI_MAP_HEIGHT 200
@@ -44,6 +46,12 @@
 #define BLACK		0x000000FF
 #define RED			0xFF0000FF
 #define	GREEN		0x00FF00FF
+
+typedef	struct		s_sprite
+{
+	mlx_texture_t*	s_texture[NUM_SPRITES];
+	mlx_image_t*	s_images[NUM_SPRITES];
+}					t_sprite;
 
 typedef	struct		s_mini_map
 {
@@ -118,6 +126,7 @@ typedef	struct		s_data
 	t_player*		player;
 	t_ray*			ray;
 	t_text			text[RAYS];
+	t_sprite		sprites;
 }					t_data;
 
 void	init_data(t_data *data, char *arg);
@@ -155,3 +164,5 @@ void	ft_exit(t_data *data, int i, bool term);
 void	free_char_arr(char **arr);
 int		parse_map(t_data *data);
 char	**ft_split_cub(char const *s, char c);
+
+void	load_sprites(t_data *data);

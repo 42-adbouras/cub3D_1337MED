@@ -5,6 +5,7 @@
 !libraries/
 !maps/
 !assets/
+!sptites/
 !*.png
 !*.cub
 !Makefile
