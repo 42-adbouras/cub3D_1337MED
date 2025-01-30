@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:29:18 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/29 10:10:36 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:42:13 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	draw_bg(t_data *data)
 		while (width < WIDTH)
 		{
 			if (height < HEIGHT / 2)
-				mlx_put_pixel(data->frame, width, height, rgba(121, 215, 190, 255));
+				mlx_put_pixel(data->frame, width, height, rgba(62, 88, 121, 155));
 			else
-				mlx_put_pixel(data->frame, width, height, rgba(46, 80, 119,255));
+				mlx_put_pixel(data->frame, width, height, rgba(33, 53, 85, 255));
 			width++;
 		}
 		height++;
@@ -74,9 +74,9 @@ void	draw_rect(t_data *data, double x, double y, double width, double height)
         while (j < height)
 		{
 			if (data->text[(int)x].is_hori)
-            	mlx_put_pixel(data->frame, x + i, y + j, rgba(246, 244, 240, 255));
+            	mlx_put_pixel(data->frame, x + i, y + j, rgba(216, 196, 182, 255));
 			else
-            	mlx_put_pixel(data->frame, x + i, y + j, rgba(226, 224, 220, 255));
+            	mlx_put_pixel(data->frame, x + i, y + j, rgba(245, 239, 231, 255));
 			j++;
         }
 		i++;
