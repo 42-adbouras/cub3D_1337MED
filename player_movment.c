@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:26:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/26 18:19:55 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:26:04 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	key_press(t_data *data)
 		data->player->strafe_dir = -1;
 	if (mlx_is_key_down(data->game, MLX_KEY_LEFT_SHIFT))
 		data->player->walk_dir *= 2.5;
+	// if (mlx_is_mouse_down(data->game, MLX_MOUSE_BUTTON_LEFT))
+	// 	animation(data);
 }
 void    draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, uint32_t color) {
     int dx;

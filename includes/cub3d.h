@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/30 19:32:22 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:17:26 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,3 +166,4 @@ int		parse_map(t_data *data);
 char	**ft_split_cub(char const *s, char c);
 
 void	load_sprites(t_data *data);
+void	animation(t_data *data);
