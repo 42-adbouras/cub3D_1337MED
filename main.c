@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:43:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/30 23:00:34 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:38:03 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,42 +37,43 @@ void	player_spawn(t_data *data)
 	}
 }
 
-void	load_sprites(t_data *data)
+void	import_frames(t_data *data)
 {
-	char	*path[NUM_SPRITES] = {
-		"assets/sptites/1.png", "assets/sptites/2.png", "assets/sptites/3.png",
-        "assets/sptites/4.png", "assets/sptites/5.png", "assets/sptites/6.png",
-        "assets/sptites/7.png", "assets/sptites/8.png", "assets/sptites/9.png",
-        "assets/sptites/10.png", "assets/sptites/11.png", "assets/sptites/12.png",
-        "assets/sptites/13.png", "assets/sptites/14.png", "assets/sptites/15.png",
-        "assets/sptites/16.png", "assets/sptites/17.png", "assets/sptites/18.png"
-    };
-	// data->sprites.s_texture[0] = mlx_load_png("assets/sptites/1.png");
-	// data->sprites.s_texture[1] = mlx_load_png("assets/sptites/2.png");
-	// data->sprites.s_texture[2] = mlx_load_png("assets/sptites/3.png");
-	// data->sprites.s_texture[3] = mlx_load_png("assets/sptites/4.png");
-	// data->sprites.s_texture[4] = mlx_load_png("assets/sptites/5.png");
-	// data->sprites.s_texture[5] = mlx_load_png("assets/sptites/6.png");
-	// data->sprites.s_texture[6] = mlx_load_png("assets/sptites/7.png");
-	// data->sprites.s_texture[7] = mlx_load_png("assets/sptites/8.png");
-	// data->sprites.s_texture[8] = mlx_load_png("assets/sptites/9.png");
-	// data->sprites.s_texture[9] = mlx_load_png("assets/sptites/10.png");
-	// data->sprites.s_texture[10] = mlx_load_png("assets/sptites/11.png");
-	// data->sprites.s_texture[11] = mlx_load_png("assets/sptites/12.png");
-	// data->sprites.s_texture[12] = mlx_load_png("assets/sptites/13.png");
-	// data->sprites.s_texture[13] = mlx_load_png("assets/sptites/14.png");
-	// data->sprites.s_texture[14] = mlx_load_png("assets/sptites/15.png");
-	// data->sprites.s_texture[15] = mlx_load_png("assets/sptites/16.png");
-	// data->sprites.s_texture[16] = mlx_load_png("assets/sptites/17.png");
-	// data->sprites.s_texture[17] = mlx_load_png("assets/sptites/18.png");
-	int	i = 0;
+	int		i;
+
+	i = 0;
 	while (i < NUM_SPRITES)
 	{
-		data->sprites.s_texture[i] = mlx_load_png(path[i]);
+		data->sprites.s_texture[i] = mlx_load_png(data->sprites.path[i]);
+		if (!data->sprites.s_texture[i])
+			ft_exit(data, 2, true);
 		data->sprites.s_images[i] = mlx_texture_to_image(data->game, data->sprites.s_texture[i]);
-		
+		if (!data->sprites.s_images[i])
+			ft_exit(data, 2, true);
 		i++;
 	}
+}
+
+void	load_sprites(t_data *data)
+{
+	char	*path;
+	char	*temp;
+	int		fd;
+
+	path = NULL;
+	fd = open("assets/sprites/sheet.txt", O_RDONLY);
+	while (1)
+	{
+		temp = get_next_line(fd);
+		if (!temp)
+			break ;
+		path = ft_strjoin(path, temp);
+		free(temp);
+	}
+	data->sprites.path = ft_split_cub(path, '\n');
+	free(path);
+	close(fd);
+	import_frames(data);
 }
 
 int	main(int ac, char **av)

@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/31 16:17:26 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:35:45 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 #include <math.h>
 #include <float.h>
 
-#define	WIDTH		1200
+#define	WIDTH		1440
 #define	HEIGHT		(int)round(WIDTH / 16 * 9)
 #define	TILE_SIZE	42
 #define	MAP_FACT	0.2
@@ -49,6 +49,7 @@
 
 typedef	struct		s_sprite
 {
+	char**			path;
 	mlx_texture_t*	s_texture[NUM_SPRITES];
 	mlx_image_t*	s_images[NUM_SPRITES];
 }					t_sprite;

@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:23:36 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/31 16:26:26 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:39:30 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	animation(t_data *data)
 	static int	frame;
 	int			speed;
 	
-    speed = 6;
+    speed = 4;
 	frame++;
     if (frame % speed == 0)
     {
