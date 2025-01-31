@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:23:36 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/31 18:39:30 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:48:43 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	animation(t_data *data)
 {
-	static int	current;
-	static int	frame;
+	int static	current;
+	int static	frame;
 	int			speed;
 	
     speed = 4;
@@ -34,15 +34,11 @@ void	game_loop(void *param)
 
 	data = (t_data*) param;
 	mlx_set_mouse_pos(data->game, WIDTH / 2, HEIGHT / 2);
-
 	player_hook(data);
 	raycasting(data);
-
 	draw_bg(data);
 	draw_walls(data);
 	draw_minimap(data);
 	animation(data);
-
-
 	mouse_hook(data);
 }
