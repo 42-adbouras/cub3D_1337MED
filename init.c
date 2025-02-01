@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:09 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/26 18:22:11 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/01 18:31:31 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	init_data(t_data *data, char *arg)
 void	load_game(t_data **data)
 {
 	(*data)->game = mlx_init(WIDTH, HEIGHT, "cub3D", true);
+	(*data)->rot_speed = ROT_SPEED * (M_PI / 180);
+	(*data)->fov = FOV * (M_PI / 180);
 	if (!(*data)->game)
 	{
 		perror("Failed while loading game window");

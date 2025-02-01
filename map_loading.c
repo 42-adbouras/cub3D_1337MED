@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:06:12 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/01 15:54:35 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/01 18:14:58 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,15 +99,16 @@ void	draw_minimap(t_data	*data)
 
 void	draw_player(t_data *data)
 {	
-	int		center_x;
-	int		center_y;
-	int		end_x;
-	int		end_y;
+	t_line		line;
+	// int		start_x;
+	// int		start_y;
+	// int		end_x;
+	// int		end_y;
 
-	center_x = MINI_MAP_WIDTH / 2;
-	center_y = MINI_MAP_HEIGHT / 2;
-	end_x = MINI_MAP_WIDTH / 2 + 10 * cos(ROT_ANGLE);
-	end_y = MINI_MAP_HEIGHT / 2 + 10 * sin(ROT_ANGLE);
+	line.start_x = MINI_MAP_WIDTH / 2;
+	line.start_y = MINI_MAP_HEIGHT / 2;
+	line.end_x = MINI_MAP_WIDTH / 2 + 10 * cos(data->player->rot_angle);
+	line.end_y = MINI_MAP_HEIGHT / 2 + 10 * sin(data->player->rot_angle);
 	mlx_put_pixel(data->minimap, (MINI_MAP_WIDTH / 2), (MINI_MAP_HEIGHT / 2), RED);
 	mlx_put_pixel(data->minimap, (MINI_MAP_WIDTH / 2) + 1, (MINI_MAP_HEIGHT / 2), RED);
 	mlx_put_pixel(data->minimap, (MINI_MAP_WIDTH / 2) - 1, (MINI_MAP_HEIGHT / 2), RED);
@@ -117,5 +118,5 @@ void	draw_player(t_data *data)
 	mlx_put_pixel(data->minimap, (MINI_MAP_WIDTH / 2) - 2, (MINI_MAP_HEIGHT / 2), RED);
 	mlx_put_pixel(data->minimap, (MINI_MAP_WIDTH / 2), (MINI_MAP_HEIGHT / 2) + 2, RED);
 	mlx_put_pixel(data->minimap, (MINI_MAP_WIDTH / 2), (MINI_MAP_HEIGHT / 2) - 2, RED);
-	draw_line(data->minimap, center_x, center_y, end_x, end_y, RED);	
+	draw_line(data->minimap, line, RED);	
 }
