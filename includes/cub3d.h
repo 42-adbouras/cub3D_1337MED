@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/31 18:35:45 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/01 15:52:02 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include <stdbool.h>
 #include <math.h>
 #include <float.h>
+#include "consts.h"
 
 #define	WIDTH		1440
 #define	HEIGHT		(int)round(WIDTH / 16 * 9)

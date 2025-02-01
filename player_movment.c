@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:26:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/31 16:26:04 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/01 15:55:20 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,13 @@ void	update_player_pose(t_data *data)
 	int32_t	new_x;
 	int32_t	new_y;
 
-	data->player->rot_angle += data->player->turn_dir * (ROT_SPEED );
-	data->player->rot_angle = norm_angle(data->player->rot_angle);
+	ROT_ANGLE += data->player->turn_dir * (ROT_SPEED );
+	ROT_ANGLE = norm_angle(ROT_ANGLE);
 	move_step = data->player->walk_dir * (SPEED );
 	straf_step = data->player->strafe_dir * (SPEED );
 
-	new_x = round(cos(data->player->rot_angle) * move_step - sin(data->player->rot_angle) * straf_step);
-	new_y = round(sin(data->player->rot_angle) * move_step + cos(data->player->rot_angle) * straf_step);
+	new_x = round(cos(ROT_ANGLE) * move_step - sin(ROT_ANGLE) * straf_step);
+	new_y = round(sin(ROT_ANGLE) * move_step + cos(ROT_ANGLE) * straf_step);
 	
 	if (if_collition(data, new_x, new_y))
 	{
@@ -122,8 +122,8 @@ void	mouse_hook(t_data *data)
 	delta = (new_x - prev_x) / MOUSE_SENS;
 	if (prev_x != 0)
 	{
-		data->player->rot_angle += delta;
-		data->player->rot_angle = norm_angle(data->player->rot_angle);	
+		ROT_ANGLE += delta;
+		ROT_ANGLE = norm_angle(ROT_ANGLE);	
 	}
 	prev_x = WIDTH / 2;
 	// mlx_set_mouse_pos(data->game, WIDTH / 2, HEIGHT / 2);

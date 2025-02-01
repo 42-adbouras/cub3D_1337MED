@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:06:12 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/29 14:04:41 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/01 15:54:35 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,11 @@ void	draw_minimap(t_data	*data)
 			if ((m.x >= 0 && m.x < 4 ) || (m.y >= 0 && m.y < 4) || (m.x >= MINI_MAP_WIDTH - 4 && m.x <= MINI_MAP_WIDTH) \
 				|| (m.y >= MINI_MAP_HEIGHT - 4 && m.y <= MINI_MAP_HEIGHT))
 				mlx_put_pixel(data->minimap, m.x, m.y, rgba(230, 230, 230, 255));
-			else if (m.map_y >= 0 && m.map_x >= 0 && m.map_y < data->map_height && m.map_x < (int)ft_strlen(data->parsed_map[m.map_y]) && data->parsed_map[m.map_y][m.map_x] == '1')
+			else if (m.map_y >= 0 && m.map_x >= 0 && m.map_y < data->map_height \
+					&& m.map_x < (int)ft_strlen(data->parsed_map[m.map_y]) && data->parsed_map[m.map_y][m.map_x] == '1')
 				mlx_put_pixel(data->minimap, m.x, m.y, rgba(230, 230, 230, 255));
 			else
-				mlx_put_pixel(data->minimap, m.x, m.y, rgba(0, 89, 98, 180));
+				mlx_put_pixel(data->minimap, m.x, m.y, rgba(33, 53, 85, 180));
 			m.x++;
 		}
 		m.y++;
@@ -105,8 +106,8 @@ void	draw_player(t_data *data)
 
 	center_x = MINI_MAP_WIDTH / 2;
 	center_y = MINI_MAP_HEIGHT / 2;
-	end_x = MINI_MAP_WIDTH / 2 + 10 * cos(data->player->rot_angle);
-	end_y = MINI_MAP_HEIGHT / 2 + 10 * sin(data->player->rot_angle);
+	end_x = MINI_MAP_WIDTH / 2 + 10 * cos(ROT_ANGLE);
+	end_y = MINI_MAP_HEIGHT / 2 + 10 * sin(ROT_ANGLE);
 	mlx_put_pixel(data->minimap, (MINI_MAP_WIDTH / 2), (MINI_MAP_HEIGHT / 2), RED);
 	mlx_put_pixel(data->minimap, (MINI_MAP_WIDTH / 2) + 1, (MINI_MAP_HEIGHT / 2), RED);
 	mlx_put_pixel(data->minimap, (MINI_MAP_WIDTH / 2) - 1, (MINI_MAP_HEIGHT / 2), RED);

@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:58:41 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/26 18:12:55 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/01 15:55:31 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	raycasting(t_data *data)
     ray = 0;
     hori_dist = DBL_MAX;
     vert_dist = DBL_MAX;
-    data->ray->angle = data->player->rot_angle - (FOV / 2);
+    data->ray->angle = ROT_ANGLE - (FOV / 2);
     while (ray < RAYS)
     {
         data->ray->angle = norm_angle(data->ray->angle);

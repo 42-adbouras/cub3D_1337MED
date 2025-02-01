@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:29:18 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/30 10:42:13 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/01 15:55:38 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	render_strip(t_data *data, int ray, double distance)
 	double top;
 	double bottom;
 
-	distance *= cos(data->text[ray].angle - data->player->rot_angle);
+	distance *= cos(data->text[ray].angle - ROT_ANGLE);
 	proj_plane = (WIDTH / 2) / tan(FOV / 2);
 	wall_height = (TILE_SIZE / distance) * proj_plane;
 
