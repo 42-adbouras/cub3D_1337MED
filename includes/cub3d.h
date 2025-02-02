@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/02 17:17:02 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/02 19:34:58 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 #include <string.h>
 #include <stdbool.h>
 #include <math.h>
-#include <float.h>
 
 #define WIDTH			1366
 #define HEIGHT			720
@@ -37,7 +36,6 @@
 #define MOUSE_SENS		1000.00
 #define NUM_SPRITES		18
 
-
 #define MINI_MAP_WIDTH	350
 #define MINI_MAP_HEIGHT	200
 #define M_MAP_FACT		0.3
@@ -47,26 +45,26 @@
 #define RED				0xFF0000FF
 #define GREEN			0x00FF00FF
 
-typedef	struct			s_sprite
+typedef struct s_sprite
 {
-	char**				path;
-	mlx_texture_t*		s_texture[NUM_SPRITES];
-	mlx_image_t*		s_images[NUM_SPRITES];
+	char				**path;
+	mlx_texture_t		*s_texture[NUM_SPRITES];
+	mlx_image_t			s_images[NUM_SPRITES];
 }						t_sprite;
 
-typedef	struct			s_ray_utils
+typedef struct s_ray_utils
 {
 	double				x_step;
 	double				y_step;
 	double				x_inter;
-	double 				y_inter;
+	double				y_inter;
 	double				next_x;
 	double				next_y;
 	int					player_x;
 	int					player_y;
 }						t_ray_utils;
 
-typedef	struct			s_line
+typedef struct s_line
 {
 	int					start_x;
 	int					start_y;
@@ -78,7 +76,7 @@ typedef	struct			s_line
 	double				y_inc;
 }						t_line;
 
-typedef	struct			s_mini_map
+typedef struct s_mini_map
 {
 	int					x;
 	int					y;
@@ -88,10 +86,10 @@ typedef	struct			s_mini_map
 	int					start_y;
 }						t_mini_map;
 
-typedef	struct			s_player
+typedef struct s_player
 {
-	mlx_image_t*		imge;
-	mlx_image_t*		rays;
+	mlx_image_t			*imge;
+	mlx_image_t			*rays;
 	int					x;
 	int					y;
 	int					walk_dir;
@@ -100,22 +98,7 @@ typedef	struct			s_player
 	double				rot_angle;
 }						t_player;
 
-// typedef	struct			s_ray
-// {
-// 	double				angle;
-// 	double				distance;
-// 	bool				h_cross;
-// 	bool				v_cross;
-// 	double				wall_hit_x;
-// 	double				wall_hit_y;
-// 	bool				face_up;
-// 	bool				face_down;
-// 	bool				face_left;
-// 	bool				face_right;
-// 	bool				is_hori;
-// }						t_ray;
-
-typedef	struct			s_text
+typedef struct s_text
 {
 	double				angle;
 	double				distance;
@@ -130,26 +113,25 @@ typedef	struct			s_text
 	bool				is_hori;
 }						t_text;
 
-typedef	struct			s_data
+typedef struct s_data
 {
-	const char*			map;
-	char**				map_arr;
+	const char			*map;
+	char				**map_arr;
 	char				**parsed_map;
-	char*				north_texture;
-	char*				south_texture;
-	char*				west_texture;
-	char*				east_texture;
+	char				*north_texture;
+	char				*south_texture;
+	char				*west_texture;
+	char				*east_texture;
 	int					floor_color[3];
 	int					ceiling_color[3];
 	int					map_width;
 	int					map_height;
-	mlx_t*				game;
-	mlx_image_t*		frame;
-	mlx_image_t*		minimap;
-	mlx_texture_t*		tx;
-	mlx_image_t*		im;
-	t_player*			player;
-	// t_ray*				ray;
+	mlx_t				*game;
+	mlx_image_t			*frame;
+	mlx_image_t			*minimap;
+	mlx_texture_t		*tx;
+	mlx_image_t			*im;
+	t_player			*player;
 	t_text				text[RAYS];
 	t_sprite			sprites;
 	double				rot_speed;
@@ -169,7 +151,7 @@ void	draw_minimap(t_data	*data);
 void	draw_player(t_data *data);
 void	get_map_size(t_data *data);
 
-void    draw_line(mlx_image_t *img, t_line line, uint32_t color);
+void	draw_line(mlx_image_t *img, t_line line, uint32_t color);
 
 void	player_hook(t_data *data);
 
@@ -195,7 +177,8 @@ char	**ft_split_cub(char const *s, char c);
 void	load_sprites(t_data *data);
 void	animation(t_data *data);
 
-double	get_distance(double start_x, double start_y, double end_x, double end_y);
+double	get_distance(double start_x, double start_y,
+			double end_x, double end_y);
 void	set_orientation(t_data *data, double angle, int ray);
 bool	wall_at(t_data *data, int x, int y, int ray);
 int		rgba(int r, int g, int b, int a);
