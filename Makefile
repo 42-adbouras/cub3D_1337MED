@@ -6,7 +6,7 @@
 #    By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 11:59:01 by adbouras          #+#    #+#              #
-#    Updated: 2025/01/26 18:12:31 by adbouras         ###   ########.fr        #
+#    Updated: 2025/02/02 17:02:01 by adbouras         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ HEADERS		=	-I ./include -I $(LIBMLX)/include
 INCLUDES	=	includes/cub3d.h includes/get_next_line.h
 LIBS		=	$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 SRCS		=	clean_up.c game_loop.c get_next_line.c get_next_line_utils.c init.c main.c map_loading.c parse_map.c \
-				player_movment.c raycasting.c rendering.c utils.c 
+				player_movment.c raycasting.c rendering.c utils.c raycast_utils.c
 OBJ_DIR		=	objects/
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 

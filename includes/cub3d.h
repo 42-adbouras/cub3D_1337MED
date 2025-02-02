@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/02 14:55:15 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/02 17:17:02 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 #include <math.h>
 #include <float.h>
 
-#define WIDTH			1440
-#define HEIGHT			900
+#define WIDTH			1366
+#define HEIGHT			720
 #define TILE_SIZE		42
 #define MAP_FACT		0.2
 #define HITBOX			4
@@ -154,6 +154,7 @@ typedef	struct			s_data
 	t_sprite			sprites;
 	double				rot_speed;
 	double				fov;
+	bool				orient;
 }						t_data;
 
 void	init_data(t_data *data, char *arg);
@@ -193,3 +194,8 @@ char	**ft_split_cub(char const *s, char c);
 
 void	load_sprites(t_data *data);
 void	animation(t_data *data);
+
+double	get_distance(double start_x, double start_y, double end_x, double end_y);
+void	set_orientation(t_data *data, double angle, int ray);
+bool	wall_at(t_data *data, int x, int y, int ray);
+int		rgba(int r, int g, int b, int a);
