@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/01 18:50:45 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/02 14:55:15 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,18 @@ typedef	struct			s_sprite
 	mlx_image_t*		s_images[NUM_SPRITES];
 }						t_sprite;
 
+typedef	struct			s_ray_utils
+{
+	double				x_step;
+	double				y_step;
+	double				x_inter;
+	double 				y_inter;
+	double				next_x;
+	double				next_y;
+	int					player_x;
+	int					player_y;
+}						t_ray_utils;
+
 typedef	struct			s_line
 {
 	int					start_x;
@@ -88,20 +100,20 @@ typedef	struct			s_player
 	double				rot_angle;
 }						t_player;
 
-typedef	struct			s_ray
-{
-	double				angle;
-	double				distance;
-	bool				h_cross;
-	bool				v_cross;
-	double				wall_hit_x;
-	double				wall_hit_y;
-	bool				face_up;
-	bool				face_down;
-	bool				face_left;
-	bool				face_right;
-	bool				is_hori;
-}						t_ray;
+// typedef	struct			s_ray
+// {
+// 	double				angle;
+// 	double				distance;
+// 	bool				h_cross;
+// 	bool				v_cross;
+// 	double				wall_hit_x;
+// 	double				wall_hit_y;
+// 	bool				face_up;
+// 	bool				face_down;
+// 	bool				face_left;
+// 	bool				face_right;
+// 	bool				is_hori;
+// }						t_ray;
 
 typedef	struct			s_text
 {
@@ -137,7 +149,7 @@ typedef	struct			s_data
 	mlx_texture_t*		tx;
 	mlx_image_t*		im;
 	t_player*			player;
-	t_ray*				ray;
+	// t_ray*				ray;
 	t_text				text[RAYS];
 	t_sprite			sprites;
 	double				rot_speed;
@@ -145,13 +157,13 @@ typedef	struct			s_data
 }						t_data;
 
 void	init_data(t_data *data, char *arg);
-void	load_game(t_data **data);
+void	load_game(t_data *data);
 void	get_player_position(t_data *data, int *x, int *y);
-void	load_player(t_data **data);
-void	load_images(t_data **data);
-void	load_ray(t_data **data);
+void	load_player(t_data *data);
+void	load_images(t_data *data);
+void	load_ray(t_data *data);
 
-void	import_map(t_data **data, char *path);
+void	import_map(t_data *data, char *path);
 void	draw_minimap(t_data	*data);
 void	draw_player(t_data *data);
 void	get_map_size(t_data *data);

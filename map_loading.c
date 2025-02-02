@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:06:12 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/01 18:14:58 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/02 14:57:42 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int	check_extension(char	*name)
 	return (0);
 }
 
-void	import_map(t_data **data, char *path)
+void	import_map(t_data *data, char *path)
 {
 	char	*line;
 	int		fd;
 
-	(*data)->map = NULL;
+	data->map = NULL;
 	if (check_extension(path) == 1)
 	{
 		printf("Error,\n invalid map extension.");
@@ -43,11 +43,10 @@ void	import_map(t_data **data, char *path)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		(*data)->map = ft_strjoin((*data)->map, line);
+		data->map = ft_strjoin(data->map, line);
 		free(line);
 	}
-	(*data)->map_arr = ft_split_cub((*data)->map, '\n');
-	// get_map_size(*data);
+	data->map_arr = ft_split_cub(data->map, '\n');
 	close(fd);
 }
 
