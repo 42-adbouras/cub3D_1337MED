@@ -6,7 +6,7 @@
 #    By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 11:59:01 by adbouras          #+#    #+#              #
-#    Updated: 2025/02/03 16:45:03 by adbouras         ###   ########.fr        #
+#    Updated: 2025/02/03 17:01:53 by adbouras         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,13 +58,11 @@ $(BNS_NAME): $(BNS_OBJS)
 
 clean:
 	@make clean -C libraries/libft/
-	@make clean -C bonus/
-	@rm -rf $(OBJ_DIR) && echo
+	@rm -rf $(OBJ_DIR)
 	@rm -rf $(LIBMLX)/build
 
 fclean: clean
 	@make fclean -C libraries/libft/
-	@make fclean -C bonus/
 	@rm -rf $(NAME) $(BNS_NAME)
 
 re: clean all
