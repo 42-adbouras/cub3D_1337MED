@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:43:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/03 15:24:26 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:25:48 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	player_spawn_bonus(t_data *data)
 		mlx_image_to_window(data->game, data->sprites.s_images[i], (WIDTH / 2) - data->sprites.s_images[i]->height / 2, HEIGHT - data->sprites.s_images[i]->height);
 		data->sprites.s_images[i]->enabled = false;
 	}
+	data->sprites.s_images[0]->enabled = true;
 }
 
 void	import_frames_bonus(t_data *data)

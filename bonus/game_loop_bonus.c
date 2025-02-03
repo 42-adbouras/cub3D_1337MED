@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:23:36 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/03 16:16:57 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:23:22 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,18 @@ void	animation_bonus(t_data *data)
 	int static	frame;
 	int			speed;
 	
-    speed = 4;
+	speed = 4;
 	frame++;
-    if (frame % speed == 0)
-    {
-        data->sprites.s_images[current]->enabled = false;
-        current = (current + 1) % NUM_SPRITES;
-        data->sprites.s_images[current]->enabled = true;
-    }
+	if (frame % speed == 0)
+	{
+		data->sprites.s_images[current]->enabled = false;
+		current = (current + 1) % NUM_SPRITES;
+		data->sprites.s_images[current]->enabled = true;
+	}
 	if (current == NUM_SPRITES - 1 && frame == (speed * NUM_SPRITES - 1))
 	{
+		data->sprites.s_images[current]->enabled = false;
+		data->sprites.s_images[0]->enabled = true;
 		data->animation = false;
 		current = 0;
 		frame = 0;
