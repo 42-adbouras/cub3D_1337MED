@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast_utils.c                                    :+:      :+:    :+:   */
+/*   raycast_utils_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 16:59:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/02 17:17:13 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:22:41 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "cub3d_bonus.h"
 
 int	rgba(int r, int g, int b, int a)
 {

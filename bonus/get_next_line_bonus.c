@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:59:38 by adbouras          #+#    #+#             */
-/*   Updated: 2024/12/23 19:05:17 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:15:27 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_read(char *line, int fd);
 char	*ft_substr_ft(char *line);

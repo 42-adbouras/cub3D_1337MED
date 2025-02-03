@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/03 12:49:31 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:14:57 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "../libraries/MLX42/include/MLX42/MLX42.h"
 #include "../libraries/libft/libft.h"
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 #include <unistd.h>
 #include <stdio.h>

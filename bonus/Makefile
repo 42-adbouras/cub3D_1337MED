@@ -5,56 +5,45 @@
 #                                                     +:+ +:+         +:+      #
 #    By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/01/23 11:59:01 by adbouras          #+#    #+#              #
-#    Updated: 2025/02/03 13:32:04 by adbouras         ###   ########.fr        #
+#    Created: 2025/02/03 13:05:52 by adbouras          #+#    #+#              #
+#    Updated: 2025/02/03 13:31:01 by adbouras         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	cub3D
 BNS_NAME	=	cub3D_bonus
 CFLAGS		=	-Wextra -Wall -Werror -fsanitize=address -g
 LDFLAGS		=	-fsanitize=address -g
-LIBMLX		=	./libraries/MLX42
-LIBFT		=	./libraries/libft/libft.a
+LIBMLX		=	../libraries/MLX42
+LIBFT		=	../libraries/libft/libft.a
 
-HEADERS		=	-I ./include -I $(LIBMLX)/include
-INCLUDES	=	includes/cub3d.h includes/get_next_line.h
+BNS_HDRS	=	-I ../include -I $(LIBMLX)/include
+BNS_INC		=	cub3d_bonus.h get_next_line_bonus.h
 LIBS		=	$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-SRCS		=	clean_up.c game_loop.c get_next_line.c get_next_line_utils.c init.c main.c map_loading.c parse_map.c \
-				player_movment.c raycasting.c rendering.c utils.c raycast_utils.c
-BNS_SRCS	=	
-OBJ_DIR		=	objects/
+SRCS		=	clean_up_bonus.c game_loop_bonus.c get_next_line_bonus.c get_next_line_utils_bonus.c init_bonus.c main_bonus.c map_loading_bonus.c parse_map_bonus.c player_movment_bonus.c raycast_utils_bonus.c raycasting_bonus.c rendering_bonus.c utils_bonus.c
+OBJ_DIR		=	bonus_objects/
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
-BOBJECTS	=	$(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 
-all: libmlx $(NAME)
+all: libmlx $(BNS_NAME)
 
-bonus:
-	@make -C bonus/
-	@mv bonus/cub3D_bonus .
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
-$(OBJ_DIR)%.o: %.c $(INCLUDES)
+$(OBJ_DIR)%.o: %.c $(BNS_INC)
 	@mkdir -p $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "[Compiling: $(notdir $<)]\n"
+	@$(CC) $(CFLAGS) -o $@ -c $< $(BNS_HDRS) && printf "[Compiling: $(notdir $<)]\n"
 
-$(NAME): $(OBJS)
-	@make -C ./libraries/libft/
-	@$(CC) $(OBJS) $(LIBS) $(LIBFT) $(HEADERS) $(LDFLAGS) -o $(NAME)
-	@printf "[Compiled seccessfully. run ./$(NAME) <map path>]\n"
+$(BNS_NAME): $(OBJS)
+	@make -C ../libraries/libft/
+	@$(CC) $(OBJS) $(LIBS) $(LIBFT) $(BNS_HDRS) $(LDFLAGS) -o $(BNS_NAME)
+	@printf "[Compiled seccessfully. run ./$(BNS_NAME) <map path>]\n"
 
 clean:
-	@make clean -C ./libraries/libft/
-	@make clean -C bonus/
 	@rm -rf $(OBJ_DIR)
 	@rm -rf $(LIBMLX)/build
 
 fclean: clean
-	@make fclean -C ./libraries/libft/
-	@make fclean -C bonus/
-	@rm -rf $(NAME)
+	@rm -rf $(BNS_NAME)
 
 re: clean all
 
-.PHONY: all clean fclean re libmlx bonus
+.PHONY: all clean fclean re libmlx

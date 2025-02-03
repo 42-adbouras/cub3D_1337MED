@@ -6,11 +6,9 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:09 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/02 14:57:02 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:13:53 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "includes/cub3d.h"
 
 #include "includes/cub3d.h"
 
