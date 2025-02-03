@@ -6,37 +6,38 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:09 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/03 13:22:51 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:36:30 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-void	init_data(t_data *data, char *arg)
+void	init_data_bonus(t_data *data, char *arg)
 {
-	import_map(data, arg);
+	import_map_bonus(data, arg);
 	parse_map(data);
-	load_game(data);
-	load_player(data);
-	load_images(data);
-	load_ray(data);
-	get_map_size(data);
+	load_game_bonus(data);
+	load_player_bonus(data);
+	load_images_bonus(data);
+	load_ray_bonus(data);
+	get_map_size_bonus(data);
 }
 
 
-void	load_game(t_data *data)
+void	load_game_bonus(t_data *data)
 {
 	data->game = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	data->rot_speed = ROT_SPEED * (M_PI / 180);
 	data->fov = FOV * (M_PI / 180);
+	data->animation = false;
 	if (!data->game)
 	{
 		perror("Failed while loading game window");
-		ft_exit(data, 0, true);
+		ft_exit_bonus(data, 0, true);
 	}
 }
 
-void	get_player_position(t_data *data, int *x, int *y)
+void	get_player_position_bonus(t_data *data, int *x, int *y)
 {
 	int		i;
 	int		j;
@@ -60,13 +61,13 @@ void	get_player_position(t_data *data, int *x, int *y)
 	}
 }
 
-void	load_player(t_data *data)
+void	load_player_bonus(t_data *data)
 {
 	data->player = malloc(sizeof(t_player));
 	if (!data->player)
 	{
 		perror("Bad malloc on <load_player>");
-		ft_exit(data, 0, true);
+		ft_exit_bonus(data, 0, true);
 	}
 	data->player->walk_dir = 0;
 	data->player->turn_dir = 0;
@@ -74,26 +75,26 @@ void	load_player(t_data *data)
 	data->player->rot_angle = 3 * (M_PI / 2);
 	data->player->rays = mlx_new_image(data->game, WIDTH, HEIGHT);
 	data->player->imge = mlx_new_image(data->game, HITBOX, HITBOX);
-	get_player_position(data, &data->player->x, &data->player->y);
+	get_player_position_bonus(data, &data->player->x, &data->player->y);
 	if (!data->player->imge || !data->player->rays)
 	{
 		perror("Failed while loading player image");
-		ft_exit(data, 1, true);
+		ft_exit_bonus(data, 1, true);
 	}
 }
 
-void	load_images(t_data *data)
+void	load_images_bonus(t_data *data)
 {
 	data->frame = mlx_new_image(data->game, WIDTH, HEIGHT);
 	data->minimap = mlx_new_image(data->game, WIDTH, HEIGHT);
 	if (!data->frame || !data->minimap)
 	{
 		perror("Failed while loading images");
-		ft_exit(data, 1, true);
+		ft_exit_bonus(data, 1, true);
 	}
 }
 
-void	load_ray(t_data *data)
+void	load_ray_bonus(t_data *data)
 {
 	int	ray;
 

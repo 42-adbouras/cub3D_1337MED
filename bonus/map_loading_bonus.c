@@ -6,13 +6,13 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:06:12 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/03 13:22:41 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:26:52 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-int	check_extension(char *name)
+int	check_extension_bonus(char *name)
 {
 	int	i;
 
@@ -26,13 +26,13 @@ int	check_extension(char *name)
 	return (0);
 }
 
-void	import_map(t_data *data, char *path)
+void	import_map_bonus(t_data *data, char *path)
 {
 	char	*line;
 	int		fd;
 
 	data->map = NULL;
-	if (check_extension(path) == 1)
+	if (check_extension_bonus(path) == 1)
 	{
 		printf("Error,\n invalid map extension.");
 		exit(1);
@@ -50,7 +50,7 @@ void	import_map(t_data *data, char *path)
 	close(fd);
 }
 
-void	get_map_size(t_data *data)
+void	get_map_size_bonus(t_data *data)
 {
 	int	width;
 	int	height;
@@ -67,7 +67,7 @@ void	get_map_size(t_data *data)
 	data->map_width = width;
 }
 
-void	draw_minimap(t_data	*data)
+void	draw_minimap_bonus(t_data	*data)
 {
 	t_mini_map	m;
 
@@ -93,10 +93,10 @@ void	draw_minimap(t_data	*data)
 		}
 		m.y++;
 	}
-	draw_player(data);
+	draw_player_bonus(data);
 }
 
-void	draw_player(t_data *data)
+void	draw_player_bonus(t_data *data)
 {	
 	t_line		line;
 
@@ -113,5 +113,5 @@ void	draw_player(t_data *data)
 	mlx_put_pixel(data->minimap, (MINI_MAP_WIDTH / 2) - 2, (MINI_MAP_HEIGHT / 2), RED);
 	mlx_put_pixel(data->minimap, (MINI_MAP_WIDTH / 2), (MINI_MAP_HEIGHT / 2) + 2, RED);
 	mlx_put_pixel(data->minimap, (MINI_MAP_WIDTH / 2), (MINI_MAP_HEIGHT / 2) - 2, RED);
-	draw_line(data->minimap, line, RED);	
+	draw_line_bonus(data->minimap, line, RED);	
 }

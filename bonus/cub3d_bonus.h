@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/03 13:14:57 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:35:52 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,48 +137,49 @@ typedef struct s_data
 	double				rot_speed;
 	double				fov;
 	bool				orient;
+	bool				animation;
 }						t_data;
 
-void	init_data(t_data *data, char *arg);
-void	load_game(t_data *data);
-void	get_player_position(t_data *data, int *x, int *y);
-void	load_player(t_data *data);
-void	load_images(t_data *data);
-void	load_ray(t_data *data);
+void	init_data_bonus(t_data *data, char *arg);
+void	load_game_bonus(t_data *data);
+void	get_player_position_bonus(t_data *data, int *x, int *y);
+void	load_player_bonus(t_data *data);
+void	load_images_bonus(t_data *data);
+void	load_ray_bonus(t_data *data);
 
-void	import_map(t_data *data, char *path);
-void	draw_minimap(t_data	*data);
-void	draw_player(t_data *data);
-void	get_map_size(t_data *data);
+void	import_map_bonus(t_data *data, char *path);
+void	draw_minimap_bonus(t_data	*data);
+void	draw_player_bonus(t_data *data);
+void	get_map_size_bonus(t_data *data);
 
-void	draw_line(mlx_image_t *img, t_line line, uint32_t color);
+void	draw_line_bonus(mlx_image_t *img, t_line line, uint32_t color);
 
-void	player_hook(t_data *data);
+void	player_hook_bonus(t_data *data);
 
-double	norm_angle(double angle);
+double	norm_angle_bonus(double angle);
 
-void	game_loop(void *param);
-void	raycasting(t_data *data);
-void	draw_bg(t_data *data);
-void	render_strip(t_data *data, int ray, double distance);
-void	draw_rect(t_data *data, double x, double y, double width, double height);
-void	draw_walls(t_data *data);
+void	game_loop_bonus(void *param);
+void	raycasting_bonus(t_data *data);
+void	draw_bg_bonus(t_data *data);
+void	render_strip_bonus(t_data *data, int ray, double distance);
+void	draw_rect_bonus(t_data *data, double x, double y, double width, double height);
+void	draw_walls_bonus(t_data *data);
 
 int		rgba(int r, int g, int b, int a);
 
-void	mouse_hook(t_data *data);
+void	mouse_hook_bonus(t_data *data);
 
-void	close_game(void *param);
-void	ft_exit(t_data *data, int i, bool term);
-void	free_char_arr(char **arr);
+void	close_game_bonus(void *param);
+void	ft_exit_bonus(t_data *data, int i, bool term);
+void	free_char_arr_bonus(char **arr);
 int		parse_map(t_data *data);
 char	**ft_split_cub(char const *s, char c);
 
-void	load_sprites(t_data *data);
-void	animation(t_data *data);
+void	load_sprites_bonus(t_data *data);
+void	animation_bonus(t_data *data);
 
-double	get_distance(double start_x, double start_y,
+double	get_distance_bonus(double start_x, double start_y,
 			double end_x, double end_y);
-void	set_orientation(t_data *data, double angle, int ray);
-bool	wall_at(t_data *data, int x, int y, int ray);
+void	set_orientation_bonus(t_data *data, double angle, int ray);
+bool	wall_at_bonus(t_data *data, int x, int y, int ray);
 int		rgba(int r, int g, int b, int a);

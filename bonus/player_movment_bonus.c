@@ -6,19 +6,19 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:26:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/03 13:22:41 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:40:13 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-void	key_press(t_data *data)
+void	key_press_bonus(t_data *data)
 {
 	data->player->turn_dir = 0;
 	data->player->walk_dir = 0;
 	data->player->strafe_dir = 0;
 	if (mlx_is_key_down(data->game, MLX_KEY_ESCAPE))
-		ft_exit(data, 0, true);
+		ft_exit_bonus(data, 0, true);
 	if (mlx_is_key_down(data->game, MLX_KEY_RIGHT))
 		data->player->turn_dir = 1;
 	if (mlx_is_key_down(data->game, MLX_KEY_LEFT))
@@ -33,8 +33,10 @@ void	key_press(t_data *data)
 		data->player->strafe_dir = -1;
 	if (mlx_is_key_down(data->game, MLX_KEY_LEFT_SHIFT))
 		data->player->walk_dir *= 2.5;
+	if (mlx_is_mouse_down(data->game, MLX_MOUSE_BUTTON_LEFT))
+		data->animation = true;
 }
-void    draw_line(mlx_image_t *img, t_line line, uint32_t color)
+void    draw_line_bonus(mlx_image_t *img, t_line line, uint32_t color)
 {
 	int		i;
 	int		steps;
@@ -61,7 +63,7 @@ void    draw_line(mlx_image_t *img, t_line line, uint32_t color)
 	}
 }
 
-bool	if_collition(t_data *data, int32_t x, int32_t y)
+bool	if_collition_bonus(t_data *data, int32_t x, int32_t y)
 {
 	int		p_x;
 	int		p_y;
@@ -80,7 +82,7 @@ bool	if_collition(t_data *data, int32_t x, int32_t y)
 	return (false);
 }
 
-void	update_player_pose(t_data *data)
+void	update_player_pose_bonus(t_data *data)
 {
 	double	move_step;
 	double	straf_step;
@@ -88,7 +90,7 @@ void	update_player_pose(t_data *data)
 	int32_t	new_y;
 
 	data->player->rot_angle += data->player->turn_dir * (data->rot_speed);
-	data->player->rot_angle = norm_angle(data->player->rot_angle);
+	data->player->rot_angle = norm_angle_bonus(data->player->rot_angle);
 	move_step = data->player->walk_dir * (SPEED);
 	straf_step = data->player->strafe_dir * (SPEED);
 
@@ -97,7 +99,7 @@ void	update_player_pose(t_data *data)
 	new_y = round(sin(data->player->rot_angle) * move_step \
 			+ cos(data->player->rot_angle) * straf_step);
 	
-	if (if_collition(data, new_x, new_y))
+	if (if_collition_bonus(data, new_x, new_y))
 	{
 		data->player->imge->instances->x += new_x;
 		data->player->imge->instances->y += new_y;
@@ -106,7 +108,7 @@ void	update_player_pose(t_data *data)
 	data->player->y = data->player->imge->instances->y;
 }
 
-void	mouse_hook(t_data *data)
+void	mouse_hook_bonus(t_data *data)
 {
 	static int32_t	prev_x;
 	int32_t			new_x;
@@ -118,13 +120,13 @@ void	mouse_hook(t_data *data)
 	if (prev_x != 0)
 	{
 		data->player->rot_angle += delta;
-		data->player->rot_angle = norm_angle(data->player->rot_angle);	
+		data->player->rot_angle = norm_angle_bonus(data->player->rot_angle);	
 	}
 	prev_x = WIDTH / 2;
 }
 
-void	player_hook(t_data *data)
+void	player_hook_bonus(t_data *data)
 {
-	key_press(data);
-	update_player_pose(data);
+	key_press_bonus(data);
+	update_player_pose_bonus(data);
 }

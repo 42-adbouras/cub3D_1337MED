@@ -6,13 +6,13 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:23:36 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/03 13:22:35 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:16:57 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-void	animation(t_data *data)
+void	animation_bonus(t_data *data)
 {
 	int static	current;
 	int static	frame;
@@ -26,19 +26,26 @@ void	animation(t_data *data)
         current = (current + 1) % NUM_SPRITES;
         data->sprites.s_images[current]->enabled = true;
     }
+	if (current == NUM_SPRITES - 1 && frame == (speed * NUM_SPRITES - 1))
+	{
+		data->animation = false;
+		current = 0;
+		frame = 0;
+	}
 }
 
-void	game_loop(void *param)
+void	game_loop_bonus(void *param)
 {
 	t_data	*data;
 
 	data = (t_data*) param;
 	mlx_set_mouse_pos(data->game, WIDTH / 2, HEIGHT / 2);
-	player_hook(data);
-	raycasting(data);
-	draw_bg(data);
-	draw_walls(data);
-	draw_minimap(data);
-	animation(data);
-	mouse_hook(data);
+	player_hook_bonus(data);
+	raycasting_bonus(data);
+	draw_bg_bonus(data);
+	draw_walls_bonus(data);
+	draw_minimap_bonus(data);
+	if (data->animation)
+		animation_bonus(data);
+	mouse_hook_bonus(data);
 }

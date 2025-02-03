@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 16:59:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/03 13:22:41 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:26:03 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	rgba(int r, int g, int b, int a)
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-bool	wall_at(t_data *data, int x, int y, int ray)
+bool	wall_at_bonus(t_data *data, int x, int y, int ray)
 {
 	int	map_x;
 	int	map_y;
@@ -46,7 +46,7 @@ bool	wall_at(t_data *data, int x, int y, int ray)
 	return (false);
 }
 
-void	set_orientation(t_data *data, double angle, int ray)
+void	set_orientation_bonus(t_data *data, double angle, int ray)
 {
 	data->text[ray].face_down = (angle > 0 && angle < M_PI);
 	data->text[ray].face_up = !data->text[ray].face_down;
@@ -54,7 +54,7 @@ void	set_orientation(t_data *data, double angle, int ray)
 	data->text[ray].face_left = !data->text[ray].face_right;
 }
 
-double	get_distance(double start_x, double start_y, double end_x, double end_y)
+double	get_distance_bonus(double start_x, double start_y, double end_x, double end_y)
 {
 	return (sqrt(pow(end_x - start_x, 2) + pow(end_y - start_y, 2)));
 }

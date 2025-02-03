@@ -6,19 +6,19 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:58:41 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/03 13:22:41 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:33:55 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-t_ray_utils	step_incremant(t_data *data, t_ray_utils u, int ray, bool orient)
+t_ray_utils	step_incremant_bonus(t_data *data, t_ray_utils u, int ray, bool orient)
 {
 	data->orient = orient;
 	while (u.next_x >= 0 && u.next_x <= data->map_width * TILE_SIZE \
 		&& u.next_y >= 0 && u.next_y <= data->map_height * TILE_SIZE)
 	{
-		if (wall_at(data, u.next_x, u.next_y, ray))
+		if (wall_at_bonus(data, u.next_x, u.next_y, ray))
 		{
 			if (!orient)
 				data->text[ray].v_cross = true;
@@ -32,7 +32,7 @@ t_ray_utils	step_incremant(t_data *data, t_ray_utils u, int ray, bool orient)
 	return (u); 
 }
 
-double	hori_intersection(t_data *data, double angle, int ray)
+double	hori_intersection_bonus(t_data *data, double angle, int ray)
 {
 	t_ray_utils	h;
 
@@ -52,13 +52,13 @@ double	hori_intersection(t_data *data, double angle, int ray)
 		h.x_step *= -1;
 	h.next_x = h.x_inter;
 	h.next_y = h.y_inter;
-	h = step_incremant(data, h, ray, true);
+	h = step_incremant_bonus(data, h, ray, true);
 	data->text[ray].wall_hit_x = h.next_x;
 	data->text[ray].wall_hit_y = h.next_y;
-	return (get_distance(h.player_x, h.player_y, h.next_x, h.next_y));
+	return (get_distance_bonus(h.player_x, h.player_y, h.next_x, h.next_y));
 }
 
-double	vert_intersection(t_data *data, double angle, int ray)
+double	vert_intersection_bonus(t_data *data, double angle, int ray)
 {
 	t_ray_utils	v;
 
@@ -78,15 +78,15 @@ double	vert_intersection(t_data *data, double angle, int ray)
 		v.y_step *= -1;
 	v.next_x = v.x_inter;
 	v.next_y = v.y_inter;
-	v = step_incremant(data, v, ray, false);
+	v = step_incremant_bonus(data, v, ray, false);
 	if (data->text[ray].wall_hit_x < v.next_x)
 		data->text[ray].wall_hit_x = v.next_x;
 	if (data->text[ray].wall_hit_y < v.next_y)
 		data->text[ray].wall_hit_y = v.next_y;
-	return (get_distance(v.player_x, v.player_y, v.next_x, v.next_y));
+	return (get_distance_bonus(v.player_x, v.player_y, v.next_x, v.next_y));
 }
 
-void	raycasting(t_data *data)
+void	raycasting_bonus(t_data *data)
 {
 	double	hori_dist;
 	double	vert_dist;
@@ -94,13 +94,13 @@ void	raycasting(t_data *data)
 	int		ray;
 
 	ray = -1;
-	ray_angle = norm_angle(data->player->rot_angle - (data->fov / 2));
+	ray_angle = norm_angle_bonus(data->player->rot_angle - (data->fov / 2));
 	while (++ray < RAYS)
 	{
 		data->text[ray].angle = ray_angle;
-		set_orientation(data, ray_angle, ray);
-		hori_dist = hori_intersection(data, ray_angle, ray);
-		vert_dist = vert_intersection(data, ray_angle, ray);
+		set_orientation_bonus(data, ray_angle, ray);
+		hori_dist = hori_intersection_bonus(data, ray_angle, ray);
+		vert_dist = vert_intersection_bonus(data, ray_angle, ray);
 		if (hori_dist < vert_dist)
 		{
 			data->text[ray].is_hori = true;
@@ -111,6 +111,6 @@ void	raycasting(t_data *data)
 			data->text[ray].is_hori = false;
 			data->text[ray].distance = vert_dist;
 		}
-		ray_angle = norm_angle(ray_angle + (data->fov / RAYS));
+		ray_angle = norm_angle_bonus(ray_angle + (data->fov / RAYS));
 	}
 }

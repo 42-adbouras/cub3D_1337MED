@@ -6,23 +6,23 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:29:18 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/03 13:22:41 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:28:24 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-void	draw_walls(t_data *data)
+void	draw_walls_bonus(t_data *data)
 {
 	int	ray;
 
 	ray = -1;
 	while (++ray < RAYS)
-		render_strip(data, ray, data->text[ray].distance);
+		render_strip_bonus(data, ray, data->text[ray].distance);
 }
 
 
-void	draw_bg(t_data *data)
+void	draw_bg_bonus(t_data *data)
 {
 	int	height;
 	int	width;
@@ -43,7 +43,7 @@ void	draw_bg(t_data *data)
 	}
 }
 
-void	render_strip(t_data *data, int ray, double distance)
+void	render_strip_bonus(t_data *data, int ray, double distance)
 {
 	double	wall_height;
 	double	proj_plane;
@@ -59,10 +59,10 @@ void	render_strip(t_data *data, int ray, double distance)
 	bottom = (HEIGHT / 2) + (wall_height / 2);
 	if (bottom > HEIGHT)
 		bottom = HEIGHT;
-	draw_rect(data, ray, top, 1, bottom - top);
+	draw_rect_bonus(data, ray, top, 1, bottom - top);
 }
 
-void	draw_rect(t_data *data, double x, double y, double width, double height)
+void	draw_rect_bonus(t_data *data, double x, double y, double width, double height)
 {
 	int	i;
 	int	j;
