@@ -3,20 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:29:18 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/01 18:43:40 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/07 18:59:28 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
+
+void	which_texture(t_data	*data, int ray)
+{
+	if (data->text->face_up)
+		data->text[ray].img = data->texture->north_img;
+	if (data->text->face_down)
+		data->text[ray].img = data->texture->south_img;
+	if (data->text->face_left)
+		data->text[ray].img = data->texture->west_img;
+	if (data->text->face_right)
+		data->text[ray].img = data->texture->east_img;
+	
+}
+
+void load_textures(t_data *data)
+{
+	data->texture->north_img = mlx_load_png(data->north_texture);
+	data->texture->south_img = mlx_load_png(data->south_texture);
+	data->texture->west_img = mlx_load_png(data->west_texture);
+	data->texture->east_img = mlx_load_png(data->east_texture);
+}
 
 void	draw_walls(t_data *data)
 {
 	int	ray;
 
 	ray = -1;
+	data->texture = malloc(sizeof(t_texture));
+	load_textures(data);
 	while (++ray < RAYS)
 		render_strip(data, ray, data->text[ray].distance);
 }
@@ -43,13 +66,28 @@ void	draw_bg(t_data *data)
 	}
 }
 
+double	get_texture_x(t_data *data, int ray)
+{
+	double	texture_x;
+
+	if (data->text[ray].is_hori)
+		texture_x = fmod(data->text[ray].wall_hit_y, TILE_SIZE);
+	else
+		texture_x = fmod(data->text[ray].wall_hit_x, TILE_SIZE);
+	texture_x = texture_x / TILE_SIZE;
+	return (texture_x);
+	
+}
+
 void	render_strip(t_data *data, int ray, double distance)
 {
 	double	wall_height;
 	double	proj_plane;
 	double	top;
 	double	bottom;
+	double	texture_x;
 
+	which_texture(data, ray); 
 	distance *= cos(data->text[ray].angle - data->player->rot_angle);
 	proj_plane = (WIDTH / 2) / tan(data->fov / 2);
 	wall_height = (TILE_SIZE / distance) * proj_plane;
@@ -59,26 +97,51 @@ void	render_strip(t_data *data, int ray, double distance)
 	bottom = (HEIGHT / 2) + (wall_height / 2);
 	if (bottom > HEIGHT)
 		bottom = HEIGHT;
-	draw_rect(data, ray, top, 1, bottom - top);
+	texture_x = get_texture_x(data, ray);
+	draw_rect(data, ray, top, 1, bottom - top, ray, texture_x);
 }
 
-void	draw_rect(t_data *data, double x, double y, double width, double height)
-{
-	int	i;
-	int	j;
+// void	draw_rect(t_data *data, double x, double y, double width, double height, int ray, double texture_x)
+// {
+// 	int		i;
+// 	int		j;
+// 	double	texture_y;
 
-	i = 0;
-    while (i < width)
+// 	i = 0;
+//     while (i < width)
+// 	{
+// 		j = 0;
+//         while (j < height)
+// 		{
+// 			texture_y = j / height * data->text[ray].img->width;
+			
+// 			j++;
+//         }
+// 		i++;
+//     }
+// }
+
+void draw_rect(t_data *data, double x, double y, double width, double height, int ray, double texture_x)
+{
+	int pixel_index;
+    int color;
+    mlx_texture_t *texture;
+	int	r, g, b , a;
+	int j = 0;
+
+    texture = data->text[ray].img;
+	(void)width;
+	while (j < height)
 	{
-		j = 0;
-        while (j < height)
-		{
-			if (data->text[(int)x].is_hori)
-            	mlx_put_pixel(data->frame, x + i, y + j, rgba(216, 196, 182, 255));
-			else
-            	mlx_put_pixel(data->frame, x + i, y + j, rgba(245, 239, 231, 255));
-			j++;
-        }
-		i++;
+        int tex_x = (int)(texture_x * texture->width);
+        int tex_y = (int)((j / height) * texture->height);
+		pixel_index = (tex_y * texture->width + tex_x) * 4;
+		r = texture->pixels[pixel_index + 0];
+		g = texture->pixels[pixel_index + 1];
+		b = texture->pixels[pixel_index + 2];
+		a = texture->pixels[pixel_index + 3];
+		color = rgba(r, g, b, a);
+        mlx_put_pixel(data->frame, x , y + j, color);
+        j++;
     }
 }

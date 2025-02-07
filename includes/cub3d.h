@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/03 12:49:31 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/07 18:52:04 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_player
 
 typedef struct s_text
 {
+	mlx_texture_t		*img;
 	double				angle;
 	double				distance;
 	bool				h_cross;
@@ -112,6 +113,13 @@ typedef struct s_text
 	bool				face_right;
 	bool				is_hori;
 }						t_text;
+typedef struct	s_texture
+{
+	mlx_texture_t		*north_img;
+	mlx_texture_t		*south_img;
+	mlx_texture_t		*west_img;
+	mlx_texture_t		*east_img;
+}	t_texture;
 
 typedef struct s_data
 {
@@ -127,6 +135,7 @@ typedef struct s_data
 	int					map_width;
 	int					map_height;
 	mlx_t				*game;
+	t_texture			*texture;
 	mlx_image_t			*frame;
 	mlx_image_t			*minimap;
 	mlx_texture_t		*tx;
@@ -161,7 +170,7 @@ void	game_loop(void *param);
 void	raycasting(t_data *data);
 void	draw_bg(t_data *data);
 void	render_strip(t_data *data, int ray, double distance);
-void	draw_rect(t_data *data, double x, double y, double width, double height);
+void draw_rect(t_data *data, double x, double y, double width, double height, int ray, double texture_x);
 void	draw_walls(t_data *data);
 
 int		rgba(int r, int g, int b, int a);

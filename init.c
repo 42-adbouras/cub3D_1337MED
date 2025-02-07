@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:09 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/03 13:13:53 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/07 18:56:51 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	init_data(t_data *data, char *arg)
 {
 	import_map(data, arg);
-	parse_map(data);
+	if (parse_map(data) == 1)
+		exit(1);
 	load_game(data);
 	load_player(data);
 	load_images(data);
@@ -60,6 +61,32 @@ void	get_player_position(t_data *data, int *x, int *y)
 	}
 }
 
+void init_rot_angle(t_data	*data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (data->map_arr[i])
+	{
+		j = 0;
+		while (data->map_arr[i][j])
+		{
+			if (data->map_arr[i][j] == 'N')
+				data->player->rot_angle = 270 * (M_PI / 180);
+			if (data->map_arr[i][j] == 'S')
+				data->player->rot_angle = 90 * (M_PI / 180);
+			if (data->map_arr[i][j] == 'W')
+				data->player->rot_angle = 180 * (M_PI / 180);
+			if (data->map_arr[i][j] == 'E')
+				data->player->rot_angle = 0;
+			j++;
+		}
+		i++;
+	}
+}
+
 void	load_player(t_data *data)
 {
 	data->player = malloc(sizeof(t_player));
@@ -80,6 +107,7 @@ void	load_player(t_data *data)
 		perror("Failed while loading player image");
 		ft_exit(data, 1, true);
 	}
+	init_rot_angle(data);
 }
 
 void	load_images(t_data *data)
