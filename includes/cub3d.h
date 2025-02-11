@@ -6,7 +6,7 @@
 /*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/10 19:44:38 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/02/11 15:23:41 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@
 #define BLACK			0x000000FF
 #define RED				0xFF0000FF
 #define GREEN			0x00FF00FF
+
+#define EAST  0
+#define WEST  1
+#define NORTH 2
+#define SOUTH 3
 
 typedef struct s_sprite
 {
@@ -109,6 +114,7 @@ typedef struct s_text
 	mlx_texture_t		*img;
 	double				angle;
 	double				distance;
+	int					wall_facing;
 	bool				h_cross;
 	bool				v_cross;
 	double				wall_hit_x;

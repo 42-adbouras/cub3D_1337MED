@@ -6,7 +6,7 @@
 /*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:29:18 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/11 14:22:30 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/02/11 15:28:54 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void	which_texture(t_data	*data, int ray)
 {
-	if (data->text[ray].face_up)
+	if (data->text[ray].wall_facing == NORTH)
 	{
 		// printf("north\n");
 		data->text[ray].img = data->texture->north_img;
 	}
-	else if (data->text[ray].face_down)
+	else if (data->text[ray].wall_facing == SOUTH)
 	{
 		// printf("south\n");
 		data->text[ray].img = data->texture->south_img;
 	}
-	else if (data->text[ray].face_left)
+	else if (data->text[ray].wall_facing == WEST)
 	{
 		// printf("west\n");
 		data->text[ray].img = data->texture->west_img;
 	}
-	else if (data->text[ray].face_right)
+	else if (data->text[ray].wall_facing == EAST)
 	{
 		// printf("east\n");
 		data->text[ray].img = data->texture->east_img;

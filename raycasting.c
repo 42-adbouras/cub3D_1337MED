@@ -6,7 +6,7 @@
 /*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:58:41 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/10 19:36:53 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/02/11 15:38:31 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,11 @@ void	raycasting(t_data *data)
 			data->text[ray].distance = hori_dist;
 			data->text[ray].wall_hit_x = h_xy.x;
 			data->text[ray].wall_hit_y = h_xy.y;
+			if (sin(ray_angle) > 0)
+				data->text[ray].wall_facing = SOUTH;
+			else
+				data->text[ray].wall_facing = NORTH;
+				
 		}
 		else
 		{
@@ -123,6 +128,10 @@ void	raycasting(t_data *data)
 			data->text[ray].distance = vert_dist;
 			data->text[ray].wall_hit_x = v_xy.x;
 			data->text[ray].wall_hit_y = v_xy.y;
+			if (cos(ray_angle) > 0)
+				data->text[ray].wall_facing = EAST;
+			else
+				data->text[ray].wall_facing = WEST;
 		}
 		ray_angle = norm_angle(ray_angle + (data->fov / RAYS));
 	}
