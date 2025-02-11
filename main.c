@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:43:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/01 15:35:20 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/10 19:53:34 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	player_spawn(t_data *data)
 	mlx_image_to_window(data->game, data->player->imge,
 						data->player->x * TILE_SIZE + (TILE_SIZE / 2 - HITBOX),
 						data->player->y * TILE_SIZE + (TILE_SIZE / 2 - HITBOX));
-	mlx_set_cursor_mode(data->game, MLX_MOUSE_HIDDEN);
+	// mlx_set_cursor_mode(data->game, MLX_MOUSE_HIDDEN);
 	if (mlx_image_to_window(data->game, data->frame, 0, 0) == -1)
 		ft_exit(data, 2, true);
 	if (mlx_image_to_window(data->game, data->minimap, 20, HEIGHT - MINI_MAP_HEIGHT - 20) == -1)

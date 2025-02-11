@@ -6,7 +6,7 @@
 /*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/07 18:52:04 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/02/10 19:44:38 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,12 @@ typedef struct s_player
 	double				rot_angle;
 }						t_player;
 
+
+typedef struct s_xy
+{
+	double				x;
+	double				y;
+}	t_xy;
 typedef struct s_text
 {
 	mlx_texture_t		*img;
@@ -170,7 +176,7 @@ void	game_loop(void *param);
 void	raycasting(t_data *data);
 void	draw_bg(t_data *data);
 void	render_strip(t_data *data, int ray, double distance);
-void draw_rect(t_data *data, double x, double y, double width, double height, int ray, double texture_x);
+void	draw_rect(t_data *data, double x, double y, double width, double height, int ray, double texture_x);
 void	draw_walls(t_data *data);
 
 int		rgba(int r, int g, int b, int a);
@@ -191,3 +197,4 @@ double	get_distance(double start_x, double start_y,
 void	set_orientation(t_data *data, double angle, int ray);
 bool	wall_at(t_data *data, int x, int y, int ray);
 int		rgba(int r, int g, int b, int a);
+void	load_textures(t_data *data);

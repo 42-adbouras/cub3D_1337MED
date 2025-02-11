@@ -6,7 +6,7 @@
 /*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:29:18 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/07 19:07:07 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/02/11 14:22:30 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 void	which_texture(t_data	*data, int ray)
 {
-	if (data->text->face_up)
+	if (data->text[ray].face_up)
 	{
-		printf("north\n");
+		// printf("north\n");
 		data->text[ray].img = data->texture->north_img;
 	}
-	if (data->text->face_down)
+	else if (data->text[ray].face_down)
 	{
-		printf("south\n");
+		// printf("south\n");
 		data->text[ray].img = data->texture->south_img;
 	}
-	if (data->text->face_left)
+	else if (data->text[ray].face_left)
 	{
-		printf("west\n");
+		// printf("west\n");
 		data->text[ray].img = data->texture->west_img;
 	}
-	if (data->text->face_right)
+	else if (data->text[ray].face_right)
 	{
-		printf("east\n");
+		// printf("east\n");
 		data->text[ray].img = data->texture->east_img;
 	}
 	
@@ -39,6 +39,7 @@ void	which_texture(t_data	*data, int ray)
 
 void load_textures(t_data *data)
 {
+	data->texture = malloc(sizeof(t_texture));
 	data->texture->north_img = mlx_load_png(data->north_texture);
 	data->texture->south_img = mlx_load_png(data->south_texture);
 	data->texture->west_img = mlx_load_png(data->west_texture);
@@ -50,8 +51,6 @@ void	draw_walls(t_data *data)
 	int	ray;
 
 	ray = -1;
-	data->texture = malloc(sizeof(t_texture));
-	load_textures(data);
 	while (++ray < RAYS)
 		render_strip(data, ray, data->text[ray].distance);
 }
@@ -81,12 +80,22 @@ void	draw_bg(t_data *data)
 double	get_texture_x(t_data *data, int ray)
 {
 	double	texture_x;
-
+	static int i = 0;
+	
 	if (data->text[ray].is_hori)
-		texture_x = fmod(data->text[ray].wall_hit_y, TILE_SIZE);
+	{
+		if ((i == 0 || i ==1)&& (ray == 12 || ray == 200))
+			printf("alo\n");
+		texture_x = fmod(data->text[ray].wall_hit_x, (double)TILE_SIZE);
+	}
 	else
-		texture_x = fmod(data->text[ray].wall_hit_x, TILE_SIZE);
-	texture_x = texture_x / TILE_SIZE;
+		texture_x = fmod(data->text[ray].wall_hit_y, (double)TILE_SIZE);
+	texture_x = texture_x / (double)TILE_SIZE;
+	if ((i == 0 || i ==1)&& (ray == 12 || ray == 200))
+	{
+		printf(">>>%f||wall_h_x %f||wall_h_y %f\n", texture_x, data->text[ray].wall_hit_x, data->text[ray].wall_hit_y );
+		i++;
+	}
 	return (texture_x);
 	
 }
@@ -104,13 +113,25 @@ void	render_strip(t_data *data, int ray, double distance)
 	proj_plane = (WIDTH / 2) / tan(data->fov / 2);
 	wall_height = (TILE_SIZE / distance) * proj_plane;
 	top = (HEIGHT / 2) - (wall_height / 2);
-	if (top < 0)
-		top = 0;
+	// if (top < 0)
+		// top = 0;
 	bottom = (HEIGHT / 2) + (wall_height / 2);
 	if (bottom > HEIGHT)
 		bottom = HEIGHT;
 	texture_x = get_texture_x(data, ray);
-	draw_rect(data, ray, top, 1, bottom - top, ray, texture_x);
+	// draw_rect(data, ray, top, 1, bottom - top, ray, texture_x);
+	if (ray == WIDTH /2)
+	{
+		if (data->text[ray].face_up)
+			printf("i am up !\n");
+		if (data->text[ray].face_down)
+			printf("i am down !\n");
+		if (data->text[ray].face_left)
+			printf("i am left !\n");
+		if (data->text[ray].face_right)	
+			printf("i am right !\n");
+	}
+	draw_rect(data, ray, top, 1, wall_height, ray, texture_x);
 }
 
 // void	draw_rect(t_data *data, double x, double y, double width, double height, int ray, double texture_x)
@@ -119,6 +140,7 @@ void	render_strip(t_data *data, int ray, double distance)
 // 	int		j;
 // 	double	texture_y;
 
+// 	i = 0;
 // 	i = 0;
 //     while (i < width)
 // 	{
@@ -153,7 +175,8 @@ void draw_rect(t_data *data, double x, double y, double width, double height, in
 		b = texture->pixels[pixel_index + 2];
 		a = texture->pixels[pixel_index + 3];
 		color = rgba(r, g, b, a);
-        mlx_put_pixel(data->frame, x , y + j, color);
+		if (x >= 0 && x < WIDTH && y+j >= 0  && y+j < HEIGHT)
+			mlx_put_pixel(data->frame, x, y + j, color);
         j++;
     }
 }

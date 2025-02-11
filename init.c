@@ -6,7 +6,7 @@
 /*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:09 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/07 18:56:51 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/02/10 19:44:04 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_data(t_data *data, char *arg)
 	load_player(data);
 	load_images(data);
 	load_ray(data);
+	load_textures(data);
 	get_map_size(data);
 }
 
