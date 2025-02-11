@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 14:02:54 by fidriss           #+#    #+#             */
-/*   Updated: 2025/01/26 18:12:55 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:47:21 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	parse_color(t_data *data, char	*line, int id[])
 		j = 0;
 		while(colors[i][j])
 		{
+			while(colors[i][j] == ' ')
+				j++;
 			if (ft_isdigit(colors[i][j]))
 				j++;
 			else

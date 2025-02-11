@@ -6,7 +6,7 @@
 /*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:29:18 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/11 15:28:54 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/02/11 15:43:58 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ void	draw_bg(t_data *data)
 		while (width < WIDTH)
 		{
 			if (height < HEIGHT / 2)
-				mlx_put_pixel(data->frame, width, height, rgba(62, 88, 121, 155));
+				mlx_put_pixel(data->frame, width, height, rgba(data->ceiling_color[0], data->ceiling_color[1], data->ceiling_color[2], 155));
 			else
-				mlx_put_pixel(data->frame, width, height, rgba(33, 53, 85, 255));
+				mlx_put_pixel(data->frame, width, height, rgba(data->floor_color[0], data->floor_color[1], data->floor_color[2], 255));
 			width++;
 		}
 		height++;
