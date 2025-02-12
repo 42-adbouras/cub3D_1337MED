@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/11 15:23:41 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/02/11 18:39:28 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #define HEIGHT			720
 #define TILE_SIZE		42
 #define MAP_FACT		0.2
-#define HITBOX			4
+#define HITBOX			10
 #define SPEED			2
 #define ROT_SPEED		3
 #define FOV				80

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:29:18 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/11 15:43:58 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/02/11 16:47:47 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,17 +120,17 @@ void	render_strip(t_data *data, int ray, double distance)
 		bottom = HEIGHT;
 	texture_x = get_texture_x(data, ray);
 	// draw_rect(data, ray, top, 1, bottom - top, ray, texture_x);
-	if (ray == WIDTH /2)
-	{
-		if (data->text[ray].face_up)
-			printf("i am up !\n");
-		if (data->text[ray].face_down)
-			printf("i am down !\n");
-		if (data->text[ray].face_left)
-			printf("i am left !\n");
-		if (data->text[ray].face_right)	
-			printf("i am right !\n");
-	}
+	// if (ray == WIDTH /2)
+	// {
+	// 	if (data->text[ray].face_up)
+	// 		printf("i am up !\n");
+	// 	if (data->text[ray].face_down)
+	// 		printf("i am down !\n");
+	// 	if (data->text[ray].face_left)
+	// 		printf("i am left !\n");
+	// 	if (data->text[ray].face_right)	
+	// 		printf("i am right !\n");
+	// }
 	draw_rect(data, ray, top, 1, wall_height, ray, texture_x);
 }
 
