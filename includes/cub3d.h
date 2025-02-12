@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/11 18:39:28 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:42:47 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct s_xy
 	double				x;
 	double				y;
 }	t_xy;
+
 typedef struct s_text
 {
 	mlx_texture_t		*img;

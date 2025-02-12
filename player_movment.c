@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:26:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/01 18:41:29 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:28:14 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	key_press(t_data *data)
 	if (mlx_is_key_down(data->game, MLX_KEY_LEFT_SHIFT))
 		data->player->walk_dir *= 2.5;
 }
+
 void    draw_line(mlx_image_t *img, t_line line, uint32_t color)
 {
 	int		i;
@@ -104,23 +105,6 @@ void	update_player_pose(t_data *data)
 	}
 	data->player->x = data->player->imge->instances->x;
 	data->player->y = data->player->imge->instances->y;
-}
-
-void	mouse_hook(t_data *data)
-{
-	static int32_t	prev_x;
-	int32_t			new_x;
-	int32_t			new_y;
-	double			delta;
-
-	mlx_get_mouse_pos(data->game, &new_x, &new_y);
-	delta = (new_x - prev_x) / MOUSE_SENS;
-	if (prev_x != 0)
-	{
-		data->player->rot_angle += delta;
-		data->player->rot_angle = norm_angle(data->player->rot_angle);	
-	}
-	prev_x = WIDTH / 2;
 }
 
 void	player_hook(t_data *data)

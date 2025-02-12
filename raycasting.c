@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:58:41 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/11 15:38:31 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/02/12 13:29:31 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,6 @@ void	raycasting(t_data *data)
 	double	ray_angle;
 	int		ray;
 	t_xy	h_xy, v_xy;
-
-	
 
 	ray = -1;
 	ray_angle = norm_angle(data->player->rot_angle - (data->fov / 2));
