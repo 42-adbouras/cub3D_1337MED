@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/03 15:35:52 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:12:23 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@
 #define BLACK			0x000000FF
 #define RED				0xFF0000FF
 #define GREEN			0x00FF00FF
+
+#define EAST  0
+#define WEST  1
+#define NORTH 2
+#define SOUTH 3
 
 typedef struct s_sprite
 {
@@ -98,10 +103,18 @@ typedef struct s_player
 	double				rot_angle;
 }						t_player;
 
+typedef struct s_xy
+{
+	double				x;
+	double				y;
+}	t_xy;
+
 typedef struct s_text
 {
+	mlx_texture_t		*img;
 	double				angle;
 	double				distance;
+	int					wall_facing;
 	bool				h_cross;
 	bool				v_cross;
 	double				wall_hit_x;
@@ -112,6 +125,14 @@ typedef struct s_text
 	bool				face_right;
 	bool				is_hori;
 }						t_text;
+
+typedef struct	s_texture
+{
+	mlx_texture_t		*north_img;
+	mlx_texture_t		*south_img;
+	mlx_texture_t		*west_img;
+	mlx_texture_t		*east_img;
+}	t_texture;
 
 typedef struct s_data
 {
@@ -127,6 +148,7 @@ typedef struct s_data
 	int					map_width;
 	int					map_height;
 	mlx_t				*game;
+	t_texture			*texture;
 	mlx_image_t			*frame;
 	mlx_image_t			*minimap;
 	mlx_texture_t		*tx;
@@ -162,7 +184,7 @@ void	game_loop_bonus(void *param);
 void	raycasting_bonus(t_data *data);
 void	draw_bg_bonus(t_data *data);
 void	render_strip_bonus(t_data *data, int ray, double distance);
-void	draw_rect_bonus(t_data *data, double x, double y, double width, double height);
+void	draw_rect_bonus(t_data *data, double x, double y, double width, double height, int ray, double texture_x);
 void	draw_walls_bonus(t_data *data);
 
 int		rgba(int r, int g, int b, int a);
@@ -183,3 +205,5 @@ double	get_distance_bonus(double start_x, double start_y,
 void	set_orientation_bonus(t_data *data, double angle, int ray);
 bool	wall_at_bonus(t_data *data, int x, int y, int ray);
 int		rgba(int r, int g, int b, int a);
+
+void	load_textures_bonus(t_data *data);

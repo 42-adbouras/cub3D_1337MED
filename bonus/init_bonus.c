@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:09 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/03 15:36:30 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:12:04 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_data_bonus(t_data *data, char *arg)
 	load_player_bonus(data);
 	load_images_bonus(data);
 	load_ray_bonus(data);
+	load_textures_bonus(data);
 	get_map_size_bonus(data);
 }
 

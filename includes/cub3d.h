@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/12 13:42:47 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:14:14 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #define HEIGHT			720
 #define TILE_SIZE		42
 #define MAP_FACT		0.2
-#define HITBOX			10
+#define HITBOX			4
 #define SPEED			2
 #define ROT_SPEED		3
 #define FOV				80
@@ -126,6 +126,7 @@ typedef struct s_text
 	bool				face_right;
 	bool				is_hori;
 }						t_text;
+
 typedef struct	s_texture
 {
 	mlx_texture_t		*north_img;
