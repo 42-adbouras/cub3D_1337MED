@@ -6,7 +6,7 @@
 /*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 14:02:54 by fidriss           #+#    #+#             */
-/*   Updated: 2025/02/11 15:47:21 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/02/13 10:08:02 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ int	parse_color(t_data *data, char	*line, int id[])
 		j = 0;
 		while(colors[i][j])
 		{
-			while(colors[i][j] == ' ')
-				j++;
+			colors[i] = ft_strtrim(colors[i], " ");
 			if (ft_isdigit(colors[i][j]))
 				j++;
 			else

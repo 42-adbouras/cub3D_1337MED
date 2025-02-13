@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:29:18 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/11 16:47:47 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/13 10:17:18 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,22 +80,14 @@ void	draw_bg(t_data *data)
 double	get_texture_x(t_data *data, int ray)
 {
 	double	texture_x;
-	static int i = 0;
 	
 	if (data->text[ray].is_hori)
-	{
-		if ((i == 0 || i ==1)&& (ray == 12 || ray == 200))
-			printf("alo\n");
 		texture_x = fmod(data->text[ray].wall_hit_x, (double)TILE_SIZE);
-	}
 	else
 		texture_x = fmod(data->text[ray].wall_hit_y, (double)TILE_SIZE);
 	texture_x = texture_x / (double)TILE_SIZE;
-	if ((i == 0 || i ==1)&& (ray == 12 || ray == 200))
-	{
-		printf(">>>%f||wall_h_x %f||wall_h_y %f\n", texture_x, data->text[ray].wall_hit_x, data->text[ray].wall_hit_y );
-		i++;
-	}
+	if (data->text[ray].wall_facing == WEST || data->text[ray].wall_facing == SOUTH)
+		texture_x = 1 - texture_x;
 	return (texture_x);
 	
 }
