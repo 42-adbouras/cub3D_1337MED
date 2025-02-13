@@ -6,7 +6,7 @@
 /*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 14:02:54 by fidriss           #+#    #+#             */
-/*   Updated: 2025/02/13 10:08:02 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/02/13 13:29:13 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	parse_color(t_data *data, char	*line, int id[])
 	while (colors[i])
 	{
 		j = 0;
-		while(colors[i][j])
+		while (colors[i][j])
 		{
 			colors[i] = ft_strtrim(colors[i], " ");
 			if (ft_isdigit(colors[i][j]))
@@ -67,7 +67,7 @@ int	parse_color(t_data *data, char	*line, int id[])
 	return (0);
 }
 
-int check_elements(t_data *data, char *line, int id[])
+int	check_elements(t_data *data, char *line, int id[])
 {
 	int	i;
 	int	fd;
@@ -81,10 +81,10 @@ int check_elements(t_data *data, char *line, int id[])
 			if (id[4] == 1)
 			{
 				printf("Error, invalid file.\n");
-				exit(1);				
+				exit (1);
 			}
-				id[4] = 1;
-			}
+			id[4] = 1;
+		}
 		else
 		{
 			if (id[5] == 1)
@@ -119,7 +119,7 @@ int check_elements(t_data *data, char *line, int id[])
 					return (1);
 				}
 				data->north_texture = ft_strdup(line + i);
-				id[0] = 1;	
+				id[0] = 1;
 			}
 			else if (ft_strncmp("SO ", line, 3) == 0)
 			{
@@ -158,11 +158,11 @@ int check_elements(t_data *data, char *line, int id[])
 	return (0);
 }
 
-int check_map_borders(char **map)
+int	check_map_borders(char **map)
 {
-	int i;
-	int j;
-	int row_count;
+	int	i;
+	int	j;
+	int	row_count;
 
 	i = 0;
 	j = 0;
@@ -175,19 +175,23 @@ int check_map_borders(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
+			if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S'
+					|| map[i][j] == 'W' || map[i][j] == 'E')
 			{
-				if (i == 0 || j == 0 || i == row_count || (size_t)j == ft_strlen(map[i]) - 1)
+				if (i == 0 || j == 0 || i == row_count
+					|| (size_t)j == ft_strlen(map[i]) - 1)
 				{
 					printf("Error, invalid map.\n");
 					return (1);
 				}
-				if ((size_t)j > ft_strlen(map[i - 1]) - 1 || (size_t)j > ft_strlen(map[i + 1]) - 1)
+				if ((size_t)j > ft_strlen(map[i - 1]) - 1
+					|| (size_t)j > ft_strlen(map[i + 1]) - 1)
 				{
 					printf("Error, invalid map.\n");
 					return (1);
 				}
-				if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ' || map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
+				if (map[i - 1][j] == ' ' || map[i + 1][j] == ' '
+					|| map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
 				{
 					printf("Error, invalid map.\n");
 					return (1);
@@ -202,9 +206,9 @@ int check_map_borders(char **map)
 
 int	check_map_content(char **map)
 {
-	int i;
-	int j;
-	int count;
+	int	i;
+	int	j;
+	int	count;
 
 	i = 0;
 	j = 0;
@@ -212,9 +216,10 @@ int	check_map_content(char **map)
 	while (map[i])
 	{
 		j = 0;
-		while(map[i][j])
+		while (map[i][j])
 		{
-			if (map[i][j] == 'S' || map[i][j] == 'N' || map[i][j] == 'W' || map[i][j] == 'E')
+			if (map[i][j] == 'S' || map[i][j] == 'N'
+				|| map[i][j] == 'W' || map[i][j] == 'E')
 				count++;
 			j++;
 		}
@@ -228,19 +233,21 @@ int	check_map_content(char **map)
 	return (0);
 }
 
-int check_characters(char	**map)
+int	check_characters(char	**map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
-	while(map[i])
+	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] != ' ' && map[i][j] != '1' && map[i][j] != '0'&& map[i][j] != 'N' && map[i][j] != 'S' && map[i][j] != 'W' && map[i][j] != 'E')
+			if (map[i][j] != ' ' && map[i][j] != '1' && map[i][j] != '0'
+				&& map[i][j] != 'N' && map[i][j] != 'S'
+					&& map[i][j] != 'W' && map[i][j] != 'E')
 			{
 				printf("Error, invalid character.\n");
 				return (1);
@@ -273,9 +280,9 @@ int	only_spaces(char	*line)
 	return (1);
 }
 
-int check_for_empty_lines(char **map)
+int	check_for_empty_lines(char **map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (map[i])
@@ -310,116 +317,120 @@ int	check_map(char **map)
 
 char **extract_map_content(char **map_arr)
 {
-    int	 	i = 0;
-    int 	j = 0;
-    int 	start_index = -1;
-    int 	row_count = 0;
+	int		i;
+	int		j;
+	int		start_index;
+	int		row_count;
 	char	**new_map_arr;
 
-    while (map_arr[i])
-    {
-        j = 0;
-        while (map_arr[i][j])
-        {
-			if(map_arr[i][j] == 'F' || map_arr[i][j] == 'C')
-				break;
-            if (map_arr[i][j] == '1')
-            {
-                start_index = i;
-                break;
-            }
-            j++;
-        }
-        if (start_index != -1)
-            break;
-        i++;
-    }
-    if (start_index != -1)
-    {
-        i = start_index;
-        while (map_arr[i])
-        {
-            row_count++;
-            i++;
-        }
-    }
-
-    new_map_arr = malloc((row_count + 1) * sizeof(char *));
-    if (!new_map_arr)
-        return NULL;
-
-    i = start_index;
-    j = 0;
-    while (map_arr[i])
-    {
-        new_map_arr[j] = ft_strdup(map_arr[i]);
-        i++;
-        j++;
-    }
-    new_map_arr[j] = NULL;
-    return (new_map_arr);
-}
-
-int parse_map(t_data *data)
-{
-    int i;
-    int j;
-    int id[6];
-    int k;
-	int	flag;
-
-    i = 0;
-    j = 0;
-    k = 0;
-	flag = 0;
-    while (i < 6)
+	i = 0;
+	start_index = -1;
+	row_count = 0;
+	while (map_arr[i])
 	{
-        id[i] = 0;
+		j = 0;
+		while (map_arr[i][j])
+		{
+			if (map_arr[i][j] == 'F' || map_arr[i][j] == 'C')
+				break ;
+			if (map_arr[i][j] == '1')
+			{
+				start_index = i;
+				break ;
+			}
+			j++;
+		}
+		if (start_index != -1)
+			break ;
 		i++;
 	}
-    i = 0;
-    while (data->map_arr[i])
-    {
-        j = 0;
-        while (data->map_arr[i][j])
-        {
-            while (data->map_arr[i][j] == ' ')
-                j++;
-            if (ft_strncmp("NO ", data->map_arr[i] + j, 3) == 0 || ft_strncmp("SO ", data->map_arr[i] + j, 3) == 0
-                || ft_strncmp("WE ", data->map_arr[i] + j, 3) == 0 || ft_strncmp("EA ", data->map_arr[i] + j, 3) == 0
-                || ft_strncmp("F ", data->map_arr[i] + j, 2) == 0 || ft_strncmp("C ", data->map_arr[i] + j, 2) == 0)
-            {
-                if (check_elements(data, data->map_arr[i] + j, id) == 1)
+	if (start_index != -1)
+	{
+		i = start_index;
+		while (map_arr[i])
+		{
+			row_count++;
+			i++;
+		}
+	}
+	new_map_arr = malloc((row_count + 1) * sizeof(char *));
+	if (!new_map_arr)
+		return (NULL);
+	i = start_index;
+	j = 0;
+	while (map_arr[i])
+	{
+		new_map_arr[j] = ft_strdup(map_arr[i]);
+		i++;
+		j++;
+	}
+	new_map_arr[j] = NULL;
+	return (new_map_arr);
+}
+
+int	parse_map(t_data *data)
+{
+	int	i;
+	int	j;
+	int	id[6];
+	int	k;
+	int	flag;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	flag = 0;
+	while (i < 6)
+	{
+		id[i] = 0;
+		i++;
+	}
+	i = 0;
+	while (data->map_arr[i])
+	{
+		j = 0;
+		while (data->map_arr[i][j])
+		{
+			while (data->map_arr[i][j] == ' ')
+				j++;
+			if (ft_strncmp("NO ", data->map_arr[i] + j, 3) == 0
+				|| ft_strncmp("SO ", data->map_arr[i] + j, 3) == 0
+				|| ft_strncmp("WE ", data->map_arr[i] + j, 3) == 0
+				|| ft_strncmp("EA ", data->map_arr[i] + j, 3) == 0
+				|| ft_strncmp("F ", data->map_arr[i] + j, 2) == 0
+				|| ft_strncmp("C ", data->map_arr[i] + j, 2) == 0)
+			{
+				if (check_elements(data, data->map_arr[i] + j, id) == 1)
 					return (1);
-				break;
-            }
-            else if (data->map_arr[i][j] == '1' || data->map_arr[i][j] == '0')
-            {
-                while (k < 6)
-                {
-                    if (id[k] != 1)
-                    {
-                        printf("Error, missing element.\n");
-                        return (1);
-                    }
-                    k++;
-                }
+				break ;
+			}
+			else if (data->map_arr[i][j] == '1' || data->map_arr[i][j] == '0')
+			{
+				while (k < 6)
+				{
+					if (id[k] != 1)
+					{
+						printf("Error, missing element.\n");
+						return (1);
+					}
+					k++;
+				}
 				data->parsed_map = extract_map_content(data->map_arr + i);
 				if (check_map(data->parsed_map) == 1)
 					return (1);
 				flag = 1;
-				break;
-            }
+				break ;
+			}
 			else if (data->map_arr[i][j] != ' ' && data->map_arr[i][j] != '\0')
 			{
 				printf("Error, invalid character.\n");
 				return (1);
 			}
-            j++;
-        }
+			j++;
+		}
 		if (flag == 1)
-			break;
-        i++;
+			break ;
+		i++;
 	}
-    return (0);
+	return (0);
 }

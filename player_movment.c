@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movment.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:26:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/12 13:28:14 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/13 13:20:46 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	key_press(t_data *data)
 		data->player->walk_dir *= 2.5;
 }
 
-void    draw_line(mlx_image_t *img, t_line line, uint32_t color)
+void	draw_line(mlx_image_t *img, t_line line, uint32_t color)
 {
 	int		i;
 	int		steps;
@@ -92,12 +92,10 @@ void	update_player_pose(t_data *data)
 	data->player->rot_angle = norm_angle(data->player->rot_angle);
 	move_step = data->player->walk_dir * (SPEED);
 	straf_step = data->player->strafe_dir * (SPEED);
-
 	new_x = round(cos(data->player->rot_angle) * move_step \
 			- sin(data->player->rot_angle) * straf_step);
 	new_y = round(sin(data->player->rot_angle) * move_step \
 			+ cos(data->player->rot_angle) * straf_step);
-	
 	if (if_collition(data, new_x, new_y))
 	{
 		data->player->imge->instances->x += new_x;

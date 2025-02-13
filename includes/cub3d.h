@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/12 15:14:14 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/13 13:11:44 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ void	game_loop(void *param);
 void	raycasting(t_data *data);
 void	draw_bg(t_data *data);
 void	render_strip(t_data *data, int ray, double distance);
-void	draw_rect(t_data *data, double x, double y, double width, double height, int ray, double texture_x);
+void	draw_rect(t_data *data, double x, double y, double height, int ray, double texture_x);
 void	draw_walls(t_data *data);
 
 int		rgba(int r, int g, int b, int a);
