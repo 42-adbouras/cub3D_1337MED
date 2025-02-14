@@ -6,7 +6,7 @@
 /*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/14 19:31:34 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/02/15 00:28:24 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ void	game_loop(void *param);
 void	raycasting(t_data *data);
 void	draw_bg(t_data *data);
 void	render_strip(t_data *data, int ray, double distance);
-void	draw_rect(t_data *data, double x, double y, double height, int ray, double texture_x);
+void	draw_rect(t_data *data, double x, double y, double height, int ray);
 void	draw_walls(t_data *data);
 
 int		rgba(int r, int g, int b, int a);
@@ -216,3 +216,4 @@ void	check_map(char **map);
 bool	is_bordered_map_char(char c);
 bool	is_surrounded_by_spaces(int i, int j, char **map);
 bool	is_on_border(int i, int j, int row_count, char **map);
+void	which_texture(t_data	*data, int ray);

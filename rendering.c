@@ -6,23 +6,11 @@
 /*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:29:18 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/13 13:32:38 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/02/15 00:28:10 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
-
-void	which_texture(t_data	*data, int ray)
-{
-	if (data->text[ray].wall_facing == NORTH)
-		data->text[ray].img = data->texture->north_img;
-	else if (data->text[ray].wall_facing == SOUTH)
-		data->text[ray].img = data->texture->south_img;
-	else if (data->text[ray].wall_facing == WEST)
-		data->text[ray].img = data->texture->west_img;
-	else if (data->text[ray].wall_facing == EAST)
-		data->text[ray].img = data->texture->east_img;
-}
 
 void	load_textures(t_data *data)
 {
@@ -88,7 +76,6 @@ void	render_strip(t_data *data, int ray, double distance)
 	double	proj_plane;
 	double	top;
 	double	bottom;
-	double	texture_x;
 
 	which_texture(data, ray);
 	distance *= cos(data->text[ray].angle - data->player->rot_angle);
@@ -98,35 +85,28 @@ void	render_strip(t_data *data, int ray, double distance)
 	bottom = (HEIGHT / 2) + (wall_height / 2);
 	if (bottom > HEIGHT)
 		bottom = HEIGHT;
-	texture_x = get_texture_x(data, ray);
-	draw_rect(data, ray, top, wall_height, ray, texture_x);
+	draw_rect(data, ray, top, wall_height, ray);
 }
 
-void	draw_rect(t_data *data, double x, double y, double height, int ray, double texture_x)
+void	draw_rect(t_data *data, double x, double y, double height, int ray)
 {
 	int				pixel_index;
 	int				color;
-	mlx_texture_t	*texture;
-	int				r;
-	int				g;
-	int				b;
-	int				a;
+	int				rgba_col[4];
 	int				j;
-	int				tex_x;
-	int				tex_y;
+	int				tex_xy[2];
 
 	j = 0;
-	texture = data->text[ray].img;
+	tex_xy[0] = (int)(get_texture_x(data, ray) * data->text[ray].img->width);
 	while (j < height)
 	{
-		tex_x = (int)(texture_x * texture->width);
-		tex_y = (int)((j / height) * texture->height);
-		pixel_index = (tex_y * texture->width + tex_x) * 4;
-		r = texture->pixels[pixel_index + 0];
-		g = texture->pixels[pixel_index + 1];
-		b = texture->pixels[pixel_index + 2];
-		a = texture->pixels[pixel_index + 3];
-		color = rgba(r, g, b, a);
+		tex_xy[1] = (int)((j / height) * data->text[ray].img->height);
+		pixel_index = (tex_xy[1] * data->text[ray].img->width + tex_xy[0]) * 4;
+		rgba_col[0] = data->text[ray].img->pixels[pixel_index + 0];
+		rgba_col[1] = data->text[ray].img->pixels[pixel_index + 1];
+		rgba_col[2] = data->text[ray].img->pixels[pixel_index + 2];
+		rgba_col[3] = data->text[ray].img->pixels[pixel_index + 3];
+		color = rgba(rgba_col[0], rgba_col[1], rgba_col[2], rgba_col[3]);
 		if (x >= 0 && x < WIDTH && y + j >= 0 && y + j < HEIGHT)
 			mlx_put_pixel(data->frame, x, y + j, color);
 		j++;
