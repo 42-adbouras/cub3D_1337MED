@@ -6,7 +6,7 @@
 /*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:09 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/10 19:44:04 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/02/14 19:08:42 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 void	init_data(t_data *data, char *arg)
 {
 	import_map(data, arg);
-	if (parse_map(data) == 1)
-		exit(1);
+	parse_map(data);
 	load_game(data);
 	load_player(data);
 	load_images(data);

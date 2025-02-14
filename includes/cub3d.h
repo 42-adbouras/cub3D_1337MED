@@ -6,7 +6,7 @@
 /*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/13 13:11:44 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/02/14 19:31:34 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ typedef struct s_player
 	double				rot_angle;
 }						t_player;
 
-
 typedef struct s_xy
 {
 	double				x;
@@ -127,7 +126,7 @@ typedef struct s_text
 	bool				is_hori;
 }						t_text;
 
-typedef struct	s_texture
+typedef struct s_texture
 {
 	mlx_texture_t		*north_img;
 	mlx_texture_t		*south_img;
@@ -194,7 +193,7 @@ void	mouse_hook(t_data *data);
 void	close_game(void *param);
 void	ft_exit(t_data *data, int i, bool term);
 void	free_char_arr(char **arr);
-int		parse_map(t_data *data);
+void	parse_map(t_data *data);
 char	**ft_split_cub(char const *s, char c);
 
 void	load_sprites(t_data *data);
@@ -206,3 +205,14 @@ void	set_orientation(t_data *data, double angle, int ray);
 bool	wall_at(t_data *data, int x, int y, int ray);
 int		rgba(int r, int g, int b, int a);
 void	load_textures(t_data *data);
+void	parse_color(t_data *data, char *line, int id[]);
+int		skip_spaces(const char *line, int i);
+void	check_elements(t_data *data, char *line, int id[]);
+int		count_rows(char **map);
+int		only_spaces(char	*line);
+int		isspace(int c);
+void	print_error(char *error);
+void	check_map(char **map);
+bool	is_bordered_map_char(char c);
+bool	is_surrounded_by_spaces(int i, int j, char **map);
+bool	is_on_border(int i, int j, int row_count, char **map);
