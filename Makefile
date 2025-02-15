@@ -6,7 +6,7 @@
 #    By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 11:59:01 by adbouras          #+#    #+#              #
-#    Updated: 2025/02/15 00:28:36 by starscourge      ###   ########.fr        #
+#    Updated: 2025/02/15 17:20:12 by starscourge      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,9 @@ LIBFT		=	libraries/libft/libft.a
 HEADERS		=	-I ./include -I $(LIBMLX)/include
 INCLUDES	=	includes/cub3d.h includes/get_next_line.h
 LIBS		=	$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-SRCS		=	clean_up.c game_loop.c get_next_line.c get_next_line_utils.c init.c main.c map_loading.c parsing/parse_map.c \
-				player_movment.c raycasting.c rendering.c utils.c raycast_utils.c parsing/parse_colors.c parsing/parse_elements.c \
-				parsing/check_map.c parsing/parse_utils.c parsing/parse_more_utils.c texture_utils.c
+SRCS		=	clean_up.c game_loop.c get_next_line.c get_next_line_utils.c init.c main.c map_loading.c parsing/main_parse.c \
+				player_movment.c raycasting.c textures/rendering.c utils.c raycast_utils.c parsing/parse_colors.c parsing/parse_elements.c \
+				parsing/check_map.c parsing/parse_utils.c parsing/parse_more_utils.c textures/texture_utils.c parsing/extract_map_content.c
 BNS_SRCS	=	bonus/clean_up_bonus.c bonus/game_loop_bonus.c bonus/get_next_line_bonus.c  bonus/get_next_line_utils_bonus.c \
 				bonus/init_bonus.c bonus/main_bonus.c bonus/map_loading_bonus.c bonus/parse_map_bonus.c bonus/player_movment_bonus.c \
 				bonus/raycast_utils_bonus.c bonus/raycasting_bonus.c bonus/rendering_bonus.c bonus/utils_bonus.c
