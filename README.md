@@ -88,7 +88,50 @@ void	key_press(t_data *data)
 
 This sets movement directions based on key inputs:
 
-W/S: Forward/Backward (walk_dir)
-A/D: Left/Right strafe (strafe_dir)
-Left/Right arrows: Rotation (turn_dir)
+W/S: Forward/Backward (walk_dir)\
+A/D: Left/Right strafe (strafe_dir)\
+Left/Right arrows: Rotation (turn_dir)\
 Left Shift: Sprint (increases walk_dir)
+
+- Updating player position:
+
+This is how the player is able to move in a 2D environment:
+
+```c
+void	update_player_pose(t_data *data)
+{
+	double	move_step;
+	double	straf_step;
+	int32_t	new_x;
+	int32_t	new_y;
+
+	data->player->rot_angle += data->player->turn_dir * (data->rot_speed);
+	data->player->rot_angle = norm_angle(data->player->rot_angle);
+	move_step = data->player->walk_dir * (SPEED);
+	straf_step = data->player->strafe_dir * (SPEED);
+	new_x = round(cos(data->player->rot_angle) * move_step - sin(data->player->rot_angle) * straf_step);
+	new_y = round(sin(data->player->rot_angle) * move_step + cos(data->player->rot_angle) * straf_step);
+	if (if_collition(data, new_x, new_y))
+	{
+		data->player->imge->instances->x += new_x;
+		data->player->imge->instances->y += new_y;
+	}
+	data->player->x = data->player->imge->instances->x;
+	data->player->y = data->player->imge->instances->y;
+}
+```
+
+`move_step`: the movement in the forward/backward direction (walking).\
+`strafe_step`: the movement in the left/right direction (strafing).\
+`new_x, new_y`: the new target coordinates the player will try to move to.
+
+  - Adjust Player Rotation (Turning):
+
+```c
+data->player->rot_angle += data->player->turn_dir * (data->rot_speed);
+data->player->rot_angle = norm_angle(data->player->rot_angle);
+```
+
+   - The player's rotation angle `(rot_angle)` is updated based on the turn direction (turn_dir) and the rotation speed `(rot_speed)`.\
+`turn_dir` is typically `1` for turning right and `-1` for turning left, so this updates the angle the player is facing.\
+`norm_angle` is used to normalize the angle, making sure it stays within the range [0, 2π] in radians.
