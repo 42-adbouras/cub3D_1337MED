@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:43:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/12 14:59:18 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:10:51 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	player_spawn(t_data *data)
 	data->tx = mlx_load_png("assets/sprites/1.png");
 	data->im = mlx_texture_to_image(data->game, data->tx);
 	mlx_resize_image(data->im, WIDTH * 0.7, HEIGHT * 0.7);
-	// if (mlx_image_to_window(data->game, data->im, (WIDTH / 2) - data->im->height / 2, HEIGHT - data->im->height) == -1)
-	// 	ft_exit(data, 2, true);
 	for (int i = 0; i < NUM_SPRITES; i++)
 	{
 		mlx_resize_image(data->sprites.s_images[i], WIDTH * 0.7, HEIGHT * 0.7);

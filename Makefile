@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+         #
+#    By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 11:59:01 by adbouras          #+#    #+#              #
-#    Updated: 2025/02/15 17:20:12 by starscourge      ###   ########.fr        #
+#    Updated: 2025/02/20 15:17:01 by adbouras         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

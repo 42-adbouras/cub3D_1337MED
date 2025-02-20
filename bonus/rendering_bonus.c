@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:29:18 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/12 15:11:41 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:15:06 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,13 @@
 void	which_texture(t_data	*data, int ray)
 {
 	if (data->text[ray].wall_facing == NORTH)
-	{
-		// printf("north\n");
 		data->text[ray].img = data->texture->north_img;
-	}
 	else if (data->text[ray].wall_facing == SOUTH)
-	{
-		// printf("south\n");
 		data->text[ray].img = data->texture->south_img;
-	}
 	else if (data->text[ray].wall_facing == WEST)
-	{
-		// printf("west\n");
 		data->text[ray].img = data->texture->west_img;
-	}
 	else if (data->text[ray].wall_facing == EAST)
-	{
-		// printf("east\n");
 		data->text[ray].img = data->texture->east_img;
-	}
-	
 }
 
 void	load_textures_bonus(t_data *data)
