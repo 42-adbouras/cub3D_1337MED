@@ -132,12 +132,12 @@ data->player->rot_angle += data->player->turn_dir * (data->rot_speed);
 data->player->rot_angle = norm_angle(data->player->rot_angle);
 ```
 
-   - The player's rotation angle:
+  - The player's rotation angle:
 `(rot_angle)` is updated based on the turn direction (turn_dir) and the rotation speed `(rot_speed)`.\
 `turn_dir` is typically `1` for turning right and `-1` for turning left, so this updates the angle the player is facing.\
 `norm_angle` is used to normalize the angle, making sure it stays within the range [0, 2π] in radians.
 
-   - Calculate Movement Step:
+  - Calculate Movement Step:
 
 ```c
 move_step = data->player->walk_dir * (SPEED);
@@ -145,8 +145,8 @@ strafe_step = data->player->strafe_dir * (SPEED);
 ```
 
 The player can move in the forward/backward direction `(walk_dir)` and in the left/right direction `(strafe_dir)`.\
-   - `walk_dir` is `1` for moving forward, `-1` for moving backward and `0` you guesses it, not moving.\
-   - `strafe_dir` is `1` for moving right, `-1` for moving left and `0` not moving.\
+  - `walk_dir` is `1` for moving forward, `-1` for moving backward and `0` you guesses it, not moving.\
+  - `strafe_dir` is `1` for moving right, `-1` for moving left and `0` not moving.\
   - These direction values are multiplied by a constant `(SPEED)`, which defines the speed at which the player moves. So, `move_step` and `strafe_step` are the distances the player will move in each respective direction.
 
     - Calculate New Position (X and Y):
@@ -158,12 +158,12 @@ new_y = round(sin(data->player->rot_angle) * move_step + cos(data->player->rot_a
 
   - Now, the function calculates where the player will end up (the `new_x` and `new_y` coordinates) based on the movement direction and rotation.
   - The idea is to combine both walking and strafing in a way that the directions are affected by the player's current rotation angle `(rot_angle)`:\
-  - Walking `(move_step)` affects the forward/backward movement.
-   - `cos(data->player->rot_angle)` determines how much the player moves along the X-axis (horizontal).
-   - `sin(data->player->rot_angle)` determines how much the player moves along the Y-axis (vertical).
-  - Strafing `(strafe_step)` affects the left/right movement.
-   - `-sin(data->player->rot_angle)` moves the player left/right based on the current facing direction.
-   - `cos(data->player->rot_angle)` is used for movement along the X-axis for strafing.
+  	- Walking `(move_step)` affects the forward/backward movement.
+      - `cos(data->player->rot_angle)` determines how much the player moves along the X-axis (horizontal).
+      - `sin(data->player->rot_angle)` determines how much the player moves along the Y-axis (vertical).
+    - Strafing `(strafe_step)` affects the left/right movement.
+      - `-sin(data->player->rot_angle)` moves the player left/right based on the current facing direction.
+      - `cos(data->player->rot_angle)` is used for movement along the X-axis for strafing.
   - The `round()` function ensures the new coordinates are integers (because player positions are typically in integer grid coordinates).
 
-	- Collision Check:
+  - Collision Check:
