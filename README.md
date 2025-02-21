@@ -34,13 +34,13 @@ The player structor is represented as follows:
 
 ```c
 typedef struct	s_player {
-    mlx_image_t	*imge;		// Player's image/object
-    int			x;			// Horizontal coordinates of the player
-    int 		y;			// Vertical coordinates of the player
-    int 		walk_dir;	// Movement indicator (forward/backward)
-    int 		strafe_dir;	// Strafing indicator (left/right)
-    int 		turn_dir;	// Turning indicator (left/right)
-    double		rot_angle;	// Angle where the player is looking
+	mlx_image_t	*imge;		// Player's image/object
+	int			x;			// Horizontal coordinates of the player
+	int 		y;			// Vertical coordinates of the player
+	int 		walk_dir;	// Movement indicator (forward/backward)
+	int 		strafe_dir;	// Strafing indicator (left/right)
+	int 		turn_dir;	// Turning indicator (left/right)
+	double		rot_angle;	// Angle where the player is looking
 } t_player;
 ```
 
@@ -59,32 +59,32 @@ typedef struct	s_player {
 
 ## Player Movement
 
-- Input Handling:
+1. Input Handling:
 
-```c
-void	key_press(t_data *data)
-{
-	data->player->turn_dir = 0;
-	data->player->walk_dir = 0;
-	data->player->strafe_dir = 0;
-	if (mlx_is_key_down(data->game, MLX_KEY_ESCAPE))
-		ft_exit(data, 0, true);
-	if (mlx_is_key_down(data->game, MLX_KEY_RIGHT))
-		data->player->turn_dir = 1;
-	if (mlx_is_key_down(data->game, MLX_KEY_LEFT))
-		data->player->turn_dir = -1;
-	if (mlx_is_key_down(data->game, MLX_KEY_W))
-		data->player->walk_dir = 1;
-	if (mlx_is_key_down(data->game, MLX_KEY_S))
-		data->player->walk_dir = -1;
-	if (mlx_is_key_down(data->game, MLX_KEY_D))
-		data->player->strafe_dir = 1;
-	if (mlx_is_key_down(data->game, MLX_KEY_A))
-		data->player->strafe_dir = -1;
-	if (mlx_is_key_down(data->game, MLX_KEY_LEFT_SHIFT))
-		data->player->walk_dir *= 2.5;
-}
-```
+	```c
+	void	key_press(t_data *data)
+	{
+		data->player->turn_dir = 0;
+		data->player->walk_dir = 0;
+		data->player->strafe_dir = 0;
+		if (mlx_is_key_down(data->game, MLX_KEY_ESCAPE))
+			ft_exit(data, 0, true);
+		if (mlx_is_key_down(data->game, MLX_KEY_RIGHT))
+			data->player->turn_dir = 1;
+		if (mlx_is_key_down(data->game, MLX_KEY_LEFT))
+			data->player->turn_dir = -1;
+		if (mlx_is_key_down(data->game, MLX_KEY_W))
+			data->player->walk_dir = 1;
+		if (mlx_is_key_down(data->game, MLX_KEY_S))
+			data->player->walk_dir = -1;
+		if (mlx_is_key_down(data->game, MLX_KEY_D))
+			data->player->strafe_dir = 1;
+		if (mlx_is_key_down(data->game, MLX_KEY_A))
+			data->player->strafe_dir = -1;
+		if (mlx_is_key_down(data->game, MLX_KEY_LEFT_SHIFT))
+			data->player->walk_dir *= 2.5;
+	}
+	```
 
 This sets movement directions based on key inputs:
 
@@ -93,113 +93,116 @@ A/D: Left/Right strafe (strafe_dir)\
 Left/Right arrows: Rotation (turn_dir)\
 Left Shift: Sprint (increases walk_dir)
 
-- Updating player position:
+2. Updating player position:
 
-This is how the player is able to move in a 2D environment:
+	This is how the player is able to move in a 2D environment:
 
-```c
-void	update_player_pose(t_data *data)
-{
-	double	move_step;
-	double	straf_step;
-	int32_t	new_x;
-	int32_t	new_y;
-
-	data->player->rot_angle += data->player->turn_dir * (data->rot_speed);
-	data->player->rot_angle = norm_angle(data->player->rot_angle);
-	move_step = data->player->walk_dir * (SPEED);
-	straf_step = data->player->strafe_dir * (SPEED);
-	new_x = round(cos(data->player->rot_angle) * move_step - sin(data->player->rot_angle) * straf_step);
-	new_y = round(sin(data->player->rot_angle) * move_step + cos(data->player->rot_angle) * straf_step);
-	if (if_collition(data, new_x, new_y))
+	```c
+	void	update_player_pose(t_data *data)
 	{
-		data->player->imge->instances->x += new_x;
-		data->player->imge->instances->y += new_y;
+		double	move_step;
+		double	straf_step;
+		int32_t	new_x;
+		int32_t	new_y;
+
+		data->player->rot_angle += data->player->turn_dir * (data->rot_speed);
+		data->player->rot_angle = norm_angle(data->player->rot_angle);
+		move_step = data->player->walk_dir * (SPEED);
+		straf_step = data->player->strafe_dir * (SPEED);
+		new_x = round(cos(data->player->rot_angle) * move_step - sin(data->player->rot_angle) * straf_step);
+		new_y = round(sin(data->player->rot_angle) * move_step + cos(data->player->rot_angle) * straf_step);
+		if (if_collition(data, new_x, new_y))
+		{
+			data->player->imge->instances->x += new_x;
+			data->player->imge->instances->y += new_y;
+		}
+		data->player->x = data->player->imge->instances->x;
+		data->player->y = data->player->imge->instances->y;
 	}
-	data->player->x = data->player->imge->instances->x;
-	data->player->y = data->player->imge->instances->y;
-}
-```
+	```
 
-`move_step`: the movement in the forward/backward direction (walking).\
-`strafe_step`: the movement in the left/right direction (strafing).\
-`new_x, new_y`: the new target coordinates the player will try to move to.
+	`move_step`: the movement in the forward/backward direction (walking).\
+	`strafe_step`: the movement in the left/right direction (strafing).\
+	`new_x, new_y`: the new target coordinates the player will try to move to.
 
-  - Adjust Player Rotation (Turning):
+	- Adjust Player Rotation (Turning):
 
-  ```c
-  data->player->rot_angle += data->player->turn_dir * (data->rot_speed);
-  data->player->rot_angle = norm_angle(data->player->rot_angle);
-  ```
+		```c
+		data->player->rot_angle += data->player->turn_dir * (data->rot_speed);
+		data->player->rot_angle = norm_angle(data->player->rot_angle);
+		```
 
-  - The player's rotation angle:
-  `(rot_angle)` is updated based on the turn direction (turn_dir) and the rotation speed `(rot_speed)`.\
-  `turn_dir` is typically `1` for turning right and `-1` for turning left, so this updates the angle the player is facing.\
-  `norm_angle` is used to normalize the angle, making sure it stays within the range [0, 2π] in radians.
+	- The player's rotation angle:
+		`(rot_angle)` is updated based on the turn direction (turn_dir) and the rotation speed `(rot_speed)`.\
+		`turn_dir` is typically `1` for turning right and `-1` for turning left, so this updates the angle the player is facing.\
+		`norm_angle` is used to normalize the angle, making sure it stays within the range [0, 2π] in radians.
 
-  - Calculate Movement Step:
+	- Calculate Movement Step:
 
-  ```c
-  move_step = data->player->walk_dir * (SPEED);
-  strafe_step = data->player->strafe_dir * (SPEED);
-  ```
+		```c
+		move_step = data->player->walk_dir * (SPEED);
+		strafe_step = data->player->strafe_dir * (SPEED);
+		```
 
-The player can move in the forward/backward direction `(walk_dir)` and in the left/right direction `(strafe_dir)`.\
-  - `walk_dir` is `1` for moving forward, `-1` for moving backward and `0` you guesses it, not moving.\
-  - `strafe_dir` is `1` for moving right, `-1` for moving left and `0` not moving.\
-  - These direction values are multiplied by a constant `(SPEED)`, which defines the speed at which the player moves. So, `move_step` and `strafe_step` are the distances the player will move in each respective direction.
+		The player can move in the forward/backward direction `(walk_dir)` and in the left/right direction `(strafe_dir)`.\
 
-    - Calculate New Position (X and Y):
+	- `walk_dir` is `1` for moving forward, `-1` for moving backward and `0` you guesses it, not moving.\
+	- `strafe_dir` is `1` for moving right, `-1` for moving left and `0` not moving.\
+	- These direction values are multiplied by a constant `(SPEED)`, which defines the speed at which the player moves. So, `move_step` and `strafe_step` are the distances the player will move in each respective direction.
 
-    ```c
-    new_x = round(cos(data->player->rot_angle) * move_step - sin(data->player->rot_angle) * strafe_step);
-    new_y = round(sin(data->player->rot_angle) * move_step + cos(data->player->rot_angle) * strafe_step);
-    ```
+	- Calculate New Position (X and Y):
 
-    - Forward/Backward Movement:
-        - Direction based on viewing angle θ
-        - X = cos(θ) * move_step
-        - Y = sin(θ) * move_step
+	```c
+	new_x = round(cos(data->player->rot_angle) * move_step - sin(data->player->rot_angle) * strafe_step);
+	new_y = round(sin(data->player->rot_angle) * move_step + cos(data->player->rot_angle) * strafe_step);
+	```
 
-    - Strafe Movement:
-        - Perpendicular to viewing direction
-        - X = -sin(θ) * strafe_step
-        - Y = cos(θ) * strafe_step
+	![Movement](source_img/movement.png)
 
-    - Combined Movement:
-        - Sum of forward/backward and strafe vectors
-        - Final X = cos(θ) * move_step - sin(θ) * strafe_step
-        - Final Y = sin(θ) * move_step + cos(θ) * strafe_step
+	- Forward/Backward Movement:
+		- Direction based on viewing angle θ
+		- X = cos(θ) * move_step
+		- Y = sin(θ) * move_step
 
-- Collision Check:
+	- Strafe Movement:
+		- Perpendicular to viewing direction
+		- X = -sin(θ) * strafe_step
+		- Y = cos(θ) * strafe_step
 
-```c
-bool if_collition(t_data *data, int32_t x, int32_t y)
-{
-    int p_x;
-    int p_y;
-    int h_x;
-    int h_y;
+	- Combined Movement:
+		- Sum of forward/backward and strafe vectors
+		- Final X = cos(θ) * move_step - sin(θ) * strafe_step
+		- Final Y = sin(θ) * move_step + cos(θ) * strafe_step
 
-    // Calculate the actual position including player hitbox
-    p_x = x + data->player->imge->instances->x;
-    p_y = y + data->player->imge->instances->y;
-    
-    // Calculate the position of the opposite corner of hitbox
-    h_x = (p_x + HITBOX - 1) / TILE_SIZE;
-    h_y = (p_y + HITBOX - 1) / TILE_SIZE;
+3. Collision Check:
 
-    // Check all corners for collisions
-    if (data->parsed_map[p_y / TILE_SIZE][p_x / TILE_SIZE] != '1' && 
-        data->parsed_map[h_y][h_x] != '1' && 
-        data->parsed_map[p_y / TILE_SIZE][h_x] != '1' && 
-        data->parsed_map[h_y][p_x / TILE_SIZE] != '1')
-        return (true);
-    return (false);
-}
-```
+	```c
+	bool if_collition(t_data *data, int32_t x, int32_t y)
+	{
+		int p_x;
+		int p_y;
+		int h_x;
+		int h_y;
 
-The collision system works by checking multiple points around the player's hitbox to prevent walking through walls.
+		// Calculate the actual position including player hitbox
+		p_x = x + data->player->imge->instances->x;
+		p_y = y + data->player->imge->instances->y;
+		
+		// Calculate the position of the opposite corner of hitbox
+		h_x = (p_x + HITBOX - 1) / TILE_SIZE;
+		h_y = (p_y + HITBOX - 1) / TILE_SIZE;
 
-![Collition](source_img/collision.png)
+		// Check all corners for collisions
+		if (data->parsed_map[p_y / TILE_SIZE][p_x / TILE_SIZE] != '1' && 
+			data->parsed_map[h_y][h_x] != '1' && 
+			data->parsed_map[p_y / TILE_SIZE][h_x] != '1' && 
+			data->parsed_map[h_y][p_x / TILE_SIZE] != '1')
+			return (true);
+		return (false);
+	}
+	```
+
+	The collision system works by checking multiple points around the player's hitbox to prevent walking through walls.
+
+	![Collition](source_img/collision.png)
 
