@@ -127,22 +127,22 @@ void	update_player_pose(t_data *data)
 
   - Adjust Player Rotation (Turning):
 
-```c
-data->player->rot_angle += data->player->turn_dir * (data->rot_speed);
-data->player->rot_angle = norm_angle(data->player->rot_angle);
-```
+  ```c
+  data->player->rot_angle += data->player->turn_dir * (data->rot_speed);
+  data->player->rot_angle = norm_angle(data->player->rot_angle);
+  ```
 
   - The player's rotation angle:
-`(rot_angle)` is updated based on the turn direction (turn_dir) and the rotation speed `(rot_speed)`.\
-`turn_dir` is typically `1` for turning right and `-1` for turning left, so this updates the angle the player is facing.\
-`norm_angle` is used to normalize the angle, making sure it stays within the range [0, 2π] in radians.
+  `(rot_angle)` is updated based on the turn direction (turn_dir) and the rotation speed `(rot_speed)`.\
+  `turn_dir` is typically `1` for turning right and `-1` for turning left, so this updates the angle the player is facing.\
+  `norm_angle` is used to normalize the angle, making sure it stays within the range [0, 2π] in radians.
 
   - Calculate Movement Step:
 
-```c
-move_step = data->player->walk_dir * (SPEED);
-strafe_step = data->player->strafe_dir * (SPEED);
-```
+  ```c
+  move_step = data->player->walk_dir * (SPEED);
+  strafe_step = data->player->strafe_dir * (SPEED);
+  ```
 
 The player can move in the forward/backward direction `(walk_dir)` and in the left/right direction `(strafe_dir)`.\
   - `walk_dir` is `1` for moving forward, `-1` for moving backward and `0` you guesses it, not moving.\
@@ -151,19 +151,55 @@ The player can move in the forward/backward direction `(walk_dir)` and in the le
 
     - Calculate New Position (X and Y):
 
+    ```c
+    new_x = round(cos(data->player->rot_angle) * move_step - sin(data->player->rot_angle) * strafe_step);
+    new_y = round(sin(data->player->rot_angle) * move_step + cos(data->player->rot_angle) * strafe_step);
+    ```
+
+    - Forward/Backward Movement:
+        - Direction based on viewing angle θ
+        - X = cos(θ) * move_step
+        - Y = sin(θ) * move_step
+
+    - Strafe Movement:
+        - Perpendicular to viewing direction
+        - X = -sin(θ) * strafe_step
+        - Y = cos(θ) * strafe_step
+
+    - Combined Movement:
+        - Sum of forward/backward and strafe vectors
+        - Final X = cos(θ) * move_step - sin(θ) * strafe_step
+        - Final Y = sin(θ) * move_step + cos(θ) * strafe_step
+
+- Collision Check:
+
 ```c
-new_x = round(cos(data->player->rot_angle) * move_step - sin(data->player->rot_angle) * strafe_step);
-new_y = round(sin(data->player->rot_angle) * move_step + cos(data->player->rot_angle) * strafe_step);
+bool if_collition(t_data *data, int32_t x, int32_t y)
+{
+    int p_x;
+    int p_y;
+    int h_x;
+    int h_y;
+
+    // Calculate the actual position including player hitbox
+    p_x = x + data->player->imge->instances->x;
+    p_y = y + data->player->imge->instances->y;
+    
+    // Calculate the position of the opposite corner of hitbox
+    h_x = (p_x + HITBOX - 1) / TILE_SIZE;
+    h_y = (p_y + HITBOX - 1) / TILE_SIZE;
+
+    // Check all corners for collisions
+    if (data->parsed_map[p_y / TILE_SIZE][p_x / TILE_SIZE] != '1' && 
+        data->parsed_map[h_y][h_x] != '1' && 
+        data->parsed_map[p_y / TILE_SIZE][h_x] != '1' && 
+        data->parsed_map[h_y][p_x / TILE_SIZE] != '1')
+        return (true);
+    return (false);
+}
 ```
 
-  - Now, the function calculates where the player will end up (the `new_x` and `new_y` coordinates) based on the movement direction and rotation.
-  - The idea is to combine both walking and strafing in a way that the directions are affected by the player's current rotation angle `(rot_angle)`:\
-  	- Walking `(move_step)` affects the forward/backward movement.
-      - `cos(data->player->rot_angle)` determines how much the player moves along the X-axis (horizontal).
-      - `sin(data->player->rot_angle)` determines how much the player moves along the Y-axis (vertical).
-    - Strafing `(strafe_step)` affects the left/right movement.
-      - `-sin(data->player->rot_angle)` moves the player left/right based on the current facing direction.
-      - `cos(data->player->rot_angle)` is used for movement along the X-axis for strafing.
-  - The `round()` function ensures the new coordinates are integers (because player positions are typically in integer grid coordinates).
+The collision system works by checking multiple points around the player's hitbox to prevent walking through walls.
 
-  - Collision Check:
+![Collition](source_img/collision.png)
+

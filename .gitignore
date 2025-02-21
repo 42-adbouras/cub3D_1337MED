@@ -8,6 +8,7 @@
 !assets/
 !assets/*
 !assets/sprites/*
+!source_img/
 !sprites/
 !*.png
 !*.cub
