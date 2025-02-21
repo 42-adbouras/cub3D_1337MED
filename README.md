@@ -174,35 +174,35 @@ Left Shift: Sprint (increases walk_dir)
 		- Final X = cos(θ) * move_step - sin(θ) * strafe_step
 		- Final Y = sin(θ) * move_step + cos(θ) * strafe_step
 
-3. Collision Check:
+3. Collision System:
 
 	```c
 	bool if_collition(t_data *data, int32_t x, int32_t y)
 	{
-		int p_x;
-		int p_y;
-		int h_x;
-		int h_y;
+		int		p_x;
+		int		p_y;
+		int		h_x;
+		int		h_y;
 
-		// Calculate the actual position including player hitbox
-		p_x = x + data->player->imge->instances->x;
-		p_y = y + data->player->imge->instances->y;
-		
+		// Calculate the actual position on the map
+		p_x = (x + data->player->x) / TILE_SIZE;
+		p_y = (y + data->player->y) / TILE_SIZE;
+
 		// Calculate the position of the opposite corner of hitbox
-		h_x = (p_x + HITBOX - 1) / TILE_SIZE;
-		h_y = (p_y + HITBOX - 1) / TILE_SIZE;
+		h_x = (x + data->player->x + HITBOX - 1) / TILE_SIZE;
+		h_y = (y + data->player->y + HITBOX - 1) / TILE_SIZE;
 
 		// Check all corners for collisions
-		if (data->parsed_map[p_y / TILE_SIZE][p_x / TILE_SIZE] != '1' && 
-			data->parsed_map[h_y][h_x] != '1' && 
-			data->parsed_map[p_y / TILE_SIZE][h_x] != '1' && 
-			data->parsed_map[h_y][p_x / TILE_SIZE] != '1')
+		if (data->parsed_map[p_y][p_x] \
+			!= '1' && data->parsed_map[h_y][h_x] != '1' \
+			&& data->parsed_map[p_y][h_x] != '1' \
+			&& data->parsed_map[h_y][p_x] != '1')
 			return (true);
 		return (false);
+
 	}
 	```
 
 	The collision system works by checking multiple points around the player's hitbox to prevent walking through walls.
 
 	![Collition](source_img/collision.png)
-

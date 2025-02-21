@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:26:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/20 16:13:04 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:37:22 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ bool	if_collition(t_data *data, int32_t x, int32_t y)
 	int		h_x;
 	int		h_y;
 
-	p_x = x + data->player->imge->instances->x;
-	p_y = y + data->player->imge->instances->y;
-	h_x = (p_x + HITBOX - 1) / TILE_SIZE;
-	h_y = (p_y + HITBOX - 1) / TILE_SIZE;
-	if (data->parsed_map[p_y / TILE_SIZE][p_x / TILE_SIZE] \
+	p_x = (x + data->player->x) / TILE_SIZE;
+	p_y = (y + data->player->y) / TILE_SIZE;
+	h_x = (x + data->player->x + HITBOX - 1) / TILE_SIZE;
+	h_y = (y + data->player->y + HITBOX - 1) / TILE_SIZE;
+	if (data->parsed_map[p_y][p_x] \
 		!= '1' && data->parsed_map[h_y][h_x] != '1' \
-		&& data->parsed_map[p_y / TILE_SIZE][h_x] != '1' \
-		&& data->parsed_map[h_y][p_x / TILE_SIZE] != '1')
+		&& data->parsed_map[p_y][h_x] != '1' \
+		&& data->parsed_map[h_y][p_x] != '1')
 		return (true);
 	return (false);
 }
