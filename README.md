@@ -35,8 +35,8 @@ The player structor is represented as follows:
 ```c
 typedef struct	s_player {
 	mlx_image_t	*imge;		// Player's image/object
-	int			x;			// Horizontal coordinates of the player
-	int 		y;			// Vertical coordinates of the player
+	int		x;		// Horizontal coordinates of the player
+	int 		y;		// Vertical coordinates of the player
 	int 		walk_dir;	// Movement indicator (forward/backward)
 	int 		strafe_dir;	// Strafing indicator (left/right)
 	int 		turn_dir;	// Turning indicator (left/right)
@@ -144,10 +144,10 @@ Left Shift: Sprint (increases walk_dir)
 		strafe_step = data->player->strafe_dir * (SPEED);
 		```
 
-		The player can move in the forward/backward direction `(walk_dir)` and in the left/right direction `(strafe_dir)`.\
+		The player can move in the forward/backward direction `(walk_dir)` and in the left/right direction `(strafe_dir)`.
 
-	- `walk_dir` is `1` for moving forward, `-1` for moving backward and `0` you guesses it, not moving.\
-	- `strafe_dir` is `1` for moving right, `-1` for moving left and `0` not moving.\
+	- `walk_dir` is `1` for moving forward, `-1` for moving backward and `0` you guesses it, not moving.
+	- `strafe_dir` is `1` for moving right, `-1` for moving left and `0` not moving.
 	- These direction values are multiplied by a constant `(SPEED)`, which defines the speed at which the player moves. So, `move_step` and `strafe_step` are the distances the player will move in each respective direction.
 
 	- Calculate New Position (X and Y):
@@ -193,8 +193,8 @@ Left Shift: Sprint (increases walk_dir)
 		h_y = (y + data->player->y + HITBOX - 1) / TILE_SIZE;
 
 		// Check all corners for collisions
-		if (data->parsed_map[p_y][p_x] \
-			!= '1' && data->parsed_map[h_y][h_x] != '1' \
+		if (data->parsed_map[p_y][p_x] != '1' \
+ 			&& data->parsed_map[h_y][h_x] != '1' \
 			&& data->parsed_map[p_y][h_x] != '1' \
 			&& data->parsed_map[h_y][p_x] != '1')
 			return (true);
