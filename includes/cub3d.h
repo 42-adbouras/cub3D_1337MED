@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
+/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/15 17:18:06 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/02/23 11:42:38 by fidriss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,6 @@ double	get_distance(double start_x, double start_y,
 void	set_orientation(t_data *data, double angle, int ray);
 bool	wall_at(t_data *data, int x, int y, int ray);
 int		rgba(int r, int g, int b, int a);
-void	load_textures(t_data *data);
 void	parse_color(t_data *data, char *line, int id[]);
 int		skip_spaces(const char *line, int i);
 void	check_elements(t_data *data, char *line, int id[]);

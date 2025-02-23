@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+         #
+#    By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 11:59:01 by adbouras          #+#    #+#              #
-#    Updated: 2025/02/20 15:17:01 by adbouras         ###   ########.fr        #
+#    Updated: 2025/02/23 11:45:30 by fidriss          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,9 @@ SRCS		=	clean_up.c game_loop.c get_next_line.c get_next_line_utils.c init.c main
 				player_movment.c raycasting.c textures/rendering.c utils.c raycast_utils.c parsing/parse_colors.c parsing/parse_elements.c \
 				parsing/check_map.c parsing/parse_utils.c parsing/parse_more_utils.c textures/texture_utils.c parsing/extract_map_content.c
 BNS_SRCS	=	bonus/clean_up_bonus.c bonus/game_loop_bonus.c bonus/get_next_line_bonus.c  bonus/get_next_line_utils_bonus.c \
-				bonus/init_bonus.c bonus/main_bonus.c bonus/map_loading_bonus.c bonus/parse_map_bonus.c bonus/player_movment_bonus.c \
-				bonus/raycast_utils_bonus.c bonus/raycasting_bonus.c bonus/rendering_bonus.c bonus/utils_bonus.c
+				bonus/init_bonus.c bonus/main_bonus.c bonus/map_loading_bonus.c bonus/parsing/check_map.c bonus/parsing/parse_utils.c bonus/parsing/parse_colors.c \
+				bonus/parsing/parse_elements.c bonus/parsing/parse_more_utils.c bonus/parsing/extract_map_content.c bonus/player_movment_bonus.c \
+				bonus/raycast_utils_bonus.c bonus/raycasting_bonus.c bonus/textures/rendering_bonus.c bonus/utils_bonus.c bonus/textures/texture_utils.c
 OBJ_DIR		=	objects/
 OBJS		=	$(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 BNS_OBJS	=	$(addprefix $(OBJ_DIR), $(BNS_SRCS:.c=.o))
