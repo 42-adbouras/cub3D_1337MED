@@ -15,5 +15,5 @@
 !Makefile
 !README.md
 !.git*
-!bonus/parsing/
-!bonus/textures/
+!bonus/parsing_bonus/
+!bonus/textures_bonus/

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture_utils.c                                    :+:      :+:    :+:   */
+/*   texture_utils_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 00:27:27 by starscourge       #+#    #+#             */
-/*   Updated: 2025/02/23 11:43:55 by fidriss          ###   ########.fr       */
+/*   Updated: 2025/02/23 19:17:37 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d_bonus.h"
 
-void	which_texture(t_data	*data, int ray)
+void	which_texture_bonus(t_data	*data, int ray)
 {
 	if (data->text[ray].wall_facing == NORTH)
 		data->text[ray].img = data->texture->north_img;

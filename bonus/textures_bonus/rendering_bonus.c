@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   rendering_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 19:29:18 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/23 11:46:19 by fidriss          ###   ########.fr       */
+/*   Updated: 2025/02/23 19:13:16 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d_bonus.h"
 
-void	draw_walls(t_data *data)
+void	draw_walls_bonus(t_data *data)
 {
 	int	ray;
 
 	ray = -1;
 	while (++ray < RAYS)
-		render_strip(data, ray, data->text[ray].distance);
+		render_strip_bonus(data, ray, data->text[ray].distance);
 }
 
-void	draw_bg(t_data *data)
+void	draw_bg_bonus(t_data *data)
 {
 	int	height;
 	int	width;
@@ -46,7 +46,7 @@ void	draw_bg(t_data *data)
 	}
 }
 
-double	get_texture_x(t_data *data, int ray)
+double	get_texture_x_bonus(t_data *data, int ray)
 {
 	double	texture_x;
 
@@ -61,14 +61,14 @@ double	get_texture_x(t_data *data, int ray)
 	return (texture_x);
 }
 
-void	render_strip(t_data *data, int ray, double distance)
+void	render_strip_bonus(t_data *data, int ray, double distance)
 {
 	double	wall_height;
 	double	proj_plane;
 	double	top;
 	double	bottom;
 
-	which_texture(data, ray);
+	which_texture_bonus(data, ray);
 	distance *= cos(data->text[ray].angle - data->player->rot_angle);
 	proj_plane = (WIDTH / 2) / tan(data->fov / 2);
 	wall_height = (TILE_SIZE / distance) * proj_plane;
@@ -76,10 +76,10 @@ void	render_strip(t_data *data, int ray, double distance)
 	bottom = (HEIGHT / 2) + (wall_height / 2);
 	if (bottom > HEIGHT)
 		bottom = HEIGHT;
-	draw_rect(data, ray, top, wall_height);
+	draw_rect_bonus(data, ray, top, wall_height);
 }
 
-void	draw_rect(t_data *data, double x, double y, double height)
+void	draw_rect_bonus(t_data *data, double x, double y, double height)
 {
 	int				pixel_index;
 	int				color;
@@ -88,7 +88,7 @@ void	draw_rect(t_data *data, double x, double y, double height)
 	int				tex_xy[2];
 
 	j = 0;
-	tex_xy[0] = (int)(get_texture_x(data,
+	tex_xy[0] = (int)(get_texture_x_bonus(data,
 				(int)x) * data->text[(int)x].img->width);
 	while (j < height)
 	{

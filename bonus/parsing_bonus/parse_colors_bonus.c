@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_colors.c                                     :+:      :+:    :+:   */
+/*   parse_colors_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:00:54 by starscourge       #+#    #+#             */
-/*   Updated: 2025/02/23 11:43:36 by fidriss          ###   ########.fr       */
+/*   Updated: 2025/02/23 19:48:21 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d_bonus.h"
 
-int	skip_spaces(const char *line, int i)
+int	skip_spaces_bonus(const char *line, int i)
 {
 	while (line[i] != ' ')
 		i++;
@@ -21,7 +21,7 @@ int	skip_spaces(const char *line, int i)
 	return (i);
 }
 
-char	**split_and_trim_colors(const char *line, int i)
+char	**split_and_trim_colors_bonus(const char *line, int i)
 {
 	char	**colors;
 	char	*tmp;
@@ -39,7 +39,7 @@ char	**split_and_trim_colors(const char *line, int i)
 	return (colors);
 }
 
-void	validate_colors(char **colors)
+void	validate_colors_bonus(char **colors)
 {
 	int	i;
 	int	j;
@@ -53,13 +53,13 @@ void	validate_colors(char **colors)
 			if (ft_isdigit(colors[i][j]))
 				j++;
 			else
-				print_error("Error\n Invalid color.\n");
+				print_error_bonus("Error\n Invalid color.\n");
 		}
 		i++;
 	}
 }
 
-void	convert_and_assign_colors(t_data *data, char **colors,
+void	convert_and_assign_colors_bonus(t_data *data, char **colors,
 				const char *line, int id[])
 {
 	int	i;
@@ -70,7 +70,7 @@ void	convert_and_assign_colors(t_data *data, char **colors,
 	{
 		color_check = ft_atoi(colors[i]);
 		if (color_check < 0 || color_check > 255)
-			print_error("Error\n Invalid color.\n");
+			print_error_bonus("Error\n Invalid color.\n");
 		if (ft_strncmp("F ", line, 2) == 0)
 		{
 			data->floor_color[i] = color_check;
@@ -85,16 +85,16 @@ void	convert_and_assign_colors(t_data *data, char **colors,
 	}
 }
 
-void	parse_color(t_data *data, char *line, int id[])
+void	parse_color_bonus(t_data *data, char *line, int id[])
 {
 	int		i;
 	char	**colors;
 
 	i = 0;
-	i = skip_spaces(line, i);
-	colors = split_and_trim_colors(line, i);
-	validate_colors(colors);
-	convert_and_assign_colors(data, colors, line, id);
+	i = skip_spaces_bonus(line, i);
+	colors = split_and_trim_colors_bonus(line, i);
+	validate_colors_bonus(colors);
+	convert_and_assign_colors_bonus(data, colors, line, id);
 	i = 0;
 	while (colors[i])
 	{

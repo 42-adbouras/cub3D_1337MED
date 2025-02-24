@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   check_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:43:40 by starscourge       #+#    #+#             */
-/*   Updated: 2025/02/23 11:43:24 by fidriss          ###   ########.fr       */
+/*   Updated: 2025/02/23 19:24:36 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d_bonus.h"
 
-void	check_map_borders(char **map)
+void	check_map_borders_bonus(char **map)
 {
 	int	i;
 	int	j;
@@ -20,20 +20,20 @@ void	check_map_borders(char **map)
 
 	i = 0;
 	j = 0;
-	row_count = count_rows(map, i);
+	row_count = count_rows_bonus(map, i);
 	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
 		{
-			if (is_bordered_map_char(map[i][j]))
+			if (is_bordered_map_char_bonus(map[i][j]))
 			{
-				if (is_on_border(i, j, row_count, map)
-					|| is_surrounded_by_spaces(i, j, map))
-					print_error("Error\n Invalid map.\n");
+				if (is_on_border_bonus(i, j, row_count, map)
+					|| is_surrounded_by_spaces_bonus(i, j, map))
+					print_error_bonus("Error\n Invalid map.\n");
 				if (map[i - 1][j] == ' ' || map[i + 1][j] == ' '
 					|| map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
-					print_error("Error\n Invalid map.\n");
+					print_error_bonus("Error\n Invalid map.\n");
 			}
 			j++;
 		}
@@ -41,7 +41,7 @@ void	check_map_borders(char **map)
 	}
 }
 
-void	check_map_content(char **map)
+void	check_map_content_bonus(char **map)
 {
 	int	i;
 	int	j;
@@ -63,10 +63,10 @@ void	check_map_content(char **map)
 		i++;
 	}
 	if (count != 1)
-		print_error("Error\n, Invalid map.\n");
+		print_error_bonus("Error\n, Invalid map.\n");
 }
 
-void	check_characters(char	**map)
+void	check_characters_bonus(char	**map)
 {
 	int	i;
 	int	j;
@@ -81,35 +81,35 @@ void	check_characters(char	**map)
 			if (map[i][j] != ' ' && map[i][j] != '1' && map[i][j] != '0'
 				&& map[i][j] != 'N' && map[i][j] != 'S'
 					&& map[i][j] != 'W' && map[i][j] != 'E')
-				print_error("Error\n Invalid character.\n");
+				print_error_bonus("Error\n Invalid character.\n");
 			j++;
 		}
 		i++;
 	}
 }
 
-void	check_for_empty_lines(char **map)
+void	check_for_empty_lines_bonus(char **map)
 {
 	int	i;
 
 	i = 0;
 	while (map[i])
 	{
-		if (ft_strlen(map[i]) == 0 || only_spaces(map[i]))
-			print_error("Error\n Invalid map.\n");
+		if (ft_strlen(map[i]) == 0 || only_spaces_bonus(map[i]))
+			print_error_bonus("Error\n Invalid map.\n");
 		i++;
 	}
 }
 
-void	check_map(char **map)
+void	check_map_bonus(char **map)
 {
 	int		row_count;
 
 	row_count = 0;
 	while (map[row_count])
 		row_count++;
-	check_map_borders(map);
-	check_map_content(map);
-	check_characters(map);
-	check_for_empty_lines(map);
+	check_map_borders_bonus(map);
+	check_map_content_bonus(map);
+	check_characters_bonus(map);
+	check_for_empty_lines_bonus(map);
 }

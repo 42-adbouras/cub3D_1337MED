@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/23 11:46:09 by fidriss          ###   ########.fr       */
+/*   Updated: 2025/02/24 10:33:51 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ void	game_loop_bonus(void *param);
 void	raycasting_bonus(t_data *data);
 void	draw_bg_bonus(t_data *data);
 void	render_strip_bonus(t_data *data, int ray, double distance);
-void	draw_rect_bonus(t_data *data, double x, double y, double width, double height, int ray, double texture_x);
+// void	draw_rect_bonus(t_data *data, double x, double y, double width, double height, int ray, double texture_x);
 void	draw_walls_bonus(t_data *data);
 
 int		rgba(int r, int g, int b, int a);
@@ -194,7 +194,7 @@ void	mouse_hook_bonus(t_data *data);
 void	close_game_bonus(void *param);
 void	ft_exit_bonus(t_data *data, int i, bool term);
 void	free_char_arr_bonus(char **arr);
-void		parse_map(t_data *data);
+void	parse_map_bonus(t_data *data);
 char	**ft_split_cub(char const *s, char c);
 
 void	load_sprites_bonus(t_data *data);
@@ -207,23 +207,23 @@ bool	wall_at_bonus(t_data *data, int x, int y, int ray);
 int		rgba(int r, int g, int b, int a);
 
 void	load_textures_bonus(t_data *data);
-void	parse_color(t_data *data, char *line, int id[]);
-int		skip_spaces(const char *line, int i);
-void	check_elements(t_data *data, char *line, int id[]);
-int		count_rows(char **map, int i);
-int		only_spaces(char	*line);
-int		isspace(int c);
-void	print_error(char *error);
-void	check_map(char **map);
-bool	is_bordered_map_char(char c);
-bool	is_surrounded_by_spaces(int i, int j, char **map);
-bool	is_on_border(int i, int j, int row_count, char **map);
-void	which_texture(t_data	*data, int ray);
-char	**extract_map_content(char **map_arr);
-void	check_invalid_character(char c);
-void	call_func(int id[], t_data	*data, int j, int *flag);
-void	check_missing_elements(int id[], int size);
-void	handle_map_parsing(t_data *data, int i);
-void	which_texture(t_data	*data, int ray);
-void	render_strip(t_data *data, int ray, double distance);
-void	draw_rect(t_data *data, double x, double y, double height);
+void	parse_color_bonus(t_data *data, char *line, int id[]);
+int		skip_spaces_bonus(const char *line, int i);
+void	check_elements_bonus(t_data *data, char *line, int id[]);
+int		count_rows_bonus(char **map, int i);
+int		only_spaces_bonus(char	*line);
+int		isspace_bonus(int c);
+void	print_error_bonus(char *error);
+void	check_map_bonus(char **map);
+bool	is_bordered_map_char_bonus(char c);
+bool	is_surrounded_by_spaces_bonus(int i, int j, char **map);
+bool	is_on_border_bonus(int i, int j, int row_count, char **map);
+void	which_texture_bonus(t_data	*data, int ray);
+char	**extract_map_content_bonus(char **map_arr);
+void	check_invalid_character_bonus(char c);
+void	call_func_bonus(int id[], t_data	*data, int j, int *flag);
+void	check_missing_elements_bonus(int id[], int size);
+void	handle_map_parsing_bonus(t_data *data, int i);
+void	which_texture_bonus(t_data	*data, int ray);
+void	render_strip_bonus(t_data *data, int ray, double distance);
+void	draw_rect_bonus(t_data *data, double x, double y, double height);

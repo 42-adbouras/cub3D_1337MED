@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extract_map_content.c                              :+:      :+:    :+:   */
+/*   extract_map_content_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 16:46:19 by starscourge       #+#    #+#             */
-/*   Updated: 2025/02/23 11:43:28 by fidriss          ###   ########.fr       */
+/*   Updated: 2025/02/23 19:09:31 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d_bonus.h"
 
-char	**allocate_and_copy_map(char **map_arr, int start_index, int row_count)
+char	**allocate_and_copy_map_bonus(char **map_arr, int start_index, int row_count)
 {
 	char	**new_map_arr;
 	int		i;
@@ -33,7 +33,7 @@ char	**allocate_and_copy_map(char **map_arr, int start_index, int row_count)
 	return (new_map_arr);
 }
 
-int	find_start_index(char **map_arr)
+int	find_start_index_bonus(char **map_arr)
 {
 	int	i;
 	int	j;
@@ -55,14 +55,14 @@ int	find_start_index(char **map_arr)
 	return (-1);
 }
 
-char	**extract_map_content(char **map_arr)
+char	**extract_map_content_bonus(char **map_arr)
 {
 	int	start_index;
 	int	row_count;
 
-	start_index = find_start_index(map_arr);
+	start_index = find_start_index_bonus(map_arr);
 	if (start_index == -1)
 		return (NULL);
-	row_count = count_rows(map_arr, start_index);
-	return (allocate_and_copy_map(map_arr, start_index, row_count));
+	row_count = count_rows_bonus(map_arr, start_index);
+	return (allocate_and_copy_map_bonus(map_arr, start_index, row_count));
 }
