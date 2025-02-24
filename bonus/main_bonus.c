@@ -6,11 +6,11 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:43:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/12 14:58:48 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/24 10:43:47 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "../includes/cub3d_bonus.h"
 
 void	_leaks(void){system("leaks cub3D");}
 

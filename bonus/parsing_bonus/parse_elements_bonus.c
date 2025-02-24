@@ -6,11 +6,11 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:07:10 by starscourge       #+#    #+#             */
-/*   Updated: 2025/02/23 19:11:39 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/24 10:45:37 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d_bonus.h"
+#include "../../includes/cub3d_bonus.h"
 
 void	handle_color_parsing_bonus(t_data *data, char *line, int id[])
 {

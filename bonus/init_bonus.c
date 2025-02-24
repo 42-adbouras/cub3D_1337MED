@@ -6,16 +6,16 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:09 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/12 15:12:04 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/24 10:43:47 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "../includes/cub3d_bonus.h"
 
 void	init_data_bonus(t_data *data, char *arg)
 {
 	import_map_bonus(data, arg);
-	parse_map(data);
+	parse_map_bonus(data);
 	load_game_bonus(data);
 	load_player_bonus(data);
 	load_images_bonus(data);

@@ -6,11 +6,11 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:47:58 by starscourge       #+#    #+#             */
-/*   Updated: 2025/02/23 19:12:24 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/24 10:45:37 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d_bonus.h"
+#include "../../includes/cub3d_bonus.h"
 
 void	check_invalid_character_bonus(char c)
 {

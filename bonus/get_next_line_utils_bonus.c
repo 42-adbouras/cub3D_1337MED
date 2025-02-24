@@ -6,11 +6,11 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:59:44 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/03 13:15:32 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/24 10:44:57 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "../includes/get_next_line_bonus.h"
 
 int	ft_strlen_gnl(char *s)
 {

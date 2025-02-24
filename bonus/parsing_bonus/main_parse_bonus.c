@@ -6,11 +6,11 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 14:02:54 by fidriss           #+#    #+#             */
-/*   Updated: 2025/02/23 19:10:13 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/24 10:45:37 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d_bonus.h"
+#include "../../includes/cub3d_bonus.h"
 
 void	handle_map_parsing_bonus(t_data *data, int i)
 {

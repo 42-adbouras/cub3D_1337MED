@@ -6,11 +6,11 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:43:40 by starscourge       #+#    #+#             */
-/*   Updated: 2025/02/23 19:24:36 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/24 10:45:37 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d_bonus.h"
+#include "../../includes/cub3d_bonus.h"
 
 void	check_map_borders_bonus(char **map)
 {

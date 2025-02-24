@@ -6,11 +6,11 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:59:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/03 13:15:27 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/24 10:44:33 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "../includes/get_next_line_bonus.h"
 
 char	*ft_read(char *line, int fd);
 char	*ft_substr_ft(char *line);
