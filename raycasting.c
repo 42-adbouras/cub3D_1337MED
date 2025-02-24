@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:58:41 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/12 13:29:31 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:00:00 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ double	hori_intersection(t_data *data, double angle, int ray, t_xy *h_xy)
 	h = step_incremant(data, h, ray, true);
 	h_xy ->x = h.next_x;
 	h_xy->y = h.next_y;
-	// if (ray == 12 || ray == 200)
-	// 	printf(">>>nbrray :%d||wall_h_x %f||wall_h_y %f\n",ray, h.next_x, h.next_y);
 	return (get_distance(h.player_x, h.player_y, h.next_x, h.next_y));
 }
 
@@ -81,14 +79,8 @@ double	vert_intersection(t_data *data, double angle, int ray, t_xy *v_xy)
 	v.next_x = v.x_inter;
 	v.next_y = v.y_inter;
 	v = step_incremant(data, v, ray, false);
-	// if (data->text[ray].wall_hit_x < v.next_x)
-	// 	data->text[ray].wall_hit_x = v.next_x;
-	// if (data->text[ray].wall_hit_y < v.next_y)
-	// 	data->text[ray].wall_hit_y = v.next_y;
 	v_xy->x = v.next_x;
 	v_xy->y = v.next_y;
-	// if (ray == 12 || ray == 200)
-	// 	printf("VVVVVV>>>nbrray :%d||wall_h_x %f||wall_h_y %f\n",ray, v.next_x, v.next_y);
 	return (get_distance(v.player_x, v.player_y, v.next_x, v.next_y));
 }
 

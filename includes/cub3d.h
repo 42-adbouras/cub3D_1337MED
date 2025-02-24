@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/23 11:42:38 by fidriss          ###   ########.fr       */
+/*   Updated: 2025/02/24 12:54:04 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,6 @@
 #define NORTH 2
 #define SOUTH 3
 
-typedef struct s_sprite
-{
-	char				**path;
-	mlx_texture_t		*s_texture[NUM_SPRITES];
-	mlx_image_t			*s_images[NUM_SPRITES];
-}						t_sprite;
-
 typedef struct s_ray_utils
 {
 	double				x_step;
@@ -80,16 +73,6 @@ typedef struct s_line
 	double				x_inc;
 	double				y_inc;
 }						t_line;
-
-typedef struct s_mini_map
-{
-	int					x;
-	int					y;
-	int					map_x;
-	int					map_y;
-	int					start_x;
-	int					start_y;
-}						t_mini_map;
 
 typedef struct s_player
 {
@@ -151,11 +134,10 @@ typedef struct s_data
 	t_texture			*texture;
 	mlx_image_t			*frame;
 	mlx_image_t			*minimap;
-	mlx_texture_t		*tx;
-	mlx_image_t			*im;
+	mlx_texture_t		*p_txtre;
+	mlx_image_t			*p_asset;
 	t_player			*player;
 	t_text				text[RAYS];
-	t_sprite			sprites;
 	double				rot_speed;
 	double				fov;
 	bool				orient;
@@ -169,8 +151,6 @@ void	load_images(t_data *data);
 void	load_ray(t_data *data);
 
 void	import_map(t_data *data, char *path);
-void	draw_minimap(t_data	*data);
-void	draw_player(t_data *data);
 void	get_map_size(t_data *data);
 
 void	draw_line(mlx_image_t *img, t_line line, uint32_t color);
@@ -188,16 +168,11 @@ void	draw_walls(t_data *data);
 
 int		rgba(int r, int g, int b, int a);
 
-void	mouse_hook(t_data *data);
-
 void	close_game(void *param);
 void	ft_exit(t_data *data, int i, bool term);
 void	free_char_arr(char **arr);
 void	parse_map(t_data *data);
 char	**ft_split_cub(char const *s, char c);
-
-void	load_sprites(t_data *data);
-void	animation(t_data *data);
 
 double	get_distance(double start_x, double start_y,
 			double end_x, double end_y);
