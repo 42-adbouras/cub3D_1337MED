@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:43:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/24 12:56:44 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/25 11:49:18 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	(void) ac;
-	atexit(_leaks);
 	init_data(&data, av[1]);
 	player_spawn(&data);
 	mlx_loop_hook(data.game, game_loop, &data);

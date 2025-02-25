@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:58:41 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/24 10:43:47 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:03:57 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ double	hori_intersection_bonus(t_data *data, double angle, int ray, t_xy *h_xy)
 	h = step_incremant_bonus(data, h, ray, true);
 	h_xy ->x = h.next_x;
 	h_xy->y = h.next_y;
-	// if (ray == 12 || ray == 200)
-	// 	printf(">>>nbrray :%d||wall_h_x %f||wall_h_y %f\n",ray, h.next_x, h.next_y);
 	return (get_distance_bonus(h.player_x, h.player_y, h.next_x, h.next_y));
 }
 
@@ -81,24 +79,58 @@ double	vert_intersection_bonus(t_data *data, double angle, int ray, t_xy *v_xy)
 	v.next_x = v.x_inter;
 	v.next_y = v.y_inter;
 	v = step_incremant_bonus(data, v, ray, false);
-	// if (data->text[ray].wall_hit_x < v.next_x)
-	// 	data->text[ray].wall_hit_x = v.next_x;
-	// if (data->text[ray].wall_hit_y < v.next_y)
-	// 	data->text[ray].wall_hit_y = v.next_y;
 	v_xy->x = v.next_x;
 	v_xy->y = v.next_y;
-	// if (ray == 12 || ray == 200)
-	// 	printf("VVVVVV>>>nbrray :%d||wall_h_x %f||wall_h_y %f\n",ray, v.next_x, v.next_y);
 	return (get_distance_bonus(v.player_x, v.player_y, v.next_x, v.next_y));
+}
+
+void	assigne_hori_walls_bonus(t_data *data, double ray_angle, int ray)
+{
+	if (sin(ray_angle) > 0)
+		data->text[ray].wall_facing = SOUTH;
+	else
+		data->text[ray].wall_facing = NORTH;
+}
+
+void	assigne_vert_walls_bonus(t_data *data, double ray_angle, int ray)
+{
+	if (cos(ray_angle) > 0)
+			data->text[ray].wall_facing = EAST;
+		else
+			data->text[ray].wall_facing = WEST;
+}
+
+void	calculate_dist_bonus(t_data *data, double ray_angle, int ray)
+{
+	double	hori_dist;
+	double	vert_dist;
+	t_xy	h_xy;
+	t_xy	v_xy;
+
+	hori_dist = hori_intersection_bonus(data, ray_angle, ray, &h_xy);
+	vert_dist = vert_intersection_bonus(data, ray_angle, ray, &v_xy);
+	if (hori_dist < vert_dist)
+	{
+		data->text[ray].is_hori = true;
+		data->text[ray].distance = hori_dist;
+		data->text[ray].wall_hit_x = h_xy.x;
+		data->text[ray].wall_hit_y = h_xy.y;
+		assigne_hori_walls_bonus(data, ray_angle, ray);
+	}
+	else
+	{
+		data->text[ray].is_hori = false;
+		data->text[ray].distance = vert_dist;
+		data->text[ray].wall_hit_x = v_xy.x;
+		data->text[ray].wall_hit_y = v_xy.y;
+		assigne_vert_walls_bonus(data, ray_angle, ray);
+	}
 }
 
 void	raycasting_bonus(t_data *data)
 {
-	double	hori_dist;
-	double	vert_dist;
 	double	ray_angle;
 	int		ray;
-	t_xy	h_xy, v_xy;
 
 	ray = -1;
 	ray_angle = norm_angle_bonus(data->player->rot_angle - (data->fov / 2));
@@ -106,31 +138,7 @@ void	raycasting_bonus(t_data *data)
 	{
 		data->text[ray].angle = ray_angle;
 		set_orientation_bonus(data, ray_angle, ray);
-		hori_dist = hori_intersection_bonus(data, ray_angle, ray, &h_xy);
-		vert_dist = vert_intersection_bonus(data, ray_angle, ray, &v_xy);
-		if (hori_dist < vert_dist)
-		{
-			data->text[ray].is_hori = true;
-			data->text[ray].distance = hori_dist;
-			data->text[ray].wall_hit_x = h_xy.x;
-			data->text[ray].wall_hit_y = h_xy.y;
-			if (sin(ray_angle) > 0)
-				data->text[ray].wall_facing = SOUTH;
-			else
-				data->text[ray].wall_facing = NORTH;
-				
-		}
-		else
-		{
-			data->text[ray].is_hori = false;
-			data->text[ray].distance = vert_dist;
-			data->text[ray].wall_hit_x = v_xy.x;
-			data->text[ray].wall_hit_y = v_xy.y;
-			if (cos(ray_angle) > 0)
-				data->text[ray].wall_facing = EAST;
-			else
-				data->text[ray].wall_facing = WEST;
-		}
+		calculate_dist_bonus(data, ray_angle, ray);
 		ray_angle = norm_angle_bonus(ray_angle + (data->fov / RAYS));
 	}
 }

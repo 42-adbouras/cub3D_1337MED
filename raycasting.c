@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:58:41 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/24 13:00:00 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:25:16 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ double	hori_intersection(t_data *data, double angle, int ray, t_xy *h_xy)
 	h.next_x = h.x_inter;
 	h.next_y = h.y_inter;
 	h = step_incremant(data, h, ray, true);
-	h_xy ->x = h.next_x;
+	h_xy->x = h.next_x;
 	h_xy->y = h.next_y;
 	return (get_distance(h.player_x, h.player_y, h.next_x, h.next_y));
 }
@@ -84,13 +84,53 @@ double	vert_intersection(t_data *data, double angle, int ray, t_xy *v_xy)
 	return (get_distance(v.player_x, v.player_y, v.next_x, v.next_y));
 }
 
-void	raycasting(t_data *data)
+void	assigne_hori_walls(t_data *data, double ray_angle, int ray)
+{
+	if (sin(ray_angle) > 0)
+		data->text[ray].wall_facing = SOUTH;
+	else
+		data->text[ray].wall_facing = NORTH;
+}
+
+void	assigne_vert_walls(t_data *data, double ray_angle, int ray)
+{
+	if (cos(ray_angle) > 0)
+			data->text[ray].wall_facing = EAST;
+		else
+			data->text[ray].wall_facing = WEST;
+}
+
+void	calculate_dist(t_data *data, double ray_angle, int ray)
 {
 	double	hori_dist;
 	double	vert_dist;
+	t_xy	h_xy;
+	t_xy	v_xy;
+
+	hori_dist = hori_intersection(data, ray_angle, ray, &h_xy);
+	vert_dist = vert_intersection(data, ray_angle, ray, &v_xy);
+	if (hori_dist < vert_dist)
+	{
+		data->text[ray].is_hori = true;
+		data->text[ray].distance = hori_dist;
+		data->text[ray].wall_hit_x = h_xy.x;
+		data->text[ray].wall_hit_y = h_xy.y;
+		assigne_hori_walls(data, ray_angle, ray);
+	}
+	else
+	{
+		data->text[ray].is_hori = false;
+		data->text[ray].distance = vert_dist;
+		data->text[ray].wall_hit_x = v_xy.x;
+		data->text[ray].wall_hit_y = v_xy.y;
+		assigne_vert_walls(data, ray_angle, ray);
+	}
+}
+
+void	raycasting(t_data *data)
+{
 	double	ray_angle;
 	int		ray;
-	t_xy	h_xy, v_xy;
 
 	ray = -1;
 	ray_angle = norm_angle(data->player->rot_angle - (data->fov / 2));
@@ -98,31 +138,7 @@ void	raycasting(t_data *data)
 	{
 		data->text[ray].angle = ray_angle;
 		set_orientation(data, ray_angle, ray);
-		hori_dist = hori_intersection(data, ray_angle, ray, &h_xy);
-		vert_dist = vert_intersection(data, ray_angle, ray, &v_xy);
-		if (hori_dist < vert_dist)
-		{
-			data->text[ray].is_hori = true;
-			data->text[ray].distance = hori_dist;
-			data->text[ray].wall_hit_x = h_xy.x;
-			data->text[ray].wall_hit_y = h_xy.y;
-			if (sin(ray_angle) > 0)
-				data->text[ray].wall_facing = SOUTH;
-			else
-				data->text[ray].wall_facing = NORTH;
-				
-		}
-		else
-		{
-			data->text[ray].is_hori = false;
-			data->text[ray].distance = vert_dist;
-			data->text[ray].wall_hit_x = v_xy.x;
-			data->text[ray].wall_hit_y = v_xy.y;
-			if (cos(ray_angle) > 0)
-				data->text[ray].wall_facing = EAST;
-			else
-				data->text[ray].wall_facing = WEST;
-		}
+		calculate_dist(data, ray_angle, ray);
 		ray_angle = norm_angle(ray_angle + (data->fov / RAYS));
 	}
 }

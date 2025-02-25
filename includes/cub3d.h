@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/24 12:54:04 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:52:45 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@
 #define HEIGHT			720
 #define TILE_SIZE		42
 #define MAP_FACT		0.2
-#define HITBOX			4
+#define HITBOX			20
 #define SPEED			2
 #define ROT_SPEED		3
-#define FOV				80
+#define FOV				60
 #define RAYS			WIDTH
 #define MOUSE_SENS		1000.00
 #define NUM_SPRITES		18
@@ -45,10 +45,10 @@
 #define RED				0xFF0000FF
 #define GREEN			0x00FF00FF
 
-#define EAST  0
-#define WEST  1
-#define NORTH 2
-#define SOUTH 3
+#define EAST			0
+#define WEST			1
+#define NORTH			2
+#define SOUTH			3
 
 typedef struct s_ray_utils
 {
