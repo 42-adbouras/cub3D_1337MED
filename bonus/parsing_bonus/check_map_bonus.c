@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:43:40 by starscourge       #+#    #+#             */
-/*   Updated: 2025/02/24 10:45:37 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:12:59 by fidriss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ void	check_characters_bonus(char	**map)
 		{
 			if (map[i][j] != ' ' && map[i][j] != '1' && map[i][j] != '0'
 				&& map[i][j] != 'N' && map[i][j] != 'S'
-					&& map[i][j] != 'W' && map[i][j] != 'E')
+					&& map[i][j] != 'W' && map[i][j] != 'E'
+						&& map[i][j] == 'C' && map[i][j] == 'O')
 				print_error_bonus("Error\n Invalid character.\n");
 			j++;
 		}
