@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:06:12 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/25 13:02:13 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:51:58 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,12 @@ void	draw_minimap_bonus(t_data	*data)
 			else if (m.map_y >= 0 && m.map_x >= 0 && m.map_y < data->map_height \
 					&& m.map_x < (int)ft_strlen(data->parsed_map[m.map_y]) && data->parsed_map[m.map_y][m.map_x] == '1')
 				mlx_put_pixel(data->minimap, m.x, m.y, rgba(230, 230, 230, 180));
+			else if (m.map_y >= 0 && m.map_x >= 0 && m.map_y < data->map_height \
+					&& m.map_x < (int)ft_strlen(data->parsed_map[m.map_y]) && data->parsed_map[m.map_y][m.map_x] == 'C')
+				mlx_put_pixel(data->minimap, m.x, m.y, rgba(0, 0, 0, 255));
+			else if (m.map_y >= 0 && m.map_x >= 0 && m.map_y < data->map_height \
+					&& m.map_x < (int)ft_strlen(data->parsed_map[m.map_y]) && data->parsed_map[m.map_y][m.map_x] == 'O')
+				mlx_put_pixel(data->minimap, m.x, m.y, rgba(255, 255, 255, 255));
 			else
 				mlx_put_pixel(data->minimap, m.x, m.y, rgba(36, 28, 45, 180));
 			m.x++;

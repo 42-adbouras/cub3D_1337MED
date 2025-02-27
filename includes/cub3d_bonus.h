@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/24 10:33:51 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:43:24 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 #define HITBOX			4
 #define SPEED			2
 #define ROT_SPEED		3
-#define FOV				80
+#define FOV				60
 #define RAYS			WIDTH
 #define MOUSE_SENS		1000.00
 #define NUM_SPRITES		18
@@ -39,6 +39,9 @@
 #define MINI_MAP_WIDTH	350
 #define MINI_MAP_HEIGHT	200
 #define M_MAP_FACT		0.3
+
+#define DOOR_CLOSED 'C'
+#define DOOR_OPENED 'O'
 
 #define WHITE			0xFFFFFFFF
 #define BLACK			0x000000FF
@@ -49,6 +52,14 @@
 #define WEST  1
 #define NORTH 2
 #define SOUTH 3
+
+typedef struct s_door
+{
+	int					x;
+	int					y;
+	char				state;
+	struct s_door		*next;
+}						t_door;
 
 typedef struct s_sprite
 {
@@ -119,11 +130,14 @@ typedef struct s_text
 	bool				v_cross;
 	double				wall_hit_x;
 	double				wall_hit_y;
+	int					x;
+	int					y;
 	bool				face_up;
 	bool				face_down;
 	bool				face_left;
 	bool				face_right;
 	bool				is_hori;
+	char				contant;
 }						t_text;
 
 typedef struct	s_texture
@@ -132,6 +146,7 @@ typedef struct	s_texture
 	mlx_texture_t		*south_img;
 	mlx_texture_t		*west_img;
 	mlx_texture_t		*east_img;
+	mlx_texture_t		*door_img;
 }	t_texture;
 
 typedef struct s_data
@@ -160,6 +175,7 @@ typedef struct s_data
 	double				fov;
 	bool				orient;
 	bool				animation;
+	t_door				*doors;
 }						t_data;
 
 void	init_data_bonus(t_data *data, char *arg);

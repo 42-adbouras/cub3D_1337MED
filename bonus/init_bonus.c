@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:09 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/24 10:43:47 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:18:27 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_data_bonus(t_data *data, char *arg)
 	load_ray_bonus(data);
 	load_textures_bonus(data);
 	get_map_size_bonus(data);
+	// init_doors(data);
 }
 
 
@@ -113,5 +114,6 @@ void	load_ray_bonus(t_data *data)
 		data->text[ray].face_left = false;
 		data->text[ray].face_right = false;
 		data->text[ray].is_hori = false;
+		data->text[ray].contant = '0';
 	}
 }

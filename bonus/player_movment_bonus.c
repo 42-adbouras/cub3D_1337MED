@@ -6,11 +6,68 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:26:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/24 10:43:47 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:51:13 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
+
+
+double	door_dist(t_data *data, double ray_x, double ray_y)
+{
+	return (sqrt(pow(ray_x - data->player->x, 2) + pow(ray_y - data->player->y, 2)));
+}
+
+void	door_handle(t_data *data)
+{
+	double	ray_angle;
+    double	ray_x, ray_y;
+    double	step_x, step_y;
+    int		map_x, map_y;
+    int		hit;
+
+    ray_angle = data->player->rot_angle;
+    ray_x = data->player->x;
+    ray_y = data->player->y;
+    step_x = cos(ray_angle);
+    step_y = sin(ray_angle);
+    hit = 0;
+    while (!hit && door_dist(data, ray_x, ray_y) < TILE_SIZE * 2)
+    {
+        ray_x += step_x;
+        ray_y += step_y;
+        map_x = (int)(ray_x / TILE_SIZE);
+        map_y = (int)(ray_y / TILE_SIZE);
+        if (map_x < 0 || map_x >= data->map_width || map_y < 0 || map_y >= data->map_height)
+            break;
+        if (data->parsed_map[map_y][map_x] == DOOR_CLOSED)
+        {
+            data->parsed_map[map_y][map_x] = DOOR_OPENED;
+            hit = 1;
+        }
+        else if (data->parsed_map[map_y][map_x] == DOOR_OPENED)
+        {
+			data->parsed_map[map_y][map_x] = DOOR_CLOSED;	
+            hit = 1;
+        }
+    }
+}
+
+void	door_key(t_data *data)
+{
+	static bool	door_key;
+
+	if (mlx_is_key_down(data->game, MLX_KEY_E))
+	{
+		if (!door_key)
+		{
+			door_handle(data);
+			door_key = true;
+		}
+	}
+	else
+		door_key = false;
+}
 
 void	key_press_bonus(t_data *data)
 {
@@ -35,6 +92,7 @@ void	key_press_bonus(t_data *data)
 		data->player->walk_dir *= 2.5;
 	if (mlx_is_mouse_down(data->game, MLX_MOUSE_BUTTON_LEFT))
 		data->animation = true;
+	door_key(data);
 }
 void    draw_line_bonus(mlx_image_t *img, t_line line, uint32_t color)
 {
@@ -74,10 +132,15 @@ bool	if_collition_bonus(t_data *data, int32_t x, int32_t y)
 	p_y = (y + data->player->y) / TILE_SIZE;
 	h_x = (x + data->player->x + HITBOX - 1) / TILE_SIZE;
 	h_y = (y + data->player->y + HITBOX - 1) / TILE_SIZE;
-	if (data->parsed_map[p_y][p_x] \
-		!= '1' && data->parsed_map[h_y][h_x] != '1' \
-		&& data->parsed_map[p_y][h_x] != '1' \
-		&& data->parsed_map[h_y][p_x] != '1')
+	if (data->parsed_map[p_y][p_x] == '1' \
+		|| data->parsed_map[h_y][h_x] == '1' \
+		|| data->parsed_map[p_y][h_x] == '1' \
+		|| data->parsed_map[h_y][p_x] == '1')
+		return (true);
+	if (data->parsed_map[p_y][p_x] == 'C' \
+		|| data->parsed_map[h_y][h_x] == 'C' \
+		|| data->parsed_map[p_y][h_x] == 'C' \
+		|| data->parsed_map[h_y][p_x] == 'C')
 		return (true);
 	return (false);
 }
@@ -98,8 +161,7 @@ void	update_player_pose_bonus(t_data *data)
 			- sin(data->player->rot_angle) * straf_step);
 	new_y = round(sin(data->player->rot_angle) * move_step \
 			+ cos(data->player->rot_angle) * straf_step);
-	
-	if (if_collition_bonus(data, new_x, new_y))
+	if (!if_collition_bonus(data, new_x, new_y))
 	{
 		data->player->imge->instances->x += new_x;
 		data->player->imge->instances->y += new_y;

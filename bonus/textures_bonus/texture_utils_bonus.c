@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 00:27:27 by starscourge       #+#    #+#             */
-/*   Updated: 2025/02/24 10:45:37 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:11:41 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	which_texture_bonus(t_data	*data, int ray)
 {
-	if (data->text[ray].wall_facing == NORTH)
+	if (data->text[ray].contant == 'C')
+		data->text[ray].img = data->texture->door_img;
+	else if (data->text[ray].wall_facing == NORTH)
 		data->text[ray].img = data->texture->north_img;
 	else if (data->text[ray].wall_facing == SOUTH)
 		data->text[ray].img = data->texture->south_img;
@@ -31,4 +33,5 @@ void	load_textures_bonus(t_data *data)
 	data->texture->south_img = mlx_load_png(data->south_texture);
 	data->texture->west_img = mlx_load_png(data->west_texture);
 	data->texture->east_img = mlx_load_png(data->east_texture);
+	data->texture->door_img = mlx_load_png("assets/door.png");
 }

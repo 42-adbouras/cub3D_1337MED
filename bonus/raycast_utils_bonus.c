@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 16:59:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/24 10:43:47 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:42:04 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,22 @@ bool	wall_at_bonus(t_data *data, int x, int y, int ray)
 	if (x < 0 || x >= data->map_width * TILE_SIZE \
 		|| y < 0 || y >= data->map_height * TILE_SIZE)
 		return (true);
-	map_y = floor(y / TILE_SIZE);
-	map_x = floor(x / TILE_SIZE);
+	map_y = y / TILE_SIZE;
+	map_x = x / TILE_SIZE;
 	if (map_y >= data->map_height || map_x >= data->map_width)
 		return (true);
 	if (map_x >= (int)ft_strlen(data->parsed_map[map_y]))
 		return (true);
 	if (data->parsed_map[map_y][map_x] == '1')
+	{
+		data->text[ray].contant = '1';
 		return (true);
+	}
+	if (data->parsed_map[map_y][map_x] == 'C')
+	{
+		data->text[ray].contant = 'C';
+		return (true);	
+	}
 	return (false);
 }
 

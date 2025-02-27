@@ -6,7 +6,7 @@
 #    By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 11:59:01 by adbouras          #+#    #+#              #
-#    Updated: 2025/02/24 10:32:32 by adbouras         ###   ########.fr        #
+#    Updated: 2025/02/26 19:13:26 by adbouras         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ RST	= \033[0;39m
 CC			=	cc
 NAME		=	cub3D
 BNS_NAME	=	cub3D_bonus
-CFLAGS		=	-Wextra -Wall -Werror #-fsanitize=address -g
-# LDFLAGS		=	-fsanitize=address -g
+CFLAGS		=	-Wextra -Wall -Werror -O3 #-fsanitize=address -g
+LDFLAGS		=	-fsanitize=address -g
 LIBMLX		=	libraries/MLX42
 LIBFT		=	libraries/libft/libft.a
 
