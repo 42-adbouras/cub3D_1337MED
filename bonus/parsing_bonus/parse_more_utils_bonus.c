@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_more_utils_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 19:33:08 by starscourge       #+#    #+#             */
-/*   Updated: 2025/02/26 10:11:45 by fidriss          ###   ########.fr       */
+/*   Updated: 2025/03/11 15:08:22 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	is_surrounded_by_spaces_bonus(int i, int j, char **map)
 bool	is_bordered_map_char_bonus(char c)
 {
 	return (c == '0' || c == 'N' || c == 'S'
-		| c == 'W' || c == 'E' || c == 'C' || c =='O');
+		| c == 'W' || c == 'E' || c == 'C' || c == 'O');
 }
 
 void	call_func_bonus(int id[], t_data	*data, int j, int *flag)

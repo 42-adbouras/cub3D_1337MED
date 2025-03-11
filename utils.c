@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:12:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/01/26 18:12:55 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/10 12:46:45 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ static	int	word_count(char const *s, char c)
 	count = 0;
 	while (s[i] != '\0')
 	{
-		if (s[i] == c && (i == 0 || s[i - 1] == c)) // Consecutive delimiter case
+		if (s[i] == c && (i == 0 || s[i - 1] == c))
 			count++;
-		if (s[i] != c && (i == 0 || s[i - 1] == c)) // Start of a word
+		if (s[i] != c && (i == 0 || s[i - 1] == c))
 			count++;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:14:40 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/12 13:51:11 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/10 12:10:40 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	close_game(void *param)
 void	ft_exit(t_data *data, int i, bool term)
 {
 	(void)i;
-
 	mlx_close_window(data->game);
 	free(data->player);
 	free_char_arr(data->map_arr);

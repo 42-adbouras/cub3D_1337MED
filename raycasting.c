@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:58:41 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/25 13:25:16 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/10 12:30:47 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,22 +82,6 @@ double	vert_intersection(t_data *data, double angle, int ray, t_xy *v_xy)
 	v_xy->x = v.next_x;
 	v_xy->y = v.next_y;
 	return (get_distance(v.player_x, v.player_y, v.next_x, v.next_y));
-}
-
-void	assigne_hori_walls(t_data *data, double ray_angle, int ray)
-{
-	if (sin(ray_angle) > 0)
-		data->text[ray].wall_facing = SOUTH;
-	else
-		data->text[ray].wall_facing = NORTH;
-}
-
-void	assigne_vert_walls(t_data *data, double ray_angle, int ray)
-{
-	if (cos(ray_angle) > 0)
-			data->text[ray].wall_facing = EAST;
-		else
-			data->text[ray].wall_facing = WEST;
 }
 
 void	calculate_dist(t_data *data, double ray_angle, int ray)

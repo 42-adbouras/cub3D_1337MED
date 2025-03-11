@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 16:59:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/27 17:42:04 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:02:26 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,9 @@ bool	wall_at_bonus(t_data *data, int x, int y, int ray)
 	if (map_x >= (int)ft_strlen(data->parsed_map[map_y]))
 		return (true);
 	if (data->parsed_map[map_y][map_x] == '1')
-	{
-		data->text[ray].contant = '1';
 		return (true);
-	}
 	if (data->parsed_map[map_y][map_x] == 'C')
-	{
-		data->text[ray].contant = 'C';
-		return (true);	
-	}
+		return (true);
 	return (false);
 }
 
@@ -62,7 +56,8 @@ void	set_orientation_bonus(t_data *data, double angle, int ray)
 	data->text[ray].face_left = !data->text[ray].face_right;
 }
 
-double	get_distance_bonus(double start_x, double start_y, double end_x, double end_y)
+double	get_distance_bonus(double start_x, \
+	double start_y, double end_x, double end_y)
 {
 	return (sqrt(pow(end_x - start_x, 2) + pow(end_y - start_y, 2)));
 }

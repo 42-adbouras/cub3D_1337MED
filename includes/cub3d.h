@@ -6,13 +6,13 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/26 18:06:26 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:42:50 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "../libraries/MLX42/include/MLX42/MLX42.h"
+#include "/Users/adbouras/MLX42/include/MLX42/MLX42.h"
 #include "../libraries/libft/libft.h"
 #include "get_next_line.h"
 
@@ -36,8 +36,8 @@
 #define MOUSE_SENS		1000.00
 #define NUM_SPRITES		18
 
-#define MINI_MAP_WIDTH	350
-#define MINI_MAP_HEIGHT	200
+#define MINI_WIDTH	350
+#define MINI_WIDTH	200
 #define M_MAP_FACT		0.3
 
 #define WHITE			0xFFFFFFFF
@@ -155,12 +155,17 @@ void	get_map_size(t_data *data);
 
 void	draw_line(mlx_image_t *img, t_line line, uint32_t color);
 
+void	player_spawn(t_data *data);
+void	get_player_position(t_data *data, int *x, int *y);
+void	init_rot_angle(t_data *data);
 void	player_hook(t_data *data);
 
 double	norm_angle(double angle);
 
 void	game_loop(void *param);
 void	raycasting(t_data *data);
+void	assigne_hori_walls(t_data *data, double ray_angle, int ray);
+void	assigne_vert_walls(t_data *data, double ray_angle, int ray);
 void	draw_bg(t_data *data);
 void	render_strip(t_data *data, int ray, double distance);
 void	draw_rect(t_data *data, double x, double y, double height);

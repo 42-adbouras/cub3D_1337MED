@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:14:40 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/24 10:43:08 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/11 09:53:10 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	close_game_bonus(void *param)
 void	ft_exit_bonus(t_data *data, int i, bool term)
 {
 	(void)i;
-
 	mlx_close_window(data->game);
 	if (i > 0)
 	{

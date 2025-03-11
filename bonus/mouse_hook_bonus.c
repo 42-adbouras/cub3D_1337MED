@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mouse_hook_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/16 18:43:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/10 12:26:00 by adbouras         ###   ########.fr       */
+/*   Created: 2025/03/11 09:56:04 by adbouras          #+#    #+#             */
+/*   Updated: 2025/03/11 09:57:53 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
-void	_leaks(void)
+void	mouse_hook_bonus(t_data *data)
 {
-	system("leaks cub3D");
-}
+	static int32_t	prev_x;
+	int32_t			new_x;
+	int32_t			new_y;
+	double			delta;
 
-int	main(int ac, char **av)
-{
-	t_data	data;
-
-	(void) ac;
-	init_data(&data, av[1]);
-	player_spawn(&data);
-	mlx_loop_hook(data.game, game_loop, &data);
-	mlx_close_hook(data.game, close_game, &data);
-	mlx_loop(data.game);
-	mlx_terminate(data.game);
+	mlx_get_mouse_pos(data->game, &new_x, &new_y);
+	delta = (new_x - prev_x) / MOUSE_SENS;
+	if (prev_x != 0)
+	{
+		data->player->rot_angle += delta;
+		data->player->rot_angle = norm_angle_bonus(data->player->rot_angle);
+	}
+	prev_x = WIDTH / 2;
 }

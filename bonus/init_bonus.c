@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:09 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/27 17:18:27 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:11:07 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ void	init_data_bonus(t_data *data, char *arg)
 	load_ray_bonus(data);
 	load_textures_bonus(data);
 	get_map_size_bonus(data);
-	// init_doors(data);
 }
-
 
 void	load_game_bonus(t_data *data)
 {
@@ -50,8 +48,10 @@ void	get_player_position_bonus(t_data *data, int *x, int *y)
 		j = 0;
 		while (data->parsed_map[i][j])
 		{
-			if (data->parsed_map[i][j] == 'N' || data->parsed_map[i][j] == 'S' \
-				|| data->parsed_map[i][j] == 'E' || data->parsed_map[i][j] == 'W')
+			if (data->parsed_map[i][j] == 'N' \
+				|| data->parsed_map[i][j] == 'S' \
+				|| data->parsed_map[i][j] == 'E' \
+				|| data->parsed_map[i][j] == 'W')
 			{
 				*x = j;
 				*y = i;

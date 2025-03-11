@@ -3,12 +3,15 @@
 !*.h
 !includes/
 !libraries/
+!libraries/libft
+!libraries/get_next_line
 !maps/
 !bonus/
 !assets/
 !assets/*
 !assets/sprites/*
-!source_img/
+!parsing/
+!textures/
 !sprites/
 !*.png
 !*.cub

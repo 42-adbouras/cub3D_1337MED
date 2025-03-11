@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:07:10 by starscourge       #+#    #+#             */
-/*   Updated: 2025/02/24 10:45:37 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/10 12:16:51 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	handle_color_parsing_bonus(t_data *data, char *line, int id[])
 	parse_color_bonus(data, line, id);
 }
 
-void	parse_texture_bonus(t_data *data, char *line, int id[], int texture_index)
+void	parse_texture_bonus(t_data *data, char *line, int id[], int text_idx)
 {
 	int	i;
 
@@ -38,17 +38,17 @@ void	parse_texture_bonus(t_data *data, char *line, int id[], int texture_index)
 		i++;
 	while (line[i] && line[i] == ' ')
 		i++;
-	if (id[texture_index] == 1)
+	if (id[text_idx] == 1)
 		print_error_bonus("Error\n, Invalid file.\n");
-	if (texture_index == 0)
+	if (text_idx == 0)
 		data->north_texture = ft_strdup(line + i);
-	else if (texture_index == 1)
+	else if (text_idx == 1)
 		data->south_texture = ft_strdup(line + i);
-	else if (texture_index == 2)
+	else if (text_idx == 2)
 		data->west_texture = ft_strdup(line + i);
-	else if (texture_index == 3)
+	else if (text_idx == 3)
 		data->east_texture = ft_strdup(line + i);
-	id[texture_index] = 1;
+	id[text_idx] = 1;
 }
 
 void	handle_texture_parsing_bonus(t_data *data, char *line, int id[])

@@ -6,13 +6,13 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/02/27 17:43:24 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:04:26 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "../libraries/MLX42/include/MLX42/MLX42.h"
+#include "/Users/adbouras/MLX42/include/MLX42/MLX42.h"
 #include "../libraries/libft/libft.h"
 #include "get_next_line_bonus.h"
 
@@ -36,30 +36,22 @@
 #define MOUSE_SENS		1000.00
 #define NUM_SPRITES		18
 
-#define MINI_MAP_WIDTH	350
-#define MINI_MAP_HEIGHT	200
+#define MINI_WIDTH		300
+#define MINI_HEIGHT		170
 #define M_MAP_FACT		0.3
-
-#define DOOR_CLOSED 'C'
-#define DOOR_OPENED 'O'
 
 #define WHITE			0xFFFFFFFF
 #define BLACK			0x000000FF
 #define RED				0xFF0000FF
 #define GREEN			0x00FF00FF
 
-#define EAST  0
-#define WEST  1
-#define NORTH 2
-#define SOUTH 3
+#define EAST			0
+#define WEST			1
+#define NORTH			2
+#define SOUTH			3
 
-typedef struct s_door
-{
-	int					x;
-	int					y;
-	char				state;
-	struct s_door		*next;
-}						t_door;
+#define DOOR_CLOSED		67
+#define DOOR_OPENED		79
 
 typedef struct s_sprite
 {
@@ -91,6 +83,15 @@ typedef struct s_line
 	double				x_inc;
 	double				y_inc;
 }						t_line;
+
+typedef struct s_door
+{
+	double				ray_x;
+	double				ray_y;
+	double				step_x;
+	double				step_y;
+	bool				hit;
+}						t_door;
 
 typedef struct s_mini_map
 {
@@ -140,7 +141,7 @@ typedef struct s_text
 	char				contant;
 }						t_text;
 
-typedef struct	s_texture
+typedef struct s_texture
 {
 	mlx_texture_t		*north_img;
 	mlx_texture_t		*south_img;
@@ -175,7 +176,6 @@ typedef struct s_data
 	double				fov;
 	bool				orient;
 	bool				animation;
-	t_door				*doors;
 }						t_data;
 
 void	init_data_bonus(t_data *data, char *arg);
@@ -192,6 +192,7 @@ void	get_map_size_bonus(t_data *data);
 
 void	draw_line_bonus(mlx_image_t *img, t_line line, uint32_t color);
 
+void	player_spawn_bonus(t_data *data);
 void	player_hook_bonus(t_data *data);
 
 double	norm_angle_bonus(double angle);
@@ -199,8 +200,9 @@ double	norm_angle_bonus(double angle);
 void	game_loop_bonus(void *param);
 void	raycasting_bonus(t_data *data);
 void	draw_bg_bonus(t_data *data);
+void	assigne_hori_walls_bonus(t_data *data, double ray_angle, int ray);
+void	assigne_vert_walls_bonus(t_data *data, double ray_angle, int ray);
 void	render_strip_bonus(t_data *data, int ray, double distance);
-// void	draw_rect_bonus(t_data *data, double x, double y, double width, double height, int ray, double texture_x);
 void	draw_walls_bonus(t_data *data);
 
 int		rgba(int r, int g, int b, int a);
@@ -216,11 +218,21 @@ char	**ft_split_cub(char const *s, char c);
 void	load_sprites_bonus(t_data *data);
 void	animation_bonus(t_data *data);
 
+void	draw_minimap_walls(t_data *data, t_mini_map *m);
+void	draw_minimap_border(t_data *data, t_mini_map *m);
+void	draw_minimap_bonus(t_data *data);
+void	draw_player_bonus(t_data *data);
+
 double	get_distance_bonus(double start_x, double start_y,
 			double end_x, double end_y);
 void	set_orientation_bonus(t_data *data, double angle, int ray);
 bool	wall_at_bonus(t_data *data, int x, int y, int ray);
 int		rgba(int r, int g, int b, int a);
+
+void	import_frames_bonus(t_data *data);
+void	load_sprites_bonus(t_data *data);
+
+void	door_key(t_data *data);
 
 void	load_textures_bonus(t_data *data);
 void	parse_color_bonus(t_data *data, char *line, int id[]);

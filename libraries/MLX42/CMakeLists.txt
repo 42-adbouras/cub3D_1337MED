@@ -53,7 +53,7 @@ if(UNIX AND NOT EMSCRIPTEN)
 	else()
 		message(STATUS "Building in RELEASE mode")
 		add_definitions(-D NDEBUG)
-		add_compile_options(-Ofast)
+		add_compile_options(-O3)
 	endif(DEBUG)
 else()
 	# TODO: Figure out what we need for windows.
@@ -82,7 +82,7 @@ add_custom_command(
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/mlx_frag_shader.c
     COMMAND ${CCSHADER} ${PROJECT_SOURCE_DIR}/shaders/default.frag ${EMSCRIPTEN_VALUE} > ${CMAKE_CURRENT_BINARY_DIR}/mlx_frag_shader.c
     VERBATIM
-    # PRE_BUILD
+    PRE_BUILD
     USES_TERMINAL
 )
 
@@ -93,7 +93,7 @@ add_custom_command(
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/mlx_vert_shader.c
     COMMAND ${CCSHADER} ${PROJECT_SOURCE_DIR}/shaders/default.vert ${EMSCRIPTEN_VALUE} > ${CMAKE_CURRENT_BINARY_DIR}/mlx_vert_shader.c
     VERBATIM
-    # PRE_BUILD
+    PRE_BUILD
     USES_TERMINAL
 )
 
