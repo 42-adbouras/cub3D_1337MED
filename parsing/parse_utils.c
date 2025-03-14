@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
+/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:47:58 by starscourge       #+#    #+#             */
-/*   Updated: 2025/02/15 17:08:34 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/03/14 17:52:12 by fidriss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,7 @@
 void	check_invalid_character(char c)
 {
 	if (c != ' ' && c != '\0')
-		print_error("Error\n Invalid character.");
-}
-
-void	print_error(char *error)
-{
-	printf("%s", error);
-	exit(1);
+		ft_exit(NULL, 13, ERR_CHAR, true);
 }
 
 int	isspace(int c)

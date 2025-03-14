@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 16:59:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/11 13:02:26 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:17:52 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ int	rgba(int r, int g, int b, int a)
 
 bool	wall_at_bonus(t_data *data, int x, int y, int ray)
 {
-	int	map_x;
-	int	map_y;
-
 	if (!data->orient)
 	{
 		if (data->text[ray].face_left)
@@ -35,15 +32,13 @@ bool	wall_at_bonus(t_data *data, int x, int y, int ray)
 	if (x < 0 || x >= data->map_width * TILE_SIZE \
 		|| y < 0 || y >= data->map_height * TILE_SIZE)
 		return (true);
-	map_y = y / TILE_SIZE;
-	map_x = x / TILE_SIZE;
-	if (map_y >= data->map_height || map_x >= data->map_width)
+	x /= TILE_SIZE;
+	y /= TILE_SIZE;
+	if (y >= data->map_height || x >= data->map_width)
 		return (true);
-	if (map_x >= (int)ft_strlen(data->parsed_map[map_y]))
+	if (x >= (int)ft_strlen(data->parsed_map[y]))
 		return (true);
-	if (data->parsed_map[map_y][map_x] == '1')
-		return (true);
-	if (data->parsed_map[map_y][map_x] == 'C')
+	if (data->parsed_map[y][x] == '1' || data->parsed_map[y][x] == 'C')
 		return (true);
 	return (false);
 }

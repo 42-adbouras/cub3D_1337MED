@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:09 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/11 15:11:07 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:52:36 by fidriss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,63 +26,27 @@ void	init_data_bonus(t_data *data, char *arg)
 
 void	load_game_bonus(t_data *data)
 {
-	data->game = mlx_init(WIDTH, HEIGHT, "cub3D", true);
+	data->game = mlx_init(WIDTH, HEIGHT, "cub3D_bonus", true);
 	data->rot_speed = ROT_SPEED * (M_PI / 180);
 	data->fov = FOV * (M_PI / 180);
 	data->animation = false;
 	if (!data->game)
-	{
-		perror("Failed while loading game window");
-		ft_exit_bonus(data, 0, true);
-	}
-}
-
-void	get_player_position_bonus(t_data *data, int *x, int *y)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (data->parsed_map[i])
-	{
-		j = 0;
-		while (data->parsed_map[i][j])
-		{
-			if (data->parsed_map[i][j] == 'N' \
-				|| data->parsed_map[i][j] == 'S' \
-				|| data->parsed_map[i][j] == 'E' \
-				|| data->parsed_map[i][j] == 'W')
-			{
-				*x = j;
-				*y = i;
-				return ;
-			}
-			j++;
-		}
-		i++;
-	}
+		ft_exit_bonus(data, 3, GAME_WIN, true);
 }
 
 void	load_player_bonus(t_data *data)
 {
 	data->player = malloc(sizeof(t_player));
 	if (!data->player)
-	{
-		perror("Bad malloc on <load_player>");
-		ft_exit_bonus(data, 0, true);
-	}
+		ft_exit_bonus(data, 2, ERR_MALLOC, true);
 	data->player->walk_dir = 0;
 	data->player->turn_dir = 0;
 	data->player->strafe_dir = 0;
-	data->player->rot_angle = 3 * (M_PI / 2);
-	data->player->rays = mlx_new_image(data->game, WIDTH, HEIGHT);
 	data->player->imge = mlx_new_image(data->game, HITBOX, HITBOX);
 	get_player_position_bonus(data, &data->player->x, &data->player->y);
-	if (!data->player->imge || !data->player->rays)
-	{
-		perror("Failed while loading player image");
-		ft_exit_bonus(data, 1, true);
-	}
+	if (!data->player->imge)
+		ft_exit_bonus(data, 5, ERR_IMG, true);
+	init_rot_angle_bonus(data);
 }
 
 void	load_images_bonus(t_data *data)
@@ -90,10 +54,7 @@ void	load_images_bonus(t_data *data)
 	data->frame = mlx_new_image(data->game, WIDTH, HEIGHT);
 	data->minimap = mlx_new_image(data->game, WIDTH, HEIGHT);
 	if (!data->frame || !data->minimap)
-	{
-		perror("Failed while loading images");
-		ft_exit_bonus(data, 1, true);
-	}
+		ft_exit_bonus(data, 5, ERR_IMG, true);
 }
 
 void	load_ray_bonus(t_data *data)
@@ -115,5 +76,31 @@ void	load_ray_bonus(t_data *data)
 		data->text[ray].face_right = false;
 		data->text[ray].is_hori = false;
 		data->text[ray].contant = '0';
+	}
+}
+
+void	init_rot_angle_bonus(t_data	*data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (data->map_arr[i])
+	{
+		j = 0;
+		while (data->map_arr[i][j])
+		{
+			if (data->map_arr[i][j] == 'N')
+				data->player->rot_angle = 270 * (M_PI / 180);
+			if (data->map_arr[i][j] == 'S')
+				data->player->rot_angle = 90 * (M_PI / 180);
+			if (data->map_arr[i][j] == 'W')
+				data->player->rot_angle = 180 * (M_PI / 180);
+			if (data->map_arr[i][j] == 'E')
+				data->player->rot_angle = 0;
+			j++;
+		}
+		i++;
 	}
 }

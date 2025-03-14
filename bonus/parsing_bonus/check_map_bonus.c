@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:43:40 by starscourge       #+#    #+#             */
-/*   Updated: 2025/03/11 11:39:50 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/12 11:00:16 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@ void	check_map_borders_bonus(char **map)
 	int	j;
 	int	row_count;
 
-	i = 0;
-	j = 0;
-	row_count = count_rows_bonus(map, i);
-	while (map[i])
+	i = -1;
+	row_count = count_rows_bonus(map, i + 1);
+	while (map[++i])
 	{
 		j = 0;
 		while (map[i][j])
@@ -34,10 +33,11 @@ void	check_map_borders_bonus(char **map)
 				if (map[i - 1][j] == ' ' || map[i + 1][j] == ' '
 					|| map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
 					print_error_bonus("Error\n Invalid map.\n");
+				if (map[i][j] == 'C' || map[i][j] == 'O')
+					parse_door_bonus(map, i, j);
 			}
 			j++;
 		}
-		i++;
 	}
 }
 

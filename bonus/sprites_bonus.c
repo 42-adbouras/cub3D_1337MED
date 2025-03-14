@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 10:34:54 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/10 12:37:00 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:47:31 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,9 @@ void	import_frames_bonus(t_data *data)
 	{
 		data->sprites.s_texture[i] = mlx_load_png(data->sprites.path[i]);
 		if (!data->sprites.s_texture[i])
-			ft_exit_bonus(data, 2, true);
+			ft_exit_bonus(data, 5, ERR_IMG, true);
 		data->sprites.s_images[i] = mlx_texture_to_image(data->game, \
 				data->sprites.s_texture[i]);
-		if (!data->sprites.s_images[i])
-			ft_exit_bonus(data, 2, true);
 		i++;
 	}
 }

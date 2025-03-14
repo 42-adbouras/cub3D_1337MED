@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_parse_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 14:02:54 by fidriss           #+#    #+#             */
-/*   Updated: 2025/02/24 10:45:37 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:50:04 by fidriss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	handle_map_parsing_bonus(t_data *data, int i)
 {
 	data->parsed_map = extract_map_content_bonus(data->map_arr + i);
+	if (!data->parsed_map)
+		ft_exit(data, 13, ERR_MAP, true);
 	check_map_bonus(data->parsed_map);
 }
 

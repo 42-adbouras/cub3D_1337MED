@@ -1,13 +1,14 @@
-NO image.png
-SO image copy.png
-WE image copy 3.png
-EA image copy 2.png
+NO assets/north_texture.png
+SO assets/south_texture.png
+WE assets/west_texture.png
+EA assets/east_texture.png
 
-F 0,32,0
-C 120,0,16
+C 36,28,45
+F 42,44,60
+
 
 1111111111111
-1N00000000001
+1E00000000001
 1000000000001
 1000000000001
 1000000000001

@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 10:31:03 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/10 12:27:19 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:47:53 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 
 void	player_spawn(t_data *data)
 {
-	mlx_image_to_window(data->game, data->player->imge, \
-		data->player->x * TILE_SIZE + (TILE_SIZE / 2 - HITBOX), \
-		data->player->y * TILE_SIZE + (TILE_SIZE / 2 - HITBOX));
+	int	x;
+	int	y;
+
+	x = data->player->x * TILE_SIZE + (TILE_SIZE / 2 - HITBOX);
+	y = data->player->y * TILE_SIZE + (TILE_SIZE / 2 - HITBOX);
+	if (mlx_image_to_window(data->game, data->player->imge, x, y) == -1)
+		ft_exit(data, 6, IMG_2_WIN, true);
 	if (mlx_image_to_window(data->game, data->frame, 0, 0) == -1)
-		ft_exit(data, 2, true);
+		ft_exit(data, 6, IMG_2_WIN, true);
 	data->p_txtre = mlx_load_png("assets/sprites/1.png");
 	if (!data->p_txtre)
-		ft_exit(data, 2, true);
+		ft_exit(data, 4, ERR_TEXTURE, true);
 	data->p_asset = mlx_texture_to_image(data->game, data->p_txtre);
 	mlx_resize_image(data->p_asset, WIDTH * 0.7, HEIGHT * 0.7);
 	mlx_image_to_window(data->game, data->p_asset, \
@@ -59,21 +63,14 @@ void	load_player(t_data *data)
 {
 	data->player = malloc(sizeof(t_player));
 	if (!data->player)
-	{
-		perror("Bad malloc on <load_player>");
-		ft_exit(data, 0, true);
-	}
+		ft_exit(data, 2, ERR_MALLOC, true);
 	data->player->walk_dir = 0;
 	data->player->turn_dir = 0;
 	data->player->strafe_dir = 0;
 	data->player->rot_angle = 3 * (M_PI / 2);
-	data->player->rays = mlx_new_image(data->game, WIDTH, HEIGHT);
 	data->player->imge = mlx_new_image(data->game, HITBOX, HITBOX);
 	get_player_position(data, &data->player->x, &data->player->y);
-	if (!data->player->imge || !data->player->rays)
-	{
-		perror("Failed while loading player image");
-		ft_exit(data, 1, true);
-	}
+	if (!data->player->imge)
+		ft_exit(data, 5, ERR_IMG, true);
 	init_rot_angle(data);
 }

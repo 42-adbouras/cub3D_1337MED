@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:48:30 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/11 15:01:13 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:16:33 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ void	draw_minimap_walls(t_data *data, t_mini_map *m)
 	map_char = data->parsed_map[m->map_y][m->map_x];
 	if (map_char == '1')
 		mlx_put_pixel(data->minimap, m->x, m->y, rgba(230, 230, 230, 180));
-	else if (map_char == 'C' || map_char == 'O')
+	else if (map_char == 'C')
 		mlx_put_pixel(data->minimap, m->x, m->y, rgba(230, 230, 230, 255));
+	else if (map_char == 'O')
+		mlx_put_pixel(data->minimap, m->x, m->y, rgba(230, 230, 230, 50));
 	else if (map_char == '0')
-		mlx_put_pixel(data->minimap, m->x, m->y, rgba(36, 28, 45, 180));
+		mlx_put_pixel(data->minimap, m->x, m->y, rgba(36, 28, 45, 200));
 	else
 		mlx_put_pixel(data->minimap, m->x, m->y, rgba(230, 230, 230, 180));
 }

@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/11 15:04:26 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:11:21 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "/Users/adbouras/MLX42/include/MLX42/MLX42.h"
 #include "../libraries/libft/libft.h"
 #include "get_next_line_bonus.h"
+#include "cub3D_errors.h"
 
 #include <unistd.h>
 #include <stdio.h>
@@ -28,9 +29,9 @@
 #define HEIGHT			720
 #define TILE_SIZE		42
 #define MAP_FACT		0.2
-#define HITBOX			4
+#define HITBOX			10
 #define SPEED			2
-#define ROT_SPEED		3
+#define ROT_SPEED		2
 #define FOV				60
 #define RAYS			WIDTH
 #define MOUSE_SENS		1000.00
@@ -106,7 +107,6 @@ typedef struct s_mini_map
 typedef struct s_player
 {
 	mlx_image_t			*imge;
-	mlx_image_t			*rays;
 	int					x;
 	int					y;
 	int					walk_dir;
@@ -193,6 +193,7 @@ void	get_map_size_bonus(t_data *data);
 void	draw_line_bonus(mlx_image_t *img, t_line line, uint32_t color);
 
 void	player_spawn_bonus(t_data *data);
+void	init_rot_angle_bonus(t_data	*data);
 void	player_hook_bonus(t_data *data);
 
 double	norm_angle_bonus(double angle);
@@ -210,7 +211,7 @@ int		rgba(int r, int g, int b, int a);
 void	mouse_hook_bonus(t_data *data);
 
 void	close_game_bonus(void *param);
-void	ft_exit_bonus(t_data *data, int i, bool term);
+void	ft_exit_bonus(t_data *data, int code, const char *s, bool term);
 void	free_char_arr_bonus(char **arr);
 void	parse_map_bonus(t_data *data);
 char	**ft_split_cub(char const *s, char c);
@@ -232,6 +233,7 @@ int		rgba(int r, int g, int b, int a);
 void	import_frames_bonus(t_data *data);
 void	load_sprites_bonus(t_data *data);
 
+void	parse_door_bonus(char **map, int y, int x);
 void	door_key(t_data *data);
 
 void	load_textures_bonus(t_data *data);

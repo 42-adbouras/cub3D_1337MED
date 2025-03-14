@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:06:12 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/10 10:48:00 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:04:12 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ void	import_map(t_data *data, char *path)
 
 	data->map = NULL;
 	if (check_extension(path) == 1)
-	{
-		printf("Error,\n invalid map extension.");
-		exit(1);
-	}
+		ft_exit(data, 7, FILE_EXT, true);
 	fd = open(path, O_RDONLY);
 	while (1)
 	{

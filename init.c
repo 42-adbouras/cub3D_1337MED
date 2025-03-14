@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:09 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/10 12:22:26 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/13 21:01:48 by fidriss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ void	load_game(t_data *data)
 	data->rot_speed = ROT_SPEED * (M_PI / 180);
 	data->fov = FOV * (M_PI / 180);
 	if (!data->game)
-	{
-		perror("Failed while loading game window");
-		ft_exit(data, 0, true);
-	}
+		ft_exit(data, 3, GAME_WIN, true);
 }
 
 void	init_rot_angle(t_data	*data)
@@ -65,12 +62,8 @@ void	init_rot_angle(t_data	*data)
 void	load_images(t_data *data)
 {
 	data->frame = mlx_new_image(data->game, WIDTH, HEIGHT);
-	data->minimap = mlx_new_image(data->game, WIDTH, HEIGHT);
-	if (!data->frame || !data->minimap)
-	{
-		perror("Failed while loading images");
-		ft_exit(data, 1, true);
-	}
+	if (!data->frame)
+		ft_exit(data, 5, ERR_IMG, true);
 }
 
 void	load_ray(t_data *data)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map.c                                        :+:      :+:    :+:   */
+/*   main_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
+/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 14:02:54 by fidriss           #+#    #+#             */
-/*   Updated: 2025/02/15 17:11:30 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/03/14 17:49:39 by fidriss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	handle_map_parsing(t_data *data, int i)
 {
 	data->parsed_map = extract_map_content(data->map_arr + i);
+	if (!data->parsed_map)
+		ft_exit(data, 13, ERR_MAP, true);
 	check_map(data->parsed_map);
 }
 
@@ -26,7 +28,7 @@ void	check_missing_elements(int id[], int size)
 	while (k < size)
 	{
 		if (id[k] != 1)
-			print_error("Error\n Missing element.");
+			ft_exit(NULL, 14, ERR_ELEM, true);
 		k++;
 	}
 }

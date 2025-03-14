@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 10:36:03 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/10 16:46:57 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:46:37 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	player_spawn_bonus(t_data *data)
 		HEIGHT - MINI_HEIGHT - 20);
 	data->tx = mlx_load_png("assets/sprites/1.png");
 	if (!data->tx)
-		ft_exit_bonus(data, 2, true);
+		ft_exit_bonus(data, 4, ERR_TEXTURE, true);
 	data->im = mlx_texture_to_image(data->game, data->tx);
 	mlx_resize_image(data->im, WIDTH * 0.6, HEIGHT * 0.6);
 	i = -1;
@@ -38,4 +38,31 @@ void	player_spawn_bonus(t_data *data)
 		data->sprites.s_images[i]->enabled = false;
 	}
 	data->sprites.s_images[0]->enabled = true;
+}
+
+void	get_player_position_bonus(t_data *data, int *x, int *y)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (data->parsed_map[i])
+	{
+		j = 0;
+		while (data->parsed_map[i][j])
+		{
+			if (data->parsed_map[i][j] == 'N' \
+				|| data->parsed_map[i][j] == 'S' \
+				|| data->parsed_map[i][j] == 'E' \
+				|| data->parsed_map[i][j] == 'W')
+			{
+				*x = j;
+				*y = i;
+				data->parsed_map[i][j] = '0';
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
 }

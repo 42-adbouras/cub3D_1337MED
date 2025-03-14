@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
+/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:43:40 by starscourge       #+#    #+#             */
-/*   Updated: 2025/02/15 16:40:04 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/03/13 20:49:28 by fidriss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	check_map_borders(char **map)
 			{
 				if (is_on_border(i, j, row_count, map)
 					|| is_surrounded_by_spaces(i, j, map))
-					print_error("Error\n Invalid map.\n");
+					ft_exit(NULL, 8, MAP_BORDER, true);
 				if (map[i - 1][j] == ' ' || map[i + 1][j] == ' '
 					|| map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
-					print_error("Error\n Invalid map.\n");
+					ft_exit(NULL, 8, MAP_BORDER, true);
 			}
 			j++;
 		}
@@ -63,7 +63,7 @@ void	check_map_content(char **map)
 		i++;
 	}
 	if (count != 1)
-		print_error("Error\n, Invalid map.\n");
+		ft_exit(NULL, 9, MAP_CONTANT, true);
 }
 
 void	check_characters(char	**map)
@@ -81,7 +81,7 @@ void	check_characters(char	**map)
 			if (map[i][j] != ' ' && map[i][j] != '1' && map[i][j] != '0'
 				&& map[i][j] != 'N' && map[i][j] != 'S'
 					&& map[i][j] != 'W' && map[i][j] != 'E')
-				print_error("Error\n Invalid character.\n");
+				ft_exit(NULL, 9, MAP_CONTANT, true);
 			j++;
 		}
 		i++;
@@ -96,7 +96,7 @@ void	check_for_empty_lines(char **map)
 	while (map[i])
 	{
 		if (ft_strlen(map[i]) == 0 || only_spaces(map[i]))
-			print_error("Error\n Invalid map.\n");
+			ft_exit(NULL, 9, EMPTY_LINE, true);
 		i++;
 	}
 }

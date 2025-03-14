@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 10:26:58 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/10 10:23:12 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:17:55 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	key_press(t_data *data)
 	data->player->walk_dir = 0;
 	data->player->strafe_dir = 0;
 	if (mlx_is_key_down(data->game, MLX_KEY_ESCAPE))
-		ft_exit(data, 0, true);
+		ft_exit(data, 0, GAME_EXIT, true);
 	if (mlx_is_key_down(data->game, MLX_KEY_RIGHT))
 		data->player->turn_dir = 1;
 	if (mlx_is_key_down(data->game, MLX_KEY_LEFT))

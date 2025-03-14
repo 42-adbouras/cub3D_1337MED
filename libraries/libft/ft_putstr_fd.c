@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:56:54 by adbouras          #+#    #+#             */
-/*   Updated: 2023/12/28 11:12:17 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/12 12:39:51 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ void	ft_putstr_fd(char *s, int fd)
 		write (fd, &s[i], 1);
 		i++;
 	}
+	write (fd, "\n", 1);
 }

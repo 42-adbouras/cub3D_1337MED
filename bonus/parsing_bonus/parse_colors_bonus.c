@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_colors_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:00:54 by starscourge       #+#    #+#             */
-/*   Updated: 2025/02/24 10:45:37 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:50:13 by fidriss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	**split_and_trim_colors_bonus(const char *line, int i)
 		colors[j] = tmp;
 		j++;
 	}
+	if (j != 3)
+		print_error_bonus("Error\n Invalid color.\n");
 	return (colors);
 }
 

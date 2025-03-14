@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/10 16:42:50 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/13 21:01:42 by fidriss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "/Users/adbouras/MLX42/include/MLX42/MLX42.h"
 #include "../libraries/libft/libft.h"
 #include "get_next_line.h"
+#include "cub3D_errors.h"
 
 #include <unistd.h>
 #include <stdio.h>
@@ -30,14 +31,14 @@
 #define MAP_FACT		0.2
 #define HITBOX			10
 #define SPEED			2
-#define ROT_SPEED		3
+#define ROT_SPEED		2
 #define FOV				60
 #define RAYS			WIDTH
 #define MOUSE_SENS		1000.00
 #define NUM_SPRITES		18
 
-#define MINI_WIDTH	350
-#define MINI_WIDTH	200
+#define MINI_WIDTH		350
+#define MINI_HEIGHT		200
 #define M_MAP_FACT		0.3
 
 #define WHITE			0xFFFFFFFF
@@ -77,7 +78,6 @@ typedef struct s_line
 typedef struct s_player
 {
 	mlx_image_t			*imge;
-	mlx_image_t			*rays;
 	int					x;
 	int					y;
 	int					walk_dir;
@@ -133,7 +133,6 @@ typedef struct s_data
 	mlx_t				*game;
 	t_texture			*texture;
 	mlx_image_t			*frame;
-	mlx_image_t			*minimap;
 	mlx_texture_t		*p_txtre;
 	mlx_image_t			*p_asset;
 	t_player			*player;
@@ -174,7 +173,7 @@ void	draw_walls(t_data *data);
 int		rgba(int r, int g, int b, int a);
 
 void	close_game(void *param);
-void	ft_exit(t_data *data, int i, bool term);
+void	ft_exit(t_data *data, int code, const char *s, bool term);
 void	free_char_arr(char **arr);
 void	parse_map(t_data *data);
 char	**ft_split_cub(char const *s, char c);
@@ -190,7 +189,7 @@ void	check_elements(t_data *data, char *line, int id[]);
 int		count_rows(char **map, int i);
 int		only_spaces(char	*line);
 int		isspace(int c);
-void	print_error(char *error);
+// void	print_error(char *error);
 void	check_map(char **map);
 bool	is_bordered_map_char(char c);
 bool	is_surrounded_by_spaces(int i, int j, char **map);

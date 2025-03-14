@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
+/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:00:54 by starscourge       #+#    #+#             */
-/*   Updated: 2025/02/15 17:29:15 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/03/13 21:01:46 by fidriss          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	**split_and_trim_colors(const char *line, int i)
 		colors[j] = tmp;
 		j++;
 	}
+	if (j != 3)
+		ft_exit(NULL, 11, ERR_COLOR, true);
 	return (colors);
 }
 
@@ -53,7 +55,7 @@ void	validate_colors(char **colors)
 			if (ft_isdigit(colors[i][j]))
 				j++;
 			else
-				print_error("Error\n Invalid color.\n");
+				ft_exit(NULL, 11, ERR_COLOR, true);
 		}
 		i++;
 	}
@@ -70,7 +72,7 @@ void	convert_and_assign_colors(t_data *data, char **colors,
 	{
 		color_check = ft_atoi(colors[i]);
 		if (color_check < 0 || color_check > 255)
-			print_error("Error\n Invalid color.\n");
+			ft_exit(NULL, 11, ERR_COLOR, true);
 		if (ft_strncmp("F ", line, 2) == 0)
 		{
 			data->floor_color[i] = color_check;
