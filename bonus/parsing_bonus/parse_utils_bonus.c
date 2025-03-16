@@ -6,22 +6,16 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:47:58 by starscourge       #+#    #+#             */
-/*   Updated: 2025/03/13 11:05:14 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/16 13:00:10 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d_bonus.h"
+#include "cub3d_bonus.h"
 
 void	check_invalid_character_bonus(char c)
 {
 	if (c != ' ' && c != '\0')
-		print_error_bonus("Error\n Invalid character.");
-}
-
-void	print_error_bonus(char *error)
-{
-	printf("%s", error);
-	exit(1);
+		ft_exit_bonus(NULL, 13, ERR_CHAR, true);
 }
 
 int	isspace_bonus(int c)

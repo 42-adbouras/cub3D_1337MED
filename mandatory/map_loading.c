@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_loading_bonus.c                                :+:      :+:    :+:   */
+/*   map_loading.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:06:12 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/16 12:57:36 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/16 12:48:56 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "cub3d.h"
 
-int	check_extension_bonus(char *name)
+int	check_extension(char *name)
 {
 	int	i;
 
@@ -26,17 +26,14 @@ int	check_extension_bonus(char *name)
 	return (0);
 }
 
-void	import_map_bonus(t_data *data, char *path)
+void	import_map(t_data *data, char *path)
 {
 	char	*line;
 	int		fd;
 
 	data->map = NULL;
-	if (check_extension_bonus(path) == 1)
-	{
-		printf("Error,\n invalid map extension.");
-		exit(1);
-	}
+	if (check_extension(path) == 1)
+		ft_exit(data, 7, FILE_EXT, true);
 	fd = open(path, O_RDONLY);
 	while (1)
 	{
@@ -47,12 +44,12 @@ void	import_map_bonus(t_data *data, char *path)
 		free(line);
 	}
 	if (!data->map)
-		ft_exit_bonus(data, 17, EMPTY_MAP, true);
+		ft_exit(data, 17, EMPTY_MAP, true);
 	data->map_arr = ft_split_cub(data->map, '\n');
 	close(fd);
 }
 
-void	get_map_size_bonus(t_data *data)
+void	get_map_size(t_data *data)
 {
 	int	width;
 	int	height;

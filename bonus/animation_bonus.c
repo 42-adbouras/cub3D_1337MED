@@ -6,11 +6,11 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 09:49:12 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/12 10:27:57 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/16 12:57:36 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d_bonus.h"
+#include "cub3d_bonus.h"
 
 void	animation_bonus(t_data *data)
 {

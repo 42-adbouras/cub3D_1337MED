@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:09 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/14 17:52:36 by fidriss          ###   ########.fr       */
+/*   Updated: 2025/03/16 12:57:36 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d_bonus.h"
+#include "cub3d_bonus.h"
 
 void	init_data_bonus(t_data *data, char *arg)
 {
@@ -32,21 +32,6 @@ void	load_game_bonus(t_data *data)
 	data->animation = false;
 	if (!data->game)
 		ft_exit_bonus(data, 3, GAME_WIN, true);
-}
-
-void	load_player_bonus(t_data *data)
-{
-	data->player = malloc(sizeof(t_player));
-	if (!data->player)
-		ft_exit_bonus(data, 2, ERR_MALLOC, true);
-	data->player->walk_dir = 0;
-	data->player->turn_dir = 0;
-	data->player->strafe_dir = 0;
-	data->player->imge = mlx_new_image(data->game, HITBOX, HITBOX);
-	get_player_position_bonus(data, &data->player->x, &data->player->y);
-	if (!data->player->imge)
-		ft_exit_bonus(data, 5, ERR_IMG, true);
-	init_rot_angle_bonus(data);
 }
 
 void	load_images_bonus(t_data *data)
@@ -75,7 +60,7 @@ void	load_ray_bonus(t_data *data)
 		data->text[ray].face_left = false;
 		data->text[ray].face_right = false;
 		data->text[ray].is_hori = false;
-		data->text[ray].contant = '0';
+		data->text[ray].contant = '\0';
 	}
 }
 

@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture_utils_bonus.c                              :+:      :+:    :+:   */
+/*   texture_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 00:27:27 by starscourge       #+#    #+#             */
-/*   Updated: 2025/03/16 12:57:15 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/16 11:50:13 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "../../includes/cub3d.h"
 
-void	which_texture_bonus(t_data	*data, int ray)
+void	which_texture(t_data	*data, int ray)
 {
-	if (data->text[ray].contant == 'C')
-		data->text[ray].img = data->texture->door_img;
-	else if (data->text[ray].wall_facing == NORTH)
+	if (data->text[ray].wall_facing == NORTH)
 		data->text[ray].img = data->texture->north_img;
 	else if (data->text[ray].wall_facing == SOUTH)
 		data->text[ray].img = data->texture->south_img;
@@ -26,12 +24,11 @@ void	which_texture_bonus(t_data	*data, int ray)
 		data->text[ray].img = data->texture->east_img;
 }
 
-void	load_textures_bonus(t_data *data)
+void	load_textures(t_data *data)
 {
 	data->texture = malloc(sizeof(t_texture));
 	data->texture->north_img = mlx_load_png(data->north_texture);
 	data->texture->south_img = mlx_load_png(data->south_texture);
 	data->texture->west_img = mlx_load_png(data->west_texture);
 	data->texture->east_img = mlx_load_png(data->east_texture);
-	data->texture->door_img = mlx_load_png("assets/door.png");
 }

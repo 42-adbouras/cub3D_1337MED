@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/13 10:11:21 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/16 13:03:41 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,18 @@
 #define WIDTH			1366
 #define HEIGHT			720
 #define TILE_SIZE		42
-#define MAP_FACT		0.2
+#define MAP_FACT		0.7
 #define HITBOX			10
 #define SPEED			2
 #define ROT_SPEED		2
 #define FOV				60
 #define RAYS			WIDTH
-#define MOUSE_SENS		1000.00
+#define MOUSE_SENS		900.00
 #define NUM_SPRITES		18
 
 #define MINI_WIDTH		300
 #define MINI_HEIGHT		170
-#define M_MAP_FACT		0.3
+#define M_MAP_FACT		0.2
 
 #define WHITE			0xFFFFFFFF
 #define BLACK			0x000000FF
@@ -213,12 +213,17 @@ void	mouse_hook_bonus(t_data *data);
 void	close_game_bonus(void *param);
 void	ft_exit_bonus(t_data *data, int code, const char *s, bool term);
 void	free_char_arr_bonus(char **arr);
+void	clean_data_bonus(t_data *data);
+void	free_strings_bonus(t_data *data);
+void	clean_assets_bonus(t_data *data);
+
 void	parse_map_bonus(t_data *data);
 char	**ft_split_cub(char const *s, char c);
 
 void	load_sprites_bonus(t_data *data);
 void	animation_bonus(t_data *data);
 
+void	minimap_bonus(void *param);
 void	draw_minimap_walls(t_data *data, t_mini_map *m);
 void	draw_minimap_border(t_data *data, t_mini_map *m);
 void	draw_minimap_bonus(t_data *data);
@@ -243,7 +248,6 @@ void	check_elements_bonus(t_data *data, char *line, int id[]);
 int		count_rows_bonus(char **map, int i);
 int		only_spaces_bonus(char	*line);
 int		isspace_bonus(int c);
-void	print_error_bonus(char *error);
 void	check_map_bonus(char **map);
 bool	is_bordered_map_char_bonus(char c);
 bool	is_surrounded_by_spaces_bonus(int i, int j, char **map);

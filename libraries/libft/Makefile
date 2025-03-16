@@ -6,7 +6,7 @@
 #    By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 21:48:50 by adbouras          #+#    #+#              #
-#    Updated: 2025/01/15 15:53:32 by adbouras         ###   ########.fr        #
+#    Updated: 2025/03/16 15:29:34 by adbouras         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,7 +88,6 @@ bonus: $(BNS_OBJC) $(HEADER)
 
 clean:
 	@rm -rf $(OBJ_DIR)
-
 fclean:	clean
 	@rm -f $(NAME)
 	@echo "$(RED)[Removed $(NAME)]$(RST)"

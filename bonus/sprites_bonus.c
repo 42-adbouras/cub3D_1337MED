@@ -6,11 +6,11 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 10:34:54 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/13 10:47:31 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/16 12:57:36 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d_bonus.h"
+#include "cub3d_bonus.h"
 
 void	import_frames_bonus(t_data *data)
 {

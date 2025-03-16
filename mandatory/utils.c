@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_bonus.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:12:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/16 12:57:36 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/16 12:49:15 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "cub3d.h"
 
-double	norm_angle_bonus(double angle)
+double	norm_angle(double angle)
 {
 	double	new;
 

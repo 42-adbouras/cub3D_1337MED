@@ -1,30 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_hook_bonus.c                                 :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 09:56:04 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/16 12:57:36 by adbouras         ###   ########.fr       */
+/*   Created: 2025/02/14 18:47:58 by starscourge       #+#    #+#             */
+/*   Updated: 2025/03/16 11:50:06 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "../../includes/cub3d.h"
 
-void	mouse_hook_bonus(t_data *data)
+void	check_invalid_character(char c)
 {
-	static int32_t	prev_x;
-	int32_t			new_x;
-	int32_t			new_y;
-	double			delta;
+	if (c != ' ' && c != '\0')
+		ft_exit(NULL, 13, ERR_CHAR, true);
+}
 
-	mlx_get_mouse_pos(data->game, &new_x, &new_y);
-	delta = (new_x - prev_x) / MOUSE_SENS;
-	if (prev_x != 0)
+int	isspace(int c)
+{
+	if (c == ' ')
+		return (1);
+	return (0);
+}
+
+int	only_spaces(char	*line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
 	{
-		data->player->rot_angle += delta;
-		data->player->rot_angle = norm_angle_bonus(data->player->rot_angle);
+		if (isspace(line[i]) == 0)
+			return (0);
+		i++;
 	}
-	prev_x = WIDTH / 2;
+	return (1);
+}
+
+int	count_rows(char **map, int i)
+{
+	while (map[i])
+		i++;
+	return (i);
 }

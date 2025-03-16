@@ -6,11 +6,11 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 12:55:15 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/12 11:00:29 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/16 12:57:36 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d_bonus.h"
+#include "cub3d_bonus.h"
 
 void	parse_door_bonus(char **map, int y, int x)
 {
@@ -19,7 +19,7 @@ void	parse_door_bonus(char **map, int y, int x)
 		|| (map[y + 1][x] == '1' && map[y - 1][x] == '1' \
 		&& map[y][x + 1] == '0' && map[y][x - 1] == '0'))
 		return ;
-	print_error_bonus("Error\n Invalid map door.\n");
+	ft_exit_bonus(NULL, 16, ERR_DOOR, true);
 }
 
 double	door_dist(t_data *data, double ray_x, double ray_y)

@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop_bonus.c                                  :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 19:23:36 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/16 12:57:36 by adbouras         ###   ########.fr       */
+/*   Created: 2025/01/16 18:43:43 by adbouras          #+#    #+#             */
+/*   Updated: 2025/03/16 13:00:30 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "cub3d.h"
 
-void	game_loop_bonus(void *param)
+void	_leaks(void)
 {
-	t_data	*data;
+	system("leaks -q cub3D");
+}
 
-	data = (t_data *) param;
-	mlx_set_mouse_pos(data->game, WIDTH / 2, HEIGHT / 2);
-	player_hook_bonus(data);
-	raycasting_bonus(data);
-	draw_bg_bonus(data);
-	draw_walls_bonus(data);
-	if (data->animation)
-		animation_bonus(data);
-	mouse_hook_bonus(data);
+int	main(int ac, char **av)
+{
+	t_data	data;
+
+	if (ac < 2)
+		return (ft_putstr_fd(USAGE, STDERR), 1);
+	init_data(&data, av[1]);
+	player_spawn(&data);
+	mlx_loop_hook(data.game, game_loop, &data);
+	mlx_close_hook(data.game, close_game, &data);
+	mlx_loop(data.game);
+	mlx_terminate(data.game);
+	return (0);
 }

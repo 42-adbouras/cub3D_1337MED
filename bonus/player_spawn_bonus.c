@@ -6,11 +6,26 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 10:36:03 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/13 10:46:37 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/16 12:57:36 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d_bonus.h"
+#include "cub3d_bonus.h"
+
+void	load_player_bonus(t_data *data)
+{
+	data->player = malloc(sizeof(t_player));
+	if (!data->player)
+		ft_exit_bonus(data, 2, ERR_MALLOC, true);
+	data->player->walk_dir = 0;
+	data->player->turn_dir = 0;
+	data->player->strafe_dir = 0;
+	data->player->imge = mlx_new_image(data->game, HITBOX, HITBOX);
+	get_player_position_bonus(data, &data->player->x, &data->player->y);
+	if (!data->player->imge)
+		ft_exit_bonus(data, 5, ERR_IMG, true);
+	init_rot_angle_bonus(data);
+}
 
 void	player_spawn_bonus(t_data *data)
 {
@@ -23,11 +38,6 @@ void	player_spawn_bonus(t_data *data)
 	mlx_image_to_window(data->game, data->frame, 0, 0);
 	mlx_image_to_window(data->game, data->minimap, 20, \
 		HEIGHT - MINI_HEIGHT - 20);
-	data->tx = mlx_load_png("assets/sprites/1.png");
-	if (!data->tx)
-		ft_exit_bonus(data, 4, ERR_TEXTURE, true);
-	data->im = mlx_texture_to_image(data->game, data->tx);
-	mlx_resize_image(data->im, WIDTH * 0.6, HEIGHT * 0.6);
 	i = -1;
 	while (++i < NUM_SPRITES)
 	{
@@ -46,6 +56,8 @@ void	get_player_position_bonus(t_data *data, int *x, int *y)
 	int		j;
 
 	i = 0;
+	if (!data->parsed_map || !(*data->parsed_map))
+		ft_exit_bonus(data, 15, ERR_MAP, true);
 	while (data->parsed_map[i])
 	{
 		j = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/13 21:01:42 by fidriss          ###   ########.fr       */
+/*   Updated: 2025/03/16 10:47:05 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,6 @@ typedef struct s_data
 
 void	init_data(t_data *data, char *arg);
 void	load_game(t_data *data);
-void	get_player_position(t_data *data, int *x, int *y);
 void	load_player(t_data *data);
 void	load_images(t_data *data);
 void	load_ray(t_data *data);
@@ -176,6 +175,9 @@ void	close_game(void *param);
 void	ft_exit(t_data *data, int code, const char *s, bool term);
 void	free_char_arr(char **arr);
 void	parse_map(t_data *data);
+void	clean_assets(t_data *data);
+void	free_strings(t_data *data);
+void	clean_data(t_data *data);
 char	**ft_split_cub(char const *s, char c);
 
 double	get_distance(double start_x, double start_y,
@@ -189,7 +191,6 @@ void	check_elements(t_data *data, char *line, int id[]);
 int		count_rows(char **map, int i);
 int		only_spaces(char	*line);
 int		isspace(int c);
-// void	print_error(char *error);
 void	check_map(char **map);
 bool	is_bordered_map_char(char c);
 bool	is_surrounded_by_spaces(int i, int j, char **map);
