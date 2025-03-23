@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:12:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/23 16:35:43 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/23 18:16:45 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,6 @@ static	int	word_count(char const *s, char c)
 	return (count);
 }
 
-void	ft_free(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
-}
 int	check(char **array, int *line)
 {
 	array[*line] = ft_substr("", 0, 0);
@@ -60,7 +48,6 @@ int	check(char **array, int *line)
 	(*line)++;
 	return (0);
 }
-
 
 static	char	**ft_write(char **array, char const *s, char c, int n)
 {
@@ -74,7 +61,7 @@ static	char	**ft_write(char **array, char const *s, char c, int n)
 	{
 		if (s[i] == c && (i == 0 || s[i - 1] == c))
 			if (check(array, &line))
-				return(NULL);
+				return (NULL);
 		if (s[i] != c)
 		{
 			old_i = i;

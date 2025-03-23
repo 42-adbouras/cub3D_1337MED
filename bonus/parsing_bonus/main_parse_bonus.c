@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_parse_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 14:02:54 by fidriss           #+#    #+#             */
-/*   Updated: 2025/03/23 16:07:59 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/23 18:12:27 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

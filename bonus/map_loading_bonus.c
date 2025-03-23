@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_loading_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:06:12 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/23 16:40:52 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/23 18:12:16 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	import_map_bonus(t_data *data, char *path)
 	}
 	if (!data->map)
 		ft_exit_bonus(data, 17, EMPTY_MAP, true);
-	printf("------------%s----------\n\n\n\n", data->map);
 	data->map_arr = ft_split_cub(data->map, '\n');
 	close(fd);
 }

@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   extract_map_content_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 16:46:19 by starscourge       #+#    #+#             */
-/*   Updated: 2025/03/23 16:07:53 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/23 18:14:44 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-char	**allocate_and_copy_map_bonus(char **map_arr, int start_index, int row_count)
+char	**allocate_and_copy_map_bonus(char **map_arr,
+			int start_index, int row_count)
 {
 	char	**new_map_arr;
 	int		i;

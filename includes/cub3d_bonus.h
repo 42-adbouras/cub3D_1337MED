@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/23 16:35:27 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/23 17:51:38 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "/Users/adbouras/MLX42/include/MLX42/MLX42.h"
+#include "/Users/starscourge/MLX42/include/MLX42/MLX42.h"
 #include "../libraries/libft/libft.h"
 #include "get_next_line_bonus.h"
 #include "cub3D_errors.h"

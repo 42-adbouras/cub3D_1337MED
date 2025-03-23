@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_elements_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:07:10 by starscourge       #+#    #+#             */
-/*   Updated: 2025/03/23 16:09:31 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/23 18:14:27 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	handle_color_parsing_bonus(t_data *data, char *line, int id[])
 	parse_color_bonus(data, line, id);
 }
 
-void	parse_texture_bonus(t_data *data, char *line, int id[], int texture_index)
+void	parse_texture_bonus(t_data *data, char *line,
+			int id[], int texture_index)
 {
 	int	i;
 

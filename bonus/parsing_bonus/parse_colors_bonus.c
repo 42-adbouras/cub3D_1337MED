@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_colors_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:00:54 by starscourge       #+#    #+#             */
-/*   Updated: 2025/03/23 16:08:04 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/23 18:12:02 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	**split_and_trim_colors_bonus(const char *line, int i)
 	int		j;
 
 	j = 0;
-	colors = ft_split(line + i, ',');
+	colors = ft_split_cub_cub(line + i, ',');
 	while (colors[j])
 	{
 		tmp = ft_strtrim(colors[j], " ");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:12:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/23 16:39:27 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/23 18:15:38 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,6 @@ static	int	word_count(char const *s, char c)
 	return (count);
 }
 
-void	ft_free(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
-}
-
 int	check(char **array, int *line)
 {
 	array[*line] = ft_substr("", 0, 0);
@@ -74,7 +61,7 @@ static	char	**ft_write(char **array, char const *s, char c, int n)
 	{
 		if (s[i] == c && (i == 0 || s[i - 1] == c))
 			if (check(array, &line))
-				return(NULL);
+				return (NULL);
 		if (s[i] != c)
 		{
 			old_i = i;
@@ -98,13 +85,10 @@ char	**ft_split_cub(char const *s, char c)
 
 	if (s == NULL)
 		return (NULL);
-	printf("%s\n", s);
 	words = word_count(s, c);
 	array = (char **)malloc((words + 1) * sizeof(char *));
 	if (!array)
 		return (NULL);
 	array = ft_write(array, s, c, words);
-	// for (int i = 0; array[i]; i++)
-	// 	printf("%s\n", array[i]);
 	return (array);
 }
