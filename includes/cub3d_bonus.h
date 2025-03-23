@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/23 16:35:27 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/23 16:50:51 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,18 +184,33 @@ void		get_player_position_bonus(t_data *data, int *x, int *y);
 void		load_player_bonus(t_data *data);
 void		load_images_bonus(t_data *data);
 void		load_ray_bonus(t_data *data);
+void		init_data_bonus(t_data *data, char *arg);
+void		load_game_bonus(t_data *data);
+void		get_player_position_bonus(t_data *data, int *x, int *y);
+void		load_player_bonus(t_data *data);
+void		load_images_bonus(t_data *data);
+void		load_ray_bonus(t_data *data);
 
+void		import_map_bonus(t_data *data, char *path);
+void		draw_minimap_bonus(t_data	*data);
+void		draw_player_bonus(t_data *data);
+void		get_map_size_bonus(t_data *data);
 void		import_map_bonus(t_data *data, char *path);
 void		draw_minimap_bonus(t_data	*data);
 void		draw_player_bonus(t_data *data);
 void		get_map_size_bonus(t_data *data);
 
 void		draw_line_bonus(mlx_image_t *img, t_line line, uint32_t color);
+void		draw_line_bonus(mlx_image_t *img, t_line line, uint32_t color);
 
 void		player_spawn_bonus(t_data *data);
 void		init_rot_angle_bonus(t_data	*data);
 void		player_hook_bonus(t_data *data);
+void		player_spawn_bonus(t_data *data);
+void		init_rot_angle_bonus(t_data	*data);
+void		player_hook_bonus(t_data *data);
 
+double		norm_angle_bonus(double angle);
 double		norm_angle_bonus(double angle);
 
 void		game_loop_bonus(void *param);
@@ -205,11 +220,26 @@ void		assigne_hori_walls_bonus(t_data *data, double ray_angle, int ray);
 void		assigne_vert_walls_bonus(t_data *data, double ray_angle, int ray);
 void		render_strip_bonus(t_data *data, int ray, double distance);
 void		draw_walls_bonus(t_data *data);
+void		game_loop_bonus(void *param);
+void		raycasting_bonus(t_data *data);
+void		draw_bg_bonus(t_data *data);
+void		assigne_hori_walls_bonus(t_data *data, double ray_angle, int ray);
+void		assigne_vert_walls_bonus(t_data *data, double ray_angle, int ray);
+void		render_strip_bonus(t_data *data, int ray, double distance);
+void		draw_walls_bonus(t_data *data);
 
+int			rgba(int r, int g, int b, int a);
 int			rgba(int r, int g, int b, int a);
 
 void		mouse_hook_bonus(t_data *data);
+void		mouse_hook_bonus(t_data *data);
 
+void		close_game_bonus(void *param);
+void		ft_exit_bonus(t_data *data, int code, const char *s, bool term);
+void		free_char_arr_bonus(char **arr);
+void		clean_data_bonus(t_data *data);
+void		free_strings_bonus(t_data *data);
+void		clean_assets_bonus(t_data *data);
 void		close_game_bonus(void *param);
 void		ft_exit_bonus(t_data *data, int code, const char *s, bool term);
 void		free_char_arr_bonus(char **arr);
@@ -219,10 +249,19 @@ void		clean_assets_bonus(t_data *data);
 
 void		parse_map_bonus(t_data *data);
 char		**ft_split_cub(char const *s, char c);
+void		parse_map_bonus(t_data *data);
+char		**ft_split_cub(char const *s, char c);
 
 void		load_sprites_bonus(t_data *data);
 void		animation_bonus(t_data *data);
+void		load_sprites_bonus(t_data *data);
+void		animation_bonus(t_data *data);
 
+void		minimap_bonus(void *param);
+void		draw_minimap_walls(t_data *data, t_mini_map *m);
+void		draw_minimap_border(t_data *data, t_mini_map *m);
+void		draw_minimap_bonus(t_data *data);
+void		draw_player_bonus(t_data *data);
 void		minimap_bonus(void *param);
 void		draw_minimap_walls(t_data *data, t_mini_map *m);
 void		draw_minimap_border(t_data *data, t_mini_map *m);
@@ -234,10 +273,19 @@ double		get_distance_bonus(double start_x, double start_y,
 void		set_orientation_bonus(t_data *data, double angle, int ray);
 bool		wall_at_bonus(t_data *data, int x, int y, int ray);
 int			rgba(int r, int g, int b, int a);
+double		get_distance_bonus(double start_x, double start_y,
+				double end_x, double end_y);
+void		set_orientation_bonus(t_data *data, double angle, int ray);
+bool		wall_at_bonus(t_data *data, int x, int y, int ray);
+int			rgba(int r, int g, int b, int a);
 
 void		import_frames_bonus(t_data *data);
 void		load_sprites_bonus(t_data *data);
+void		import_frames_bonus(t_data *data);
+void		load_sprites_bonus(t_data *data);
 
+void		parse_door_bonus(char **map, int y, int x);
+void		door_key(t_data *data);
 void		parse_door_bonus(char **map, int y, int x);
 void		door_key(t_data *data);
 
