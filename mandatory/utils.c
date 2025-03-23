@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:12:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/16 12:49:15 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/23 16:35:43 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static	int	word_count(char const *s, char c)
 	return (count);
 }
 
-static void	ft_free(char **array)
+void	ft_free(char **array)
 {
 	int	i;
 
@@ -52,6 +52,15 @@ static void	ft_free(char **array)
 	}
 	free(array);
 }
+int	check(char **array, int *line)
+{
+	array[*line] = ft_substr("", 0, 0);
+	if (!array[*line])
+		return (ft_free(array), 1);
+	(*line)++;
+	return (0);
+}
+
 
 static	char	**ft_write(char **array, char const *s, char c, int n)
 {
@@ -64,27 +73,16 @@ static	char	**ft_write(char **array, char const *s, char c, int n)
 	while (s[i] != '\0' && line < n)
 	{
 		if (s[i] == c && (i == 0 || s[i - 1] == c))
-		{
-			array[line] = ft_substr("", 0, 0);
-			if (!array[line])
-			{
-				ft_free(array);
-				return (NULL);
-			}
-			line++;
-		}
+			if (check(array, &line))
+				return(NULL);
 		if (s[i] != c)
 		{
 			old_i = i;
 			while (s[i] != '\0' && s[i] != c)
 				i++;
 			array[line] = ft_substr(s, old_i, i - old_i);
-			if (!array[line])
-			{
-				ft_free(array);
-				return (NULL);
-			}
-			line++;
+			if (!array[line++])
+				return (ft_free(array), NULL);
 		}
 		if (s[i] == c)
 			i++;

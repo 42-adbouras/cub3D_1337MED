@@ -6,7 +6,7 @@
 #    By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 11:59:01 by adbouras          #+#    #+#              #
-#    Updated: 2025/03/16 15:38:18 by adbouras         ###   ########.fr        #
+#    Updated: 2025/03/23 15:32:08 by adbouras         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CC			=	cc
 NAME		=	cub3D
 BNS_NAME	=	cub3D_bonus
 CFLAGS		=	-Wextra -Wall -Werror -O3
-# LDFLAGS		=	-fsanitize=address -g
+LDFLAGS		=	-fsanitize=address -g
 LIBMLX		=	/Users/$(USER)/MLX42
 LIBFT		=	libraries/libft/libft.a
 
@@ -28,11 +28,14 @@ LIBS		=	$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 MAN_SRC_DIR	=	mandatory
 BNS_SRC_DIR	=	bonus
-
-SRCS		=	$(shell find $(MAN_SRC_DIR) -name '*.c') 
-BNS_SRCS	=	$(shell find $(BNS_SRC_DIR) -name '*.c')
 OBJ_DIR		=	objects/
-OBJS		=	$(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
+
+INCLUDES	=	$(shell find includes -name '*.h')
+
+MAN_SRCS	=	$(shell find $(MAN_SRC_DIR) -name '*.c') 
+BNS_SRCS	=	$(shell find $(BNS_SRC_DIR) -name '*.c')
+
+MAN_OBJS	=	$(addprefix $(OBJ_DIR), $(MAN_SRCS:.c=.o))
 BNS_OBJS	=	$(addprefix $(OBJ_DIR), $(BNS_SRCS:.c=.o))
 
 all: libmlx $(NAME)
@@ -42,13 +45,13 @@ bonus: libmlx $(BNS_NAME)
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
-$(OBJ_DIR)%.o: %.c
+$(OBJ_DIR)%.o: %.c $(INCLUDES)
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "$(YLW)[Compiling: $(notdir $<)]\n$(RST)"
+	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@ && printf "$(YLW)[Compiling: $(notdir $<)]\n$(RST)"
 
-$(NAME): $(OBJS)
+$(NAME): $(MAN_OBJS)
 	@make -C ./libraries/libft/
-	@$(CC) $(OBJS) $(LIBS) $(LIBFT) $(HEADERS) $(LDFLAGS) -o $(NAME)
+	@$(CC) $(MAN_OBJS) $(LIBS) $(LIBFT) $(HEADERS) $(LDFLAGS) -o $(NAME)
 	@printf "$(GRN)[Compiled seccessfully. run ./$(NAME) <map path>]\n$(RST)"
 
 $(BNS_NAME): $(BNS_OBJS)

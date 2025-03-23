@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:43:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/16 15:09:38 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/23 16:10:03 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int ac, char **av)
 
 	if (ac < 2)
 		return (ft_putstr_fd(USAGE_BONUS, STDERR), 1);
-	atexit(_leaks);
+	// atexit(_leaks);
 	init_data_bonus(&data, av[1]);
 	load_sprites_bonus(&data);
 	player_spawn_bonus(&data);

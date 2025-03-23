@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:58:41 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/16 12:49:09 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/18 16:40:54 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ double	hori_intersection(t_data *data, double angle, int ray, t_xy *h_xy)
 	h.y_inter = floor((h.player_y) / TILE_SIZE) * TILE_SIZE;
 	if (data->text[ray].face_down)
 		h.y_inter += TILE_SIZE;
-	h.x_inter = (h.player_x) + (h.y_inter - (h.player_y)) / tan(angle);
+	h.x_inter = h.player_x + (h.y_inter - h.player_y) / tan(angle);
 	h.y_step = TILE_SIZE;
 	if (data->text[ray].face_up)
 		h.y_step *= -1;
@@ -67,7 +67,7 @@ double	vert_intersection(t_data *data, double angle, int ray, t_xy *v_xy)
 	v.x_inter = floor((v.player_x) / TILE_SIZE) * TILE_SIZE;
 	if (data->text[ray].face_right)
 		v.x_inter += TILE_SIZE;
-	v.y_inter = (v.player_y) + (v.x_inter - (v.player_x)) * tan(angle);
+	v.y_inter = v.player_y + (v.x_inter - v.player_x) * tan(angle);
 	v.x_step = TILE_SIZE;
 	if (data->text[ray].face_left)
 		v.x_step *= -1;
