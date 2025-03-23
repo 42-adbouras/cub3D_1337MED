@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/16 10:47:05 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/23 04:34:32 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,65 +140,66 @@ typedef struct s_data
 	double				rot_speed;
 	double				fov;
 	bool				orient;
-}						t_data;
+}							t_data;
 
-void	init_data(t_data *data, char *arg);
-void	load_game(t_data *data);
-void	load_player(t_data *data);
-void	load_images(t_data *data);
-void	load_ray(t_data *data);
+void		init_data(t_data *data, char *arg);
+void		load_game(t_data *data);
+void		load_player(t_data *data);
+void		load_images(t_data *data);
+void		load_ray(t_data *data);
 
-void	import_map(t_data *data, char *path);
-void	get_map_size(t_data *data);
+void		import_map(t_data *data, char *path);
+void		get_map_size(t_data *data);
 
-void	draw_line(mlx_image_t *img, t_line line, uint32_t color);
+void		draw_line(mlx_image_t *img, t_line line, uint32_t color);
 
-void	player_spawn(t_data *data);
-void	get_player_position(t_data *data, int *x, int *y);
-void	init_rot_angle(t_data *data);
-void	player_hook(t_data *data);
+void		player_spawn(t_data *data);
+void		get_player_position(t_data *data, int *x, int *y);
+void		init_rot_angle(t_data *data);
+void		player_hook(t_data *data);
 
-double	norm_angle(double angle);
+double		norm_angle(double angle);
 
-void	game_loop(void *param);
-void	raycasting(t_data *data);
-void	assigne_hori_walls(t_data *data, double ray_angle, int ray);
-void	assigne_vert_walls(t_data *data, double ray_angle, int ray);
-void	draw_bg(t_data *data);
-void	render_strip(t_data *data, int ray, double distance);
-void	draw_rect(t_data *data, double x, double y, double height);
-void	draw_walls(t_data *data);
+void		game_loop(void *param);
+void		raycasting(t_data *data);
+void		assigne_hori_walls(t_data *data, double ray_angle, int ray);
+void		assigne_vert_walls(t_data *data, double ray_angle, int ray);
+void		draw_bg(t_data *data);
+void		render_strip(t_data *data, int ray, double distance);
+void		draw_rect(t_data *data, double x, double y, double height);
+void		draw_walls(t_data *data);
 
-int		rgba(int r, int g, int b, int a);
+int			rgba(int r, int g, int b, int a);
 
-void	close_game(void *param);
-void	ft_exit(t_data *data, int code, const char *s, bool term);
-void	free_char_arr(char **arr);
-void	parse_map(t_data *data);
-void	clean_assets(t_data *data);
-void	free_strings(t_data *data);
-void	clean_data(t_data *data);
-char	**ft_split_cub(char const *s, char c);
+void		close_game(void *param);
+void		ft_exit(t_data *data, int code, const char *s, bool term);
+void		free_char_arr(char **arr);
+void		parse_map(t_data *data);
+void		clean_assets(t_data *data);
+void		free_strings(t_data *data);
+void		clean_data(t_data *data);
+char		**ft_split_cub(char const *s, char c);
 
-double	get_distance(double start_x, double start_y,
-			double end_x, double end_y);
-void	set_orientation(t_data *data, double angle, int ray);
-bool	wall_at(t_data *data, int x, int y, int ray);
-int		rgba(int r, int g, int b, int a);
-void	parse_color(t_data *data, char *line, int id[]);
-int		skip_spaces(const char *line, int i);
-void	check_elements(t_data *data, char *line, int id[]);
-int		count_rows(char **map, int i);
-int		only_spaces(char	*line);
-int		isspace(int c);
-void	check_map(char **map);
-bool	is_bordered_map_char(char c);
-bool	is_surrounded_by_spaces(int i, int j, char **map);
-bool	is_on_border(int i, int j, int row_count, char **map);
-void	which_texture(t_data	*data, int ray);
-char	**extract_map_content(char **map_arr);
-void	check_invalid_character(char c);
-void	call_func(int id[], t_data	*data, int j, int *flag);
-void	check_missing_elements(int id[], int size);
-void	handle_map_parsing(t_data *data, int i);
-void	load_textures(t_data *data);
+double		get_distance(double start_x, double start_y,
+				double end_x, double end_y);
+void		set_orientation(t_data *data, double angle, int ray);
+bool		wall_at(t_data *data, int x, int y, int ray);
+int			rgba(int r, int g, int b, int a);
+void		parse_color(t_data *data, char *line, int id[]);
+int			skip_spaces(const char *line, int i);
+void		check_elements(t_data *data, char *line, int id[]);
+int			count_rows(char **map, int i);
+int			only_spaces(char	*line);
+int			isspace(int c);
+void		check_map(char **map);
+bool		is_bordered_map_char(char c);
+bool		is_surrounded_by_spaces(int i, int j, char **map);
+bool		is_on_border(int i, int j, int row_count, char **map);
+void		which_texture(t_data	*data, int ray);
+char		**extract_map_content(char **map_arr);
+void		check_invalid_character(char c);
+void		call_func(int id[], t_data	*data, int j, int *flag);
+void		check_missing_elements(int id[], int size);
+void		handle_map_parsing(t_data *data, int i);
+void		load_textures(t_data *data);
+static int	process_split(char **array, char const *s, char c, int n);

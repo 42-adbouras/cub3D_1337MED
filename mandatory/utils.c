@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:12:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/16 12:49:15 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/23 04:32:19 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,43 +53,10 @@ static void	ft_free(char **array)
 	free(array);
 }
 
-static	char	**ft_write(char **array, char const *s, char c, int n)
+static char	**ft_write(char **array, char const *s, char c, int n)
 {
-	int	i;
-	int	line;
-	int	old_i;
-
-	i = 0;
-	line = 0;
-	while (s[i] != '\0' && line < n)
-	{
-		if (s[i] == c && (i == 0 || s[i - 1] == c))
-		{
-			array[line] = ft_substr("", 0, 0);
-			if (!array[line])
-			{
-				ft_free(array);
-				return (NULL);
-			}
-			line++;
-		}
-		if (s[i] != c)
-		{
-			old_i = i;
-			while (s[i] != '\0' && s[i] != c)
-				i++;
-			array[line] = ft_substr(s, old_i, i - old_i);
-			if (!array[line])
-			{
-				ft_free(array);
-				return (NULL);
-			}
-			line++;
-		}
-		if (s[i] == c)
-			i++;
-	}
-	array[line] = NULL;
+	if (!process_split(array, s, c, n))
+		return (NULL);
 	return (array);
 }
 

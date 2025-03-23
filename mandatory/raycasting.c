@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:58:41 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/16 12:49:09 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/23 04:21:41 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_ray_utils	step_incremant(t_data *data, t_ray_utils u, int ray, bool orient)
 		u.next_x += u.x_step;
 		u.next_y += u.y_step;
 	}
-	return (u); 
+	return (u);
 }
 
 double	hori_intersection(t_data *data, double angle, int ray, t_xy *h_xy)

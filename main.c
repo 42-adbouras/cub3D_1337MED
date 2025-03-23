@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fidriss <fidriss@student.42.fr>            +#+  +:+       +#+        */
+/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:43:43 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/13 21:01:43 by fidriss          ###   ########.fr       */
+/*   Updated: 2025/03/23 04:22:11 by starscourge      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ int	main(int ac, char **av)
 	mlx_loop_hook(data.game, game_loop, &data);
 	mlx_close_hook(data.game, close_game, &data);
 	mlx_loop(data.game);
-	// mlx_terminate(data.game);
 	return (0);
 }
