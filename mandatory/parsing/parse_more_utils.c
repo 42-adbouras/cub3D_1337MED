@@ -6,11 +6,11 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 19:33:08 by starscourge       #+#    #+#             */
-/*   Updated: 2025/03/16 11:50:03 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/24 13:14:27 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3D.h"
 
 bool	is_on_border(int i, int j, int row_count, char **map)
 {

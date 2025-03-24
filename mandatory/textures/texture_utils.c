@@ -6,11 +6,11 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 00:27:27 by starscourge       #+#    #+#             */
-/*   Updated: 2025/03/16 11:50:13 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/24 13:14:27 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3D.h"
 
 void	which_texture(t_data	*data, int ray)
 {

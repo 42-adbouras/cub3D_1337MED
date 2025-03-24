@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_elements_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:07:10 by starscourge       #+#    #+#             */
-/*   Updated: 2025/03/23 18:14:27 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/03/24 13:15:20 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "cub3D_bonus.h"
 
 void	handle_color_parsing_bonus(t_data *data, char *line, int id[])
 {

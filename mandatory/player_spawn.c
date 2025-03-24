@@ -6,11 +6,11 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 10:31:03 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/16 12:49:02 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/24 13:14:03 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
 void	player_spawn(t_data *data)
 {

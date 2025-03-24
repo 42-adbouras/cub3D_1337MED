@@ -6,11 +6,11 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 10:36:19 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/19 10:37:28 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/24 13:15:20 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "cub3D_bonus.h"
 
 void	draw_minimap_walls(t_data *data, t_mini_map *m)
 {

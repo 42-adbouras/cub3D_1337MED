@@ -6,11 +6,11 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 10:43:11 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/16 12:48:19 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/24 13:14:03 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
 void	clean_assets(t_data *data)
 {

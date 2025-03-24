@@ -6,7 +6,7 @@
 #    By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 11:59:01 by adbouras          #+#    #+#              #
-#    Updated: 2025/03/23 15:32:08 by adbouras         ###   ########.fr        #
+#    Updated: 2025/03/24 13:30:45 by adbouras         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ libmlx:
 
 $(OBJ_DIR)%.o: %.c $(INCLUDES)
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@ && printf "$(YLW)[Compiling: $(notdir $<)]\n$(RST)"
+	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@ && printf "$(YLW)[Building: $(notdir $@)]\n$(RST)"
 
 $(NAME): $(MAN_OBJS)
 	@make -C ./libraries/libft/

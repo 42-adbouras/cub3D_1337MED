@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_colors_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: starscourge <starscourge@student.42.fr>    +#+  +:+       +#+        */
+/*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:00:54 by starscourge       #+#    #+#             */
-/*   Updated: 2025/03/23 18:12:02 by starscourge      ###   ########.fr       */
+/*   Updated: 2025/03/24 13:15:20 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "cub3D_bonus.h"
 
 int	skip_spaces_bonus(const char *line, int i)
 {
@@ -28,7 +28,7 @@ char	**split_and_trim_colors_bonus(const char *line, int i)
 	int		j;
 
 	j = 0;
-	colors = ft_split_cub_cub(line + i, ',');
+	colors = ft_split_cub(line + i, ',');
 	while (colors[j])
 	{
 		tmp = ft_strtrim(colors[j], " ");
