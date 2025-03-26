@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/23 15:43:37 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/24 14:55:43 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,3 +203,4 @@ void		check_missing_elements(int id[], int size);
 void		handle_map_parsing(t_data *data, int i);
 void		load_textures(t_data *data);
 void		ft_free(char **array);
+int			check_commas(const char *line);

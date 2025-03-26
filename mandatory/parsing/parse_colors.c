@@ -6,7 +6,7 @@
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 18:00:54 by starscourge       #+#    #+#             */
-/*   Updated: 2025/03/24 13:14:27 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/24 14:47:09 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ char	**split_and_trim_colors(const char *line, int i)
 	int		j;
 
 	j = 0;
+	if (check_commas(line) == 1)
+		ft_exit(NULL, 11, ERR_COLOR, true);
 	colors = ft_split(line + i, ',');
 	while (colors[j])
 	{

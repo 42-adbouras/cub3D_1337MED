@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
+/*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adbouras <adbouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:42:38 by adbouras          #+#    #+#             */
-/*   Updated: 2025/03/24 10:22:03 by adbouras         ###   ########.fr       */
+/*   Updated: 2025/03/24 14:55:22 by adbouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,3 +262,4 @@ void		which_texture_bonus(t_data	*data, int ray);
 void		render_strip_bonus(t_data *data, int ray, double distance);
 void		draw_rect_bonus(t_data *data, double x, double y, double height);
 void		ft_free(char **array);
+int			check_commas(const char *line);
